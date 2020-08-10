@@ -1,0 +1,19 @@
+language: node.js
+node_js:
+  - 14.7.0
+cache: yarn
+
+install:
+  - cd client
+  - yarn install
+
+script:
+  - yarn test
+  - yarn run build
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  on:
+    branch: master
