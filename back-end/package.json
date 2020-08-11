@@ -1,8 +1,8 @@
 {
   "name": "productivity-tracker",
   "version": "1.0.0",
-  "description": "React, Node.js, Express and Webpack",
-  "main": "server/server.js",
+  "description": "MERN task manager app",
+  "main": "server.js",
   "author": "Mduduzi Ndhlovu",
   "license": "MIT",
   "dependencies": {
@@ -24,7 +24,7 @@
   },
   "scripts": {
     "client": "cd client && yarn start",
-    "server": "nodemon /server/server.js",
+    "server": "nodemon server.js",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
     "prod:build": "concurrently \"cd client && yarn install && yarn build\" \"yarn install\"",
     "heroku-postbuild": "yarn prod:build"

@@ -1,0 +1,19 @@
+body {
+  font-family: $montserrat, "sans-serif";
+  position: relative;
+  left: 0;
+  top: 0;
+  margin: 0;
+  height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.app__container {
+  height: 100vh;
+}
+
+.home__container {
+}
