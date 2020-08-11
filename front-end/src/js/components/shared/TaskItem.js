@@ -8,7 +8,7 @@ const TaskItem = ({ title, dueDate, editTaskHandler }) => {
   return (
     <Card className="task__item">
       <ul className="task__action__buttons__container">
-        <li onClick={() => editTaskHandler("completed")}>
+        <li onClick={() => editTaskHandler("complete")}>
           <CheckCircle />
         </li>
         <li onClick={() => editTaskHandler("incomplete")}>
