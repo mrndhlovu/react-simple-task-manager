@@ -1,20 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
 
-const Span = styled.span`
-  ${({ icon }) => css`
-    &::before {
-      content: '${icon}';
-    }
-  `}
-`;
-
-const LinkItem = ({ content, icon }) => {
-  const Icon = icon && icon();
+const LinkItem = ({ content, clickHandler }) => {
   return (
-    <li className="nav__item">
-      <Span icon={icon && <Icon />}>{content}</Span>
+    <li className="nav__item" onClick={clickHandler}>
+      <span>{content}</span>
     </li>
   );
 };
@@ -22,6 +12,7 @@ const LinkItem = ({ content, icon }) => {
 LinkItem.propTypes = {
   content: PropTypes.string.isRequired,
   icon: PropTypes.func,
+  clickHandler: PropTypes.func,
 };
 
 export default LinkItem;

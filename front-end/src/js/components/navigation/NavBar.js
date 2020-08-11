@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 
 import { Menu, X } from "react-feather";
+
 import NavigationBar from "./NavigationBar";
 
 const NavBar = () => {
@@ -31,11 +31,11 @@ const NavBar = () => {
           )}
         </div>
       </header>
-      {showMobileMenu && <NavigationBar className="mobile__menu" />}
+      {showMobileMenu && (
+        <NavigationBar className="mobile__menu" toggleMenu={toggleMenu} />
+      )}
     </>
   );
 };
-
-NavBar.propTypes = {};
 
 export default NavBar;

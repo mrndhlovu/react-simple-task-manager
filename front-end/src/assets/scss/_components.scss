@@ -1,0 +1,93 @@
+.ui__input__container {
+  width: 100%;
+  height: fit-content;
+  .ui__input {
+    & > div {
+      outline: none !important;
+    }
+
+    & label {
+      font-family: $montserrat, "sans-serif";
+      font-weight: $bold;
+      font-size: 14px;
+    }
+
+    & div {
+      &:focus {
+        outline: 1px solid $green !important;
+      }
+    }
+
+    & div > input {
+      padding: 18px !important;
+      font-family: $montserrat, "sans-serif";
+      font-size: 14px;
+    }
+  }
+
+  .input__label {
+    color: $grey;
+    font-weight: $bold;
+
+    &::before {
+      content: "";
+      padding-top: 15px;
+      width: 100%;
+      display: block;
+    }
+  }
+
+  .ui__input__label__container {
+    margin: 5px 0;
+  }
+}
+
+.ui__header {
+  color: $grey;
+  text-transform: uppercase;
+  font-size: 18px;
+  margin: 30px 0;
+}
+
+.task__item {
+  padding: 10px;
+
+  & p {
+    margin: 9px 0;
+    font-size: 12px;
+  }
+
+  .task__action__buttons__container {
+    @include flexSpacing(row, space-around);
+    max-width: 40%;
+    padding-left: 0;
+    margin: 0;
+
+    & > li {
+      list-style: none;
+      padding: 5px;
+      margin-right: 5px;
+      width: 30px;
+      height: 30px;
+      border: 2px solid $grey;
+      border-radius: 50%;
+      cursor: pointer;
+      @include flexCenter(column);
+    }
+
+    & svg {
+      color: $grey;
+
+      &::after {
+        content: "";
+        width: 15px;
+        height: 15px;
+        background: red;
+      }
+    }
+  }
+
+  .task__duedate {
+    color: $green;
+  }
+}
