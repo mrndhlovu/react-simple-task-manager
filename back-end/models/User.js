@@ -2,13 +2,14 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const isEmail = require("validator/lib/isEmail");
-const { PRIVATE_SIGNATURE, ROOT_URL } = require("../utils/config");
-const { getRandom, tokenExpirationTime } = require("../utils/serverUtils");
+const { PRIVATE_SIGNATURE } = require("../utils/config");
+const { getRandom } = require("../utils/serverUtils");
 
 const UserSchema = new mongoose.Schema(
   {
-    name: { type: String, trim: true, minlength: 4 },
-    dateOfBirth: { type: String },
+    firstName: { type: String, trim: true, minlength: 4, required: true },
+    lastName: { type: String, trim: true, minlength: 4, required: true },
+    avatar: { type: String },
     email: {
       type: String,
       lowercase: true,
@@ -21,45 +22,16 @@ const UserSchema = new mongoose.Schema(
     password: {
       type: String,
       trim: true,
+      required: true,
       minlength: 7,
       validate(value) {
         if (value.toLowerCase().includes("password"))
           throw new Error("Password should not include 'password'!");
       },
     },
-    phoneNumber: {
-      type: String,
-      trim: true,
-      validate(value) {
-        // TODO validate phone number based on locale
-        const numRegex = /^\d{10}$/;
-        const validNumber = numRegex.test(value);
-        if (!validNumber) throw new Error("Phone number provided is invalid!");
-      },
-    },
-    registrationSource: { type: String },
-    notificationPreferences: {
-      type: Object,
-      default: {
-        orders: {
-          textMessage: false,
-          email: false,
-          app: true,
-        },
-        offers: {
-          textMessage: false,
-          email: false,
-          app: true,
-        },
-      },
-    },
-    facebook: { id: { type: String }, token: { type: String } },
-    google: { id: { type: String }, token: { type: String } },
     confirmationCode: { type: String },
     confirmationExpires: { type: Date },
     confirmed: { type: Boolean, default: false },
-    avatar: { type: String },
-    deleted: { type: Boolean, required: true, default: false },
     tokens: [
       {
         token: {
@@ -71,21 +43,19 @@ const UserSchema = new mongoose.Schema(
     resetPasswordToken: { type: String },
     resetPasswordExpires: { type: Date },
     resetPasswordCode: { type: String },
-    isStoreOwner: { type: Boolean, default: false },
-    devices: { type: Array, required: true, default: [] },
   },
   { timestamps: true, toJSON: { virtuals: true } }
 );
 
-UserSchema.virtual("addressBook", {
-  ref: "UserAddress",
+UserSchema.virtual("list", {
+  ref: "ListAddress",
   localField: "_id",
   foreignField: "owner",
   justOne: false,
 });
 
-UserSchema.virtual("store", {
-  ref: "Store",
+UserSchema.virtual("task", {
+  ref: "Task",
   localField: "_id",
   foreignField: "owner",
   justOne: false,
@@ -117,33 +87,24 @@ UserSchema.methods.getAuthToken = async function (next, callback) {
     );
     user.tokens = user.tokens.concat({ token });
 
-    await user.save();
-
-    callback(token);
+    try {
+      await user.save();
+      callback(token);
+    } catch (error) {
+      callback();
+    }
   });
 };
 
-UserSchema.statics.findByCredentials = async function (
-  email,
-  password,
-  facebookId,
-  googleId
-) {
+UserSchema.statics.findByCredentials = async function (email, password) {
   let isMatch;
   let user;
-  if (email && !googleId) {
+  if (email) {
     user = await this.findOne({ email });
     if (!user) throw new Error("Login error: check your email or password.");
     isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) throw new Error("Login error: check your email or password.");
-  } else if (facebookId) {
-    user = await this.findOne({ "facebook.id": facebookId });
-    if (!user) throw new Error("Failed to retrieve you account");
-  } else if (googleId) {
-    user = await this.findOne({ email, "google.id": googleId });
-    if (!user) throw new Error("Failed to retrieve you account");
   }
-
   return user;
 };
 
@@ -155,61 +116,37 @@ UserSchema.methods.runEncryption = function (
 ) {
   const user = this;
   const SALT_FACTOR = 12;
-  return bcrypt.genSalt(SALT_FACTOR, (err, salt) => {
-    if (err) return next(err);
+  try {
+    return bcrypt.genSalt(SALT_FACTOR, (err, salt) => {
+      if (err) return next(err);
 
-    return bcrypt.hash(stringToHash || user[targetId], salt, (error, hash) => {
-      if (error) return next(error);
-      if (targetId) user[targetId] = hash;
-      if (!stringToHash) next();
+      return bcrypt.hash(
+        stringToHash || user[targetId],
+        salt,
+        (error, hash) => {
+          if (error) return next(error);
+          if (targetId) user[targetId] = hash;
+          if (!stringToHash) next();
 
-      if (callback) callback(hash);
+          if (callback) callback(hash);
+        }
+      );
     });
-  });
+  } catch (error) {
+    return next(error);
+  }
 };
 
-UserSchema.methods.generateAccessCookie = async (res, token) => {
-  res.setHeader("Access-Control-Allow-Origin", ROOT_URL);
-  res.cookie("access_token", token, {
-    maxAge: 9999999,
-    httpOnly: true,
-  });
-
-  await res.append("Set-Cookie", `access_token="${token}";`);
-};
+UserSchema.virtual("tasks", {
+  ref: "Task",
+  localField: "_id",
+  foreignField: "owner",
+});
 
 UserSchema.pre("save", function (next) {
   const user = this;
   if (!user.isModified("password")) return next();
   user.runEncryption(next, "password");
-});
-
-UserSchema.pre("save", function (next) {
-  const user = this;
-
-  if (!user.isModified("email") || user.registrationSource !== "email")
-    return next();
-  const verificationCode = getRandom();
-
-  user.runEncryption(
-    next,
-    "confirmationCode",
-    `${verificationCode}`,
-    (hash) => {
-      user.confirmationCode = hash;
-      user.confirmationExpires = Date.now() + tokenExpirationTime;
-
-      const notification = {
-        subject: "Email confirmation!",
-        description: `${
-          user.name || user.email
-        }.Please Verify your email with this code: [${verificationCode}].`,
-      };
-
-      user.confirmed = false;
-      next();
-    }
-  );
 });
 
 const User = mongoose.model("User", UserSchema);

@@ -5,7 +5,11 @@ const bcrypt = require("bcrypt");
 
 const User = require("../../models/User");
 
-const { auth, getUser } = require("../../middleware/authMiddleware");
+const {
+  auth,
+  getUser,
+  generateAccessCookie,
+} = require("../../middleware/authMiddleware");
 
 const { ALLOWED_UPDATE_FIELDS_USER } = require("../../utils/config.js");
 const {
@@ -15,74 +19,28 @@ const {
 
 const STRINGS = require("../../lang/en");
 
-router.post("/signup", async (req, res, next) => {
-  const { email, deviceId, google, facebook } = req.body;
+router.post("/register", async (req, res, next) => {
+  const user = new User({ ...req.body });
 
-  let user;
+  await user.getAuthToken(next, async (token) => {
+    if (!token)
+      return res
+        .status(400)
+        .send(`User with that email: '${req.body.email}'  already exists!`);
 
-  if (email) user = new User({ ...req.body, registrationSource: "email" });
-
-  if (facebook) {
-    const currentUser = await User.findOne({ "facebook.id": facebook.id });
-
-    if (currentUser) user = currentUser;
-    else
-      user = new User({
-        name: facebook.name,
-        facebook,
-        confirmed: true,
-        registrationSource: "facebook",
-      });
-  }
-  if (google) {
-    const currentUser = await User.findOne({ "google.id": google.id });
-
-    if (currentUser) user = currentUser;
-    else
-      user = new User({
-        name: google.name,
-        avatar: google.avatar,
-        email: google.email,
-        "google.id": google.id,
-        "google.token": google.token,
-        confirmed: true,
-        registrationSource: "google",
-      });
-  }
-
-  try {
-    user.getAuthToken(next, async (token) => {
-      if (!user.devices.includes(deviceId)) user.devices.push(deviceId);
-      user.save();
-      await user.generateAccessCookie(res, token);
-      res.status(201).send(user);
-    });
-  } catch (error) {
-    res.status(400).send(error.message);
-  }
+    await generateAccessCookie(res, token);
+    res.status(201).send(user);
+  });
 });
 
 router.post("/login", async (req, res, next) => {
   try {
-    const {
-      email = null,
-      password = null,
-      deviceId,
-      facebookId,
-      googleId,
-    } = req.body;
-    const user = await User.findByCredentials(
-      email,
-      password,
-      facebookId,
-      googleId
-    );
+    const { email = null, password = null } = req.body;
+    const user = await User.findByCredentials(email, password);
     user.getAuthToken(next, async (token) => {
-      await user.generateAccessCookie(res, token);
+      await generateAccessCookie(res, token);
 
-      if (!user.devices.includes(deviceId)) user.devices.push(deviceId);
-      user.save();
-
+      await user.save();
       res.send(user);
     });
   } catch (error) {
@@ -90,9 +48,9 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
-router.get("/me", async (req, res) => {
+router.get("/me", auth, async (req, res) => {
   try {
-    res.send({ user: "Guest" });
+    res.send(req.user);
   } catch (error) {
     res.status(400).send(STRINGS.auth.noUserProfile);
   }
@@ -103,14 +61,6 @@ router.post("/logout", auth, async (req, res) => {
     req.user.tokens = req.user.tokens.filter(
       (token) => token.token !== req.token
     );
-
-    if (req.user.facebook.token) {
-      req.user.facebook = { ...req.user.facebook, token: undefined };
-    }
-
-    if (req.user.google.token) {
-      req.user.google = { ...req.user.google, token: undefined };
-    }
 
     await req.user.save();
     res.send(STRINGS.auth.logoutSuccess);
@@ -257,11 +207,6 @@ router.post("/update-password", (req, res) => {
 router.post("/logoutAll", auth, async (req, res) => {
   try {
     req.user.tokens = [];
-
-    if (req.user.facebook.token) {
-      req.user.facebook = { ...req.user.facebook, token: undefined };
-    }
-
     await req.user.save();
 
     res.send();
@@ -288,25 +233,6 @@ router.patch("/update-user", auth, async (req, res) => {
     await req.user.save();
 
     res.send(req.user);
-  } catch (error) {
-    return res.status(400).send(error.message);
-  }
-});
-
-router.post("/update-user-preferences", auth, async (req, res) => {
-  const key = Object.keys(req.body).shift();
-  const value = Object.values(req.body).shift();
-
-  const target = `notificationPreferences.${key}.${value}`;
-  const result = !req.user.notificationPreferences[key][value];
-
-  try {
-    User.findByIdAndUpdate(
-      req.user._id,
-      { $set: { [target]: result } },
-      { new: true },
-      (err, user) => res.send(user)
-    );
   } catch (error) {
     return res.status(400).send(error.message);
   }
@@ -342,7 +268,7 @@ router.post("/verify-account", auth, async (req, res) => {
     req.user.confirmationExpires = undefined;
 
     const notification = {
-      subject: `${req.user.email}, your Elephant account has been verified.`,
+      subject: `${req.user.email}, your account has been verified.`,
       description: `${req.user.email}, this is a confirmation that your account ${req.user.email} has just been verified.`,
     };
 
