@@ -13,7 +13,9 @@ body {
 
 .app__container {
   height: 100vh;
+  background: $lightGrey;
 }
 
-.home__container {
+.content__container {
+  margin: 20px;
 }
