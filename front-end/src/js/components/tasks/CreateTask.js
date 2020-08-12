@@ -4,15 +4,20 @@ import PropTypes from "prop-types";
 import UIInput from "../shared/UIInput";
 import CreateItemWrapper from "../shared/CreateItemWrapper";
 
-const CreateTask = ({ task, handleClick, handleChange }) => {
+const CreateTask = ({
+  task,
+  handleClick,
+  handleChange,
+  header = "Create New Task",
+}) => {
   return (
     <CreateItemWrapper
       buttonText="Create Task"
       clickHandler={handleClick}
-      header="Create New Task"
+      header={header}
     >
       <UIInput
-        id="outlined-search"
+        id="task-title"
         label="Title"
         placeholder="e.g. Go to the gym"
         type="text"
@@ -20,7 +25,7 @@ const CreateTask = ({ task, handleClick, handleChange }) => {
         defaultValue={task?.title}
       />
       <UIInput
-        id="outlined-search"
+        id="task-duedate"
         type="text"
         label="Due Date"
         placeholder="Tuesday 11th August"

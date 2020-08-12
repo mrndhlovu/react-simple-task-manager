@@ -12,6 +12,7 @@ const EditTask = () => {
 
   return (
     <CreateTask
+      header="Edit Task"
       task={{ title: "New task", dueDate: "12 February 2090" }}
       handleClick={() => handleSaveTaskChanges()}
       handleChange={handleChange}

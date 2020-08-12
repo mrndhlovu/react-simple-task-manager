@@ -1,11 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import LinkItem from "../shared/LinkItem";
-import { Plus, Trash2 } from "react-feather";
 import { useHistory } from "react-router";
+
+import { Plus, Trash2 } from "react-feather";
+
+import LinkItem from "../shared/LinkItem";
 import { useMainContent } from "../../utils/hookUtils";
 
-const NavigationBar = ({ lists = [], className, toggleMenu }) => {
+const NavigationBar = ({ lists = [], className, toggleMenu, user }) => {
   const history = useHistory();
 
   const { handleLogout } = useMainContent();
@@ -18,39 +20,54 @@ const NavigationBar = ({ lists = [], className, toggleMenu }) => {
   return (
     <div className={`${className} navigation`}>
       <ul className="nav__list__container">
-        <LinkItem
-          content="All"
-          clickHandler={() => clickHandler(() => history.push("/"))}
-        />
-        {lists &&
-          lists.map((list, index) => (
-            <div key={index} className="icon__link__container">
+        {user?.authenticated ? (
+          <>
+            <LinkItem
+              content="All"
+              clickHandler={() => clickHandler(() => history.push("/"))}
+            />
+            {lists &&
+              lists.map((list, index) => (
+                <div key={index} className="icon__link__container">
+                  <LinkItem
+                    content={list?.title}
+                    clickHandler={() =>
+                      clickHandler(() => history.push(`/list/${list.id}`))
+                    }
+                  />
+                  <Trash2 className="delete__button" size={15} />
+                </div>
+              ))}
+            <div className="icon__link__container">
+              <Plus size={15} />
               <LinkItem
-                content={list?.title}
+                content="Create New List"
                 clickHandler={() =>
-                  clickHandler(() => history.push(`/list/${list.id}`))
+                  clickHandler(() => history.push("/create-list"))
                 }
               />
-              <Trash2 className="delete__button" size={15} />
             </div>
-          ))}
-        <div className="icon__link__container">
-          <Plus size={15} />
-          <LinkItem
-            content="Create New List"
-            clickHandler={() =>
-              clickHandler(() => history.push("/create-list"))
-            }
-          />
-        </div>
-        <LinkItem
-          content="Settings"
-          clickHandler={() => clickHandler(() => history.push("/settings"))}
-        />
-        <LinkItem
-          content="Logout"
-          clickHandler={() => clickHandler(() => handleLogout())}
-        />
+            <LinkItem
+              content="Settings"
+              clickHandler={() => clickHandler(() => history.push("/settings"))}
+            />
+            <LinkItem
+              content="Logout"
+              clickHandler={() => clickHandler(() => handleLogout())}
+            />
+          </>
+        ) : (
+          <>
+            <LinkItem
+              content="Login"
+              clickHandler={() => clickHandler(() => history.push("/login"))}
+            />
+            <LinkItem
+              content="Register"
+              clickHandler={() => clickHandler(() => history.push("/register"))}
+            />
+          </>
+        )}
       </ul>
     </div>
   );
