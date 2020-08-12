@@ -14,7 +14,7 @@ const CreateItemWrapper = ({
 }) => {
   return (
     <div className="create__item__container">
-      <UIHeader content={header} />
+      <UIHeader content={header} className="main__header" />
       <Card className={`create__item__card ${className}`}>
         <div className="create__input__container">{children}</div>
         <Button

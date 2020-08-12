@@ -21,8 +21,23 @@
     @include gridLayout(1fr 2fr);
   }
 
+  .content__container {
+    position: absolute;
+    top: 0;
+    left: 27%;
+    width: fill-available;
+    max-width: 68%;
+    height: fit-content;
+    padding: 45px;
+  }
+
   .lg__screen__menu {
     display: block;
+  }
+
+  .main__header {
+    font-size: 30px;
+    margin-top: -13px;
   }
 
   .mobile__menu {
@@ -36,6 +51,10 @@
     .logo .logo__text {
       font-size: 36px;
     }
+  }
+
+  .task__item {
+    @include flexSpacing(row, space-between);
   }
 
   .navigation {
@@ -68,12 +87,23 @@
   .nav__bar {
     width: 25%;
   }
+
+  .content__container {
+    left: 25%;
+  }
 }
 
 @media only screen and (min-width: 1490px) {
   .navigation,
   .nav__bar {
     width: 22%;
+  }
+
+  .content__container {
+    left: 22%;
+    max-width: 76.5%;
+    height: 97vh;
+    padding: 100px 10% 0 100px;
   }
 }
 
