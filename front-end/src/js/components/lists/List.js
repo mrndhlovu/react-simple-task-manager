@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+
 import CreateTask from "../tasks/CreateTask";
 import TasksList from "../tasks/TasksList";
 
-const List = (props) => {
+const List = () => {
   return (
     <>
       <CreateTask />
@@ -14,7 +15,7 @@ const List = (props) => {
           {
             title: "take out bins",
             dueDate: "Tuesday 11th August",
-            id: 2,
+            id: 1,
           },
         ]}
       />

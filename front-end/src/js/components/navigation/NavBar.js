@@ -32,7 +32,16 @@ const NavBar = () => {
         </div>
       </header>
       {showMobileMenu && (
-        <NavigationBar className="mobile__menu" toggleMenu={toggleMenu} />
+        <NavigationBar
+          className="mobile__menu"
+          toggleMenu={toggleMenu}
+          lists={[
+            {
+              title: "Life",
+              id: 1,
+            },
+          ]}
+        />
       )}
     </>
   );

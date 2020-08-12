@@ -20,7 +20,7 @@ const NavigationBar = ({ lists = [], className, toggleMenu, user }) => {
   return (
     <div className={`${className} navigation`}>
       <ul className="nav__list__container">
-        {user?.authenticated ? (
+        {!user?.authenticated ? (
           <>
             <LinkItem
               content="All"
@@ -32,7 +32,7 @@ const NavigationBar = ({ lists = [], className, toggleMenu, user }) => {
                   <LinkItem
                     content={list?.title}
                     clickHandler={() =>
-                      clickHandler(() => history.push(`/list/${list.id}`))
+                      clickHandler(() => history.push(`/lists/${list.id}`))
                     }
                   />
                   <Trash2 className="delete__button" size={15} />
