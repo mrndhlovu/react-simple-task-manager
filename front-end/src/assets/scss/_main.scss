@@ -20,3 +20,19 @@ body {
   margin: 20px;
   overflow-y: auto;
 }
+
+.delete__account__action {
+  font-size: 15px;
+  position: absolute;
+  bottom: 3%;
+  right: 8%;
+
+  & button {
+    background: transparent;
+    border: none;
+    color: $darkGrey;
+    font-weight: $bold;
+    cursor: pointer;
+    font-family: $montserrat, "sans-serif";
+  }
+}

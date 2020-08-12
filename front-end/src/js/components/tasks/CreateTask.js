@@ -8,7 +8,7 @@ const CreateTask = ({
   task,
   handleClick,
   handleChange,
-  header = "Create New Task",
+  header,
   buttonText,
 }) => {
   return (

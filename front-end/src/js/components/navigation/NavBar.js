@@ -3,8 +3,11 @@ import React, { useState } from "react";
 import { Menu, X } from "react-feather";
 
 import NavigationBar from "./NavigationBar";
+import { useHistory } from "react-router-dom";
 
 const NavBar = () => {
+  const history = useHistory();
+
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   const toggleMenu = () => setShowMobileMenu(!showMobileMenu);
@@ -13,7 +16,9 @@ const NavBar = () => {
     <>
       <header className="nav__bar">
         <div className="logo">
-          <h1 className="logo__text">Checklists</h1>
+          <h1 className="logo__text" onClick={() => history.push("/")}>
+            Checklists
+          </h1>
         </div>
         <div className="mobile__icon_container">
           {showMobileMenu ? (
