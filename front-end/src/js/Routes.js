@@ -1,5 +1,3 @@
-"use es6";
-
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
@@ -10,17 +8,19 @@ import Settings from "./components/auth/Settings";
 import List from "./components/lists/List";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 
 export default function Routes() {
   return (
     <Switch>
-      <Route path="/" exact={true} component={HomeContainer} />
-      <Route path="/create-list" component={CreateList} />
-      <Route path="/edit-task/:taskId" component={EditTask} />
-      <Route path="/lists/:listId" component={List} />
-      <Route path="/settings" component={Settings} />
-      <Route path="/login" component={Login} />
-      <Route path="/register" component={Register} />
+      <ProtectedRoute path="/" exact={true} component={HomeContainer} />
+      <ProtectedRoute path="/create-list" component={CreateList} />
+      <ProtectedRoute path="/edit-task/:taskId" component={EditTask} />
+      <ProtectedRoute path="/lists/:listId" component={List} />
+      <ProtectedRoute path="/settings" component={Settings} />
+
+      <Route path="/register" render={(props) => <Register {...props} />} />
+      <Route path="/login" render={(props) => <Login {...props} />} />
     </Switch>
   );
 }

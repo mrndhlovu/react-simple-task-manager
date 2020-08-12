@@ -7,10 +7,10 @@ import { Plus, Trash2 } from "react-feather";
 import { useMainContent } from "../../utils/hookUtils";
 import LinkItem from "../shared/LinkItem";
 
-const NavigationBar = ({ lists = [], className, toggleMenu, user }) => {
+const NavigationBar = ({ lists = [], className, toggleMenu }) => {
   const history = useHistory();
 
-  const { handleLogout } = useMainContent();
+  const { handleLogout, auth } = useMainContent();
 
   const clickHandler = (callback) => {
     toggleMenu && toggleMenu();
@@ -20,7 +20,7 @@ const NavigationBar = ({ lists = [], className, toggleMenu, user }) => {
   return (
     <div className={`${className} navigation`}>
       <ul className="nav__list__container">
-        {!user?.authenticated ? (
+        {auth?.authenticated ? (
           <>
             <LinkItem
               content="All"

@@ -25,7 +25,7 @@
     "start": "node server.js",
     "start:server": "nodemon server.js",
     "client-install": "cd ../front-end && yarn install",
-    "client": "cd ../front-end && yarn dev",
+    "client": "cd ../front-end && yarn start",
     "dev": "concurrently --kill-others-on-fail \"yarn run start:server\"  \"yarn run client\" ",
     "heroku-postbuild": "cd ../front-end && yarn && yarn run build"
   },

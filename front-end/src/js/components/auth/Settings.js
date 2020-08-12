@@ -1,16 +1,26 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useState } from "react";
+
+import { useMainContent } from "../../utils/hookUtils";
 import CreateItemWrapper from "../shared/CreateItemWrapper";
 import UIInput from "../shared/UIInput";
 
-const Settings = ({ user = {} }) => {
-  const handleSaveChanges = () => {};
-  const handleChange = (field, e) => {};
+const Settings = () => {
+  const {
+    auth: { user },
+    deleteAccountHandler,
+    updateUserHandler,
+  } = useMainContent();
+
+  const [credentials, setCredentials] = useState({ ...user });
+
+  const handleChange = (field, e) => {
+    setCredentials({ ...credentials, [field]: e.target.value });
+  };
 
   return (
     <CreateItemWrapper
       header="Account Details"
-      clickHandler={() => handleSaveChanges()}
+      clickHandler={() => updateUserHandler(credentials)}
       buttonText="Save Changes"
     >
       <UIInput
@@ -43,12 +53,12 @@ const Settings = ({ user = {} }) => {
         type="password"
         handleChange={(e) => handleChange("password", e)}
       />
+
+      <span className="delete__account__action">
+        <button onClick={() => deleteAccountHandler()}>Delete Account</button>
+      </span>
     </CreateItemWrapper>
   );
-};
-
-Settings.propTypes = {
-  user: PropTypes.object,
 };
 
 export default Settings;
