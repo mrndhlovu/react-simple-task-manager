@@ -4,11 +4,10 @@ node_js:
 cache: yarn
 
 install:
-  - cd client
+  - cd front-end
   - yarn install
 
 script:
-  - yarn test
   - yarn run build
 
 deploy:
