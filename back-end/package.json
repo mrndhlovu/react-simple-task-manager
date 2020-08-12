@@ -18,18 +18,19 @@
     "js-cookie": "^2.2.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.8.9",
-    "nodemon": "^2.0.2",
     "validator": "^12.2.0",
     "yarn": "^1.22.0"
   },
   "scripts": {
-    "client": "cd client && yarn start",
-    "server": "nodemon server.js",
-    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-    "prod:build": "concurrently \"cd client && yarn install && yarn build\" \"yarn install\"",
-    "heroku-postbuild": "yarn prod:build"
+    "start": "node server.js",
+    "start:server": "nodemon server.js",
+    "client-install": "cd ../front-end && yarn install",
+    "client": "cd ../front-end && yarn dev",
+    "dev": "concurrently --kill-others-on-fail \"yarn run start:server\"  \"yarn run client\" ",
+    "heroku-postbuild": "cd ../front-end && yarn && yarn run build"
   },
   "devDependencies": {
-    "concurrently": "^5.2.0"
+    "concurrently": "^5.2.0",
+    "nodemon": "^2.0.2"
   }
 }

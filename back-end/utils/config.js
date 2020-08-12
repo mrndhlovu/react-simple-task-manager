@@ -11,13 +11,21 @@ const { LOCAL_MONGO_DB } = process.env;
 const PORT = process.env.PORT || 5000;
 
 const { PRIVATE_SIGNATURE, PUBLIC_SIGNATURE } = process.env;
-const ROOT_URL =
-  process.env.LOCAL_URL || `https://moneat.herokuapp.com:${PORT}`;
+const ROOT_URL = process.env.LOCAL_URL;
 
-const ALLOWED_UPDATE_FIELDS_USER = ["name", "email", "password"];
+const ALLOWED_UPDATE_FIELDS_USER = [
+  "firstName",
+  "lastName",
+  "email",
+  "password",
+];
+const ALLOWED_UPDATE_TASK_FIELDS = ["title", "dueDate", "status", "archived"];
+const ALLOWED_UPDATE_LIST_FIELDS = ["title"];
 
 module.exports = {
   ALLOWED_UPDATE_FIELDS_USER,
+  ALLOWED_UPDATE_TASK_FIELDS,
+  ALLOWED_UPDATE_LIST_FIELDS,
   environment,
   ROOT_URL,
   CONNECTION_URI,
