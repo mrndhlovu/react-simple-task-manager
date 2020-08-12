@@ -14,7 +14,7 @@
 
     & div {
       &:focus {
-        outline: 1px solid $green !important;
+        outline: 1px solid $primary-color !important;
       }
     }
 
@@ -88,6 +88,6 @@
   }
 
   .task__duedate {
-    color: $green;
+    color: $primary-color;
   }
 }

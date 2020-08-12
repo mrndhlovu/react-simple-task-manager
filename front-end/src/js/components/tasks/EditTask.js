@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 import CreateTask from "./CreateTask";
 
@@ -16,10 +16,11 @@ const EditTask = () => {
       task={{ title: "New task", dueDate: "12 February 2090" }}
       handleClick={() => handleSaveTaskChanges()}
       handleChange={handleChange}
+      buttonText="Save Changes"
     />
   );
 };
 
-EditTask.propTypes = {};
+// EditTask.propTypes = {};
 
 export default EditTask;

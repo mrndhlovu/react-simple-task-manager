@@ -4,8 +4,8 @@ import { useHistory } from "react-router";
 
 import { Plus, Trash2 } from "react-feather";
 
-import LinkItem from "../shared/LinkItem";
 import { useMainContent } from "../../utils/hookUtils";
+import LinkItem from "../shared/LinkItem";
 
 const NavigationBar = ({ lists = [], className, toggleMenu, user }) => {
   const history = useHistory();
@@ -13,7 +13,7 @@ const NavigationBar = ({ lists = [], className, toggleMenu, user }) => {
   const { handleLogout } = useMainContent();
 
   const clickHandler = (callback) => {
-    toggleMenu();
+    toggleMenu && toggleMenu();
     return callback();
   };
 

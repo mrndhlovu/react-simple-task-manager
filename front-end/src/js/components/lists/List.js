@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 import CreateTask from "../tasks/CreateTask";
 import TasksList from "../tasks/TasksList";
@@ -23,6 +23,6 @@ const List = () => {
   );
 };
 
-List.propTypes = {};
+// List.propTypes = {};
 
 export default List;

@@ -25,7 +25,7 @@
     position: absolute;
     top: 0;
     left: 27%;
-    width: fill-available;
+    width: stretch;
     max-width: 68%;
     height: fit-content;
     padding: 45px;
@@ -80,6 +80,9 @@
       }
     }
   }
+  .create__item__container .create__item__card {
+    padding: 78px;
+  }
 }
 
 @media only screen and (min-width: 1256px) {
@@ -91,19 +94,39 @@
   .content__container {
     left: 25%;
   }
+
+  .create__item__container .create__item__card {
+    padding: 110px;
+  }
 }
 
 @media only screen and (min-width: 1490px) {
   .navigation,
   .nav__bar {
-    width: 22%;
+    width: 19%;
+  }
+
+  .nav__bar .logo .logo__text {
+    font-size: 50px;
+  }
+
+  .navigation .nav__list__container {
+    padding: 27px;
+
+    .nav__item {
+      padding: 26px 0;
+    }
+  }
+
+  .create__item__container .create__item__card {
+    padding: 85px;
   }
 
   .content__container {
     left: 22%;
     max-width: 76.5%;
     height: 97vh;
-    padding: 100px 10% 0 100px;
+    padding: 100px 10% 0 10%;
   }
 }
 

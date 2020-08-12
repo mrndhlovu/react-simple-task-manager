@@ -47,6 +47,8 @@ const Settings = ({ user = {} }) => {
   );
 };
 
-Settings.propTypes = {};
+Settings.propTypes = {
+  user: PropTypes.object,
+};
 
 export default Settings;

@@ -9,12 +9,13 @@ const CreateTask = ({
   handleClick,
   handleChange,
   header = "Create New Task",
+  buttonText,
 }) => {
   return (
     <CreateItemWrapper
-      buttonText="Create Task"
       clickHandler={handleClick}
       header={header}
+      buttonText={buttonText}
     >
       <UIInput
         id="task-title"
@@ -36,6 +37,12 @@ const CreateTask = ({
   );
 };
 
-CreateTask.propTypes = {};
+CreateTask.propTypes = {
+  task: PropTypes.object,
+  handleClick: PropTypes.func,
+  handleChange: PropTypes.func,
+  header: PropTypes.string.isRequired,
+  buttonText: PropTypes.string.isRequired,
+};
 
 export default CreateTask;

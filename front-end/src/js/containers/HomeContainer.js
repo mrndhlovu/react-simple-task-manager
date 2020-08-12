@@ -44,6 +44,7 @@ const HomeContainer = () => {
       <CreateTask
         handleChange={handleChange}
         handleClick={() => handleCreateTask()}
+        buttonText="Create New Task"
       />
       <TasksList
         editTaskHandler={editTaskHandler}

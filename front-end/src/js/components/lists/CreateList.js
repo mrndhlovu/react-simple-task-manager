@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 import CreateItemWrapper from "../shared/CreateItemWrapper";
 import UIInput from "../shared/UIInput";
@@ -25,6 +25,6 @@ const CreateList = () => {
   );
 };
 
-CreateList.propTypes = {};
+// CreateList.propTypes = {};
 
 export default CreateList;

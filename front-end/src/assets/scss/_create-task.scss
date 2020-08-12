@@ -1,6 +1,6 @@
 .create__item__container {
   .create__item__card {
-    padding: 12px;
+    padding: 18px;
     border-radius: 6px;
   }
 
@@ -17,12 +17,12 @@
   }
 
   .submit__button {
-    background: $green;
+    background: $primary-color;
     color: $white;
     font-family: $montserrat, "sans-serif";
 
     &:hover {
-      background: $green;
+      background: $primary-color;
       opacity: 0.9;
     }
   }
