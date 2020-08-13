@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import update from "immutability-helper";
 
 import { useHistory } from "react-router";
 
@@ -16,11 +17,14 @@ import {
   requestDeleteTask,
   requestUpdateTask,
   requestCreateTask,
+  requestDeleteList,
+  requestCreateList,
 } from "../apis/tasksApiRequests";
 
 import NavBar from "../components/navigation/NavBar";
 import NavigationBar from "../components/navigation/NavigationBar";
 import { getValidUpdateFields } from "../utils/appUtils";
+import { EDITABLE_TASK_FIELDS } from "../constants/constants";
 
 const INITIAL_STATE = {
   user: undefined,
@@ -29,6 +33,9 @@ const INITIAL_STATE = {
 
 const AppContainer = ({ children }) => {
   const [userInfo, setUserInfo] = useState(INITIAL_STATE);
+  const [lists, setLists] = useState([]);
+  const [tasks, setTasks] = useState([]);
+
   const [isLoading, setIsLoading] = useState(true);
   const history = useHistory();
 
@@ -52,33 +59,71 @@ const AppContainer = ({ children }) => {
       });
   };
 
+  const createListHandler = async (title) => {
+    await requestCreateList({ title })
+      .then((res) => {
+        const updatedLists = update(lists, {
+          $push: [res.data],
+        });
+        setLists(updatedLists);
+        history.push(`/lists/${res.data._id}`);
+      })
+      .catch((err) => {
+        console.log("handleCreateList -> err", err.message);
+      });
+  };
+
   const deleteTaskHandler = async (taskId, callback) => {
     await requestDeleteTask(taskId)
       .then((res) => {
         callback && callback(res.data);
       })
       .catch((err) => {
-        callback(undefined, err.message);
+        callback && callback(undefined, err.message);
+      });
+  };
+
+  const deleteListHandler = async (listId, callback) => {
+    await requestDeleteList(listId)
+      .then((res) => {
+        callback && callback(res.data);
+      })
+      .catch((err) => {
+        callback && callback(undefined, err.message);
       });
   };
 
   const createTaskHandler = async (data, callback) => {
     await requestCreateTask(data)
       .then((res) => {
-        callback && callback(res.data);
+        const updatedTasks = update(tasks, {
+          $push: [res.data],
+        });
+        setTasks(updatedTasks);
+        callback && callback();
       })
       .catch((err) => {
-        callback(undefined, err.message);
+        console.log("createTaskHandler -> err", err.data);
       });
   };
 
   const updatedTaskHandler = async (task, taskId, callback) => {
+    const taskIndex = tasks.indexOf(task);
+
     await requestUpdateTask(task, taskId)
       .then((res) => {
-        callback && callback(res.data);
+        const updatedTasks = update(tasks, {
+          $splice: [
+            [taskIndex, 1],
+            [taskIndex, 0, res.data],
+          ],
+        });
+
+        setTasks(updatedTasks);
+        callback && callback();
       })
       .catch((err) => {
-        callback(undefined, err.message);
+        console.log("updatedTaskHandler -> err", err.message);
       });
   };
 
@@ -113,6 +158,38 @@ const AppContainer = ({ children }) => {
     setIsLoading(false);
   };
 
+  const taskActionHandler = (action, task) => {
+    const taskIndex = tasks.indexOf(task);
+    const body = getValidUpdateFields(task, EDITABLE_TASK_FIELDS);
+
+    switch (action) {
+      case "delete":
+        return deleteTaskHandler(task._id, (err) => {
+          const updatedTasks = update(tasks, {
+            $splice: [[taskIndex, 1]],
+          });
+          setTasks(updatedTasks);
+        });
+      case "edit":
+        return history.push(`/edit-task/${task._id}`);
+      case "incomplete":
+        return updatedTaskHandler(
+          {
+            ...body,
+            status: task.status === "incomplete" ? "todo" : "incomplete",
+          },
+          task._id
+        );
+      case "complete":
+        return updatedTaskHandler(
+          { ...body, status: task.status === "complete" ? "todo" : "complete" },
+          task._id
+        );
+      default:
+        break;
+    }
+  };
+
   const registrationHandler = async (credentials) => {
     await requestRegistration(credentials)
       .then((res) => {
@@ -123,11 +200,17 @@ const AppContainer = ({ children }) => {
       });
   };
 
+  const updateListHandler = (newList) => {
+    setLists(newList);
+  };
+
   useEffect(() => {
     const getUserInfo = async () => {
       await requestUserProfile()
         .then((res) => {
-          authListener(res.data);
+          authListener(res.data.user);
+          setTasks(res.data.tasks);
+          setLists(res.data.lists);
         })
         .catch(() => {
           authListener();
@@ -140,15 +223,21 @@ const AppContainer = ({ children }) => {
   const CONTEXT = {
     auth: userInfo,
     authListener,
+    createListHandler,
+    createTaskHandler,
     deleteAccountHandler,
+    deleteListHandler,
+    deleteTaskHandler,
     handleLogout,
     isLoading,
+    lists,
     loginHandler,
     registrationHandler,
-    updateUserHandler,
-    deleteTaskHandler,
+    taskActionHandler,
+    tasks,
     updatedTaskHandler,
-    createTaskHandler,
+    updateListHandler,
+    updateUserHandler,
   };
 
   return (

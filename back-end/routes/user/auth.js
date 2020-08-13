@@ -50,7 +50,13 @@ router.post("/login", async (req, res, next) => {
 
 router.get("/me", auth, async (req, res) => {
   try {
-    res.send(req.user);
+    const user = await User.findById(req.user._id);
+
+    await user.populate("tasks").execPopulate();
+    await user.populate("lists").execPopulate();
+    const context = { user, tasks: user.tasks, lists: user.lists };
+
+    res.send(context);
   } catch (error) {
     res.status(400).send(STRINGS.auth.noUserProfile);
   }

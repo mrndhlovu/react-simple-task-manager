@@ -52,6 +52,7 @@ CreateTask.propTypes = {
   task: PropTypes.object,
   header: PropTypes.string.isRequired,
   buttonText: PropTypes.string.isRequired,
+  handleButtonClick: PropTypes.func.isRequired,
 };
 
 export default CreateTask;

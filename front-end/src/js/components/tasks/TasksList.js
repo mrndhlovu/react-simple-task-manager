@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 
 import UIHeader from "../shared/UIHeader";
 import TaskItem from "../shared/TaskItem";
-import { useTaskContent } from "../../utils/hookUtils";
+import { useMainContent } from "../../utils/hookUtils";
 
 const TasksList = ({ header, tasks }) => {
-  const { taskActionHandler } = useTaskContent();
+  const { taskActionHandler } = useMainContent();
 
   return (
     <div>

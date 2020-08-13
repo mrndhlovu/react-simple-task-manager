@@ -101,6 +101,16 @@ router.post("/create-list", auth, async (req, res) => {
   }
 });
 
+router.get("/all-lists", auth, async (req, res) => {
+  try {
+    const lists = await List.find({ owner: req.user._id });
+
+    res.send(lists);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
+
 router.get("/id/:listId/list", auth, async (req, res) => {
   const _id = req.params.listId;
   const list = await List.findOne({ _id, owner: req.user._id });

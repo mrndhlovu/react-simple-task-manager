@@ -23,7 +23,7 @@ export const requestDeleteTask = (id) =>
   axiosInstance.delete(`${TASKS_EP}/id/${id}/delete-task`);
 
 export const requestDeleteList = (id) =>
-  axiosInstance.delete(`${TASKS_EP}/${id}/delete-list`);
+  axiosInstance.delete(`${TASKS_EP}/id/${id}/delete-list`);
 
 export const requestAllTasks = () => axiosInstance.get(`${TASKS_EP}/all`);
 export const requestLists = () => axiosInstance.get(`${TASKS_EP}/all-lists`);
