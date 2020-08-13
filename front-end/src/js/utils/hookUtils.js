@@ -1,4 +1,5 @@
 import { useContext } from "react";
-import { MainContext } from "./contextUtils";
+import { MainContext, TaskContext } from "./contextUtils";
 
 export const useMainContent = () => useContext(MainContext);
+export const useTaskContent = () => useContext(TaskContext);

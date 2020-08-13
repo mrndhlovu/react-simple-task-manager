@@ -1,88 +1,125 @@
-import React from "react";
-
-import CreateTask from "../components/tasks/CreateTask";
-import TasksList from "../components/tasks/TasksList";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
+import update from "immutability-helper";
+
+import { EDITABLE_TASK_FIELDS } from "../constants/constants";
+import { getValidUpdateFields } from "../utils/appUtils";
+import { requestAllTasks } from "../apis/tasksApiRequests";
+import { TaskContext } from "../utils/contextUtils";
+import { useMainContent } from "../utils/hookUtils";
+import CreateTask from "../components/shared/CreateTask";
+import TasksList from "../components/tasks/TasksList";
 
 const HomeContainer = () => {
   const history = useHistory();
+  const {
+    deleteTaskHandler,
+    updatedTaskHandler,
+    createTaskHandler,
+  } = useMainContent();
 
-  const editTaskHandler = (action, task) => {
+  const [tasks, setTasks] = useState([]);
+
+  const TODOS = tasks && tasks.filter((task) => task.status === "todo");
+  const COMPLETED = tasks && tasks.filter((task) => task.status === "complete");
+  const INCOMPLETES =
+    tasks && tasks.filter((task) => task.status === "incomplete");
+
+  const hasTodos = TODOS.length !== 0;
+  const hasCompleted = COMPLETED.length !== 0;
+  const hasInCompleted = INCOMPLETES.length !== 0;
+
+  const updatedTask = async (body, task) => {
+    const taskIndex = tasks.indexOf(task);
+
+    updatedTaskHandler(body, task._id, (data, error) => {
+      if (error) return console.log(error);
+
+      const updatedTasks = update(tasks, {
+        $splice: [
+          [taskIndex, 1],
+          [taskIndex, 0, data],
+        ],
+      });
+
+      setTasks(updatedTasks);
+    });
+  };
+
+  const taskActionHandler = (action, task) => {
+    const taskIndex = tasks.indexOf(task);
+    const body = getValidUpdateFields(task, EDITABLE_TASK_FIELDS);
+
     switch (action) {
       case "delete":
-        console.log(" -> delete");
-
-        break;
-
+        return deleteTaskHandler(task._id, (err) => {
+          const updatedTasks = update(tasks, {
+            $splice: [[taskIndex, 1]],
+          });
+          setTasks(updatedTasks);
+        });
       case "edit":
-        history.push(`/edit-task/${task.id}`);
-        break;
-
+        return history.push(`/edit-task/${task._id}`);
       case "incomplete":
-        console.log("editTaskHandler -> incomplete");
-        break;
-
+        return updatedTask(
+          {
+            ...body,
+            status: task.status === "incomplete" ? "todo" : "incomplete",
+          },
+          task
+        );
       case "complete":
-        console.log("editTaskHandler -> complete");
-        break;
-
+        return updatedTask(
+          { ...body, status: task.status === "complete" ? "todo" : "complete" },
+          task
+        );
       default:
         break;
     }
   };
 
-  const handleChange = (field, e) => {
-    console.log("handleChange -> field, e", field, e);
+  const createTask = (data, callback) => {
+    createTaskHandler(data, (data, error) => {
+      if (error) return console.log(error);
+
+      const updatedTasks = update(tasks, {
+        $push: [data],
+      });
+      setTasks(updatedTasks);
+      callback && callback();
+    });
   };
 
-  const handleCreateTask = (field, e) => {
-    console.log("handleChange -> field, e", field, e);
+  useEffect(() => {
+    const getTasks = async () => {
+      await requestAllTasks()
+        .then((res) => {
+          setTasks(res.data);
+        })
+        .catch((err) => {
+          console.log("getTasks -> err", err.message);
+        });
+    };
+    getTasks();
+  }, []);
+
+  const CONTEXT = {
+    taskActionHandler,
   };
 
   return (
-    <>
+    <TaskContext.Provider value={CONTEXT}>
       <CreateTask
-        handleChange={handleChange}
-        handleClick={() => handleCreateTask()}
         buttonText="Create New Task"
         header="Create New Task"
+        handleButtonClick={createTask}
       />
-      <TasksList
-        editTaskHandler={editTaskHandler}
-        header="To Do"
-        tasks={[
-          {
-            title: "take out bins",
-            dueDate: "Tuesday 11th August",
-            id: 1,
-          },
-        ]}
-      />
+      {hasTodos && <TasksList header="To Do" tasks={TODOS} />}
 
-      <TasksList
-        header="In Complete"
-        editTaskHandler={editTaskHandler}
-        tasks={[
-          {
-            title: "take out bins",
-            dueDate: "Tuesday 11th August",
-            id: 2,
-          },
-        ]}
-      />
+      {hasInCompleted && <TasksList header="In Complete" tasks={INCOMPLETES} />}
 
-      <TasksList
-        editTaskHandler={editTaskHandler}
-        header="Complete"
-        tasks={[
-          {
-            title: "take out bins",
-            dueDate: "Tuesday 11th August",
-            id: 3,
-          },
-        ]}
-      />
-    </>
+      {hasCompleted && <TasksList header="Complete" tasks={COMPLETED} />}
+    </TaskContext.Provider>
   );
 };
 

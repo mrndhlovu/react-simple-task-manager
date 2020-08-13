@@ -1,26 +1,49 @@
-import React from "react";
-// import PropTypes from "prop-types";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-import CreateTask from "./CreateTask";
+import { EDITABLE_TASK_FIELDS } from "../../constants/constants";
+import { getValidUpdateFields } from "../../utils/appUtils";
+import { requestTask } from "../../apis/tasksApiRequests";
+import { useMainContent } from "../../utils/hookUtils";
+import CreateTask from "../shared/CreateTask";
 
 const EditTask = () => {
-  const handleSaveTaskChanges = () => {};
+  const { taskId } = useParams();
+  const { updatedTaskHandler } = useMainContent();
+  const [task, setTask] = useState(undefined);
 
-  const handleChange = (field, e) => {
-    console.log("handleChange -> field, e", field, e);
+  const editTaskHandler = async (newTask) => {
+    const body = getValidUpdateFields(newTask, EDITABLE_TASK_FIELDS);
+
+    updatedTaskHandler(body, taskId, (data, error) => {
+      if (error) return console.log(error);
+      setTask(data);
+    });
   };
 
-  return (
+  useEffect(() => {
+    const getTask = async () => {
+      await requestTask(taskId)
+        .then((res) => {
+          setTask(res.data);
+        })
+        .catch((err) => {
+          console.log("deleteTask -> err", err.message);
+        });
+    };
+    getTask();
+  }, [taskId]);
+
+  return task ? (
     <CreateTask
       header="Edit Task"
-      task={{ title: "New task", dueDate: "12 February 2090" }}
-      handleClick={() => handleSaveTaskChanges()}
-      handleChange={handleChange}
+      task={task}
+      handleButtonClick={editTaskHandler}
       buttonText="Save Changes"
     />
+  ) : (
+    <div>Loading...</div>
   );
 };
-
-// EditTask.propTypes = {};
 
 export default EditTask;

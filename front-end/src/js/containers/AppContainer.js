@@ -10,7 +10,13 @@ import {
   requestRegistration,
   requestUserUpdate,
   requestDeleteAccount,
-} from "../apis/apiRequests";
+} from "../apis/authApiRequest";
+
+import {
+  requestDeleteTask,
+  requestUpdateTask,
+  requestCreateTask,
+} from "../apis/tasksApiRequests";
 
 import NavBar from "../components/navigation/NavBar";
 import NavigationBar from "../components/navigation/NavigationBar";
@@ -43,6 +49,36 @@ const AppContainer = ({ children }) => {
       })
       .catch(() => {
         authListener();
+      });
+  };
+
+  const deleteTaskHandler = async (taskId, callback) => {
+    await requestDeleteTask(taskId)
+      .then((res) => {
+        callback && callback(res.data);
+      })
+      .catch((err) => {
+        callback(undefined, err.message);
+      });
+  };
+
+  const createTaskHandler = async (data, callback) => {
+    await requestCreateTask(data)
+      .then((res) => {
+        callback && callback(res.data);
+      })
+      .catch((err) => {
+        callback(undefined, err.message);
+      });
+  };
+
+  const updatedTaskHandler = async (task, taskId, callback) => {
+    await requestUpdateTask(task, taskId)
+      .then((res) => {
+        callback && callback(res.data);
+      })
+      .catch((err) => {
+        callback(undefined, err.message);
       });
   };
 
@@ -110,6 +146,9 @@ const AppContainer = ({ children }) => {
     loginHandler,
     registrationHandler,
     updateUserHandler,
+    deleteTaskHandler,
+    updatedTaskHandler,
+    createTaskHandler,
   };
 
   return (

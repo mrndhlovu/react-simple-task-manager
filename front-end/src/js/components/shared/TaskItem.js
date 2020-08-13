@@ -29,8 +29,7 @@ const TaskItem = ({ title, dueDate, editTaskHandler }) => {
 
 TaskItem.propTypes = {
   title: PropTypes.string.isRequired,
-  dueDate: PropTypes.string.isRequired,
-  editTaskHandler: PropTypes.func.isRequired,
+  dueDate: PropTypes.string,
 };
 
 export default TaskItem;
