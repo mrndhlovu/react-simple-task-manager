@@ -93,3 +93,20 @@
     color: $primary-color;
   }
 }
+
+.ui__alert {
+  position: absolute;
+  width: 95%;
+  left: 50%;
+  top: 7%;
+  transform: translate(-50%);
+  font-family: $montserrat !important;
+  font-weight: $bold !important;
+  color: $darkGrey !important;
+  text-transform: capitalize;
+  z-index: 10000;
+
+  & div > svg {
+    color: $primary-color !important;
+  }
+}

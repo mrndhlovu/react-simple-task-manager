@@ -12,7 +12,7 @@ const NavigationBar = ({ className, toggleMenu }) => {
   const history = useHistory();
 
   const {
-    handleLogout,
+    logoutHandler,
     auth,
     deleteListHandler,
     lists,
@@ -77,7 +77,7 @@ const NavigationBar = ({ className, toggleMenu }) => {
             />
             <LinkItem
               content="Logout"
-              clickHandler={() => clickHandler(() => handleLogout())}
+              clickHandler={() => clickHandler(() => logoutHandler())}
             />
           </>
         ) : (

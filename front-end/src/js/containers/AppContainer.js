@@ -25,13 +25,15 @@ import NavBar from "../components/navigation/NavBar";
 import NavigationBar from "../components/navigation/NavigationBar";
 import { getValidUpdateFields } from "../utils/appUtils";
 import { EDITABLE_TASK_FIELDS } from "../constants/constants";
+import withAlert from "../hoc/withAlert";
 
 const INITIAL_STATE = {
   user: undefined,
   authenticated: false,
 };
 
-const AppContainer = ({ children }) => {
+const AppContainer = ({ children, notify }) => {
+  console.log("AppContainer -> notify", notify);
   const [userInfo, setUserInfo] = useState(INITIAL_STATE);
   const [lists, setLists] = useState([]);
   const [tasks, setTasks] = useState([]);
@@ -39,10 +41,13 @@ const AppContainer = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const history = useHistory();
 
-  const handleLogout = async () => {
+  const logoutHandler = async () => {
     await requestLogout()
       .then(() => authListener())
-      .catch(() => authListener());
+      .catch(() => {
+        notify("Fail to logout!");
+        authListener();
+      });
   };
 
   const updateUserHandler = async (data) => {
@@ -53,8 +58,10 @@ const AppContainer = ({ children }) => {
     await requestUserUpdate(body)
       .then((res) => {
         authListener(res.data);
+        notify("Profile updated");
       })
       .catch(() => {
+        notify("Failed to updated profile");
         authListener();
       });
   };
@@ -67,9 +74,10 @@ const AppContainer = ({ children }) => {
         });
         setLists(updatedLists);
         history.push(`/lists/${res.data._id}`);
+        notify("List created");
       })
       .catch((err) => {
-        console.log("handleCreateList -> err", err.message);
+        notify("Failed to create List!");
       });
   };
 
@@ -77,9 +85,11 @@ const AppContainer = ({ children }) => {
     await requestDeleteTask(taskId)
       .then((res) => {
         callback && callback(res.data);
+        notify("Task deleted!");
       })
       .catch((err) => {
         callback && callback(undefined, err.message);
+        notify("Failed to delete Task!");
       });
   };
 
@@ -87,15 +97,18 @@ const AppContainer = ({ children }) => {
     await requestDeleteList(listId)
       .then((res) => {
         callback && callback(res.data);
+        notify("List deleted!");
       })
       .catch((err) => {
         callback && callback(undefined, err.message);
+        notify("Failed to delete List!");
       });
   };
 
   const createTaskHandler = async (data, callback) => {
     await requestCreateTask(data)
       .then((res) => {
+        notify("Task created!");
         const updatedTasks = update(tasks, {
           $push: [res.data],
         });
@@ -103,7 +116,7 @@ const AppContainer = ({ children }) => {
         callback && callback();
       })
       .catch((err) => {
-        console.log("createTaskHandler -> err", err.data);
+        notify("Failed to create a task!");
       });
   };
 
@@ -121,9 +134,10 @@ const AppContainer = ({ children }) => {
 
         setTasks(updatedTasks);
         callback && callback();
+        notify("Task updated!");
       })
       .catch((err) => {
-        console.log("updatedTaskHandler -> err", err.message);
+        notify("Failed to update a task!");
       });
   };
 
@@ -132,9 +146,11 @@ const AppContainer = ({ children }) => {
       .then(() => {
         history.push("/login");
         authListener();
+        notify("Account deleted!");
       })
       .catch(() => {
         authListener();
+        notify("Failed to delete account!");
       });
   };
 
@@ -143,8 +159,11 @@ const AppContainer = ({ children }) => {
       .then((res) => {
         authListener(res.data);
         history.push("/");
+        notify("Welcome!");
       })
-      .catch(() => {
+      .catch((error) => {
+        notify(error.message);
+
         authListener();
       });
   };
@@ -228,10 +247,11 @@ const AppContainer = ({ children }) => {
     deleteAccountHandler,
     deleteListHandler,
     deleteTaskHandler,
-    handleLogout,
     isLoading,
     lists,
     loginHandler,
+    logoutHandler,
+    notify,
     registrationHandler,
     taskActionHandler,
     tasks,
@@ -251,4 +271,4 @@ const AppContainer = ({ children }) => {
   );
 };
 
-export default AppContainer;
+export default withAlert(AppContainer);

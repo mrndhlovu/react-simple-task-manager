@@ -17,6 +17,9 @@
 }
 
 @media only screen and (min-width: 768px) {
+  .ui__alert {
+    top: 0%;
+  }
   .app__content {
     @include gridLayout(1fr 2fr);
   }
@@ -86,6 +89,10 @@
 }
 
 @media only screen and (min-width: 1256px) {
+  .ui__alert {
+    width: 45%;
+  }
+
   .navigation,
   .nav__bar {
     width: 25%;
