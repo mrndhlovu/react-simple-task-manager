@@ -1,87 +1,34 @@
 import React from "react";
 
-import CreateTask from "../components/tasks/CreateTask";
+import { useMainContent } from "../utils/hookUtils";
+import CreateTask from "../components/shared/CreateTask";
 import TasksList from "../components/tasks/TasksList";
-import { useHistory } from "react-router";
 
 const HomeContainer = () => {
-  const history = useHistory();
+  const { createTaskHandler, tasks } = useMainContent();
 
-  const editTaskHandler = (action, task) => {
-    switch (action) {
-      case "delete":
-        console.log(" -> delete");
+  const TODOS = tasks && tasks.filter((task) => task.status === "todo");
+  const COMPLETED = tasks && tasks.filter((task) => task.status === "complete");
+  const INCOMPLETES =
+    tasks && tasks.filter((task) => task.status === "incomplete");
 
-        break;
-
-      case "edit":
-        history.push(`/edit-task/${task.id}`);
-        break;
-
-      case "incomplete":
-        console.log("editTaskHandler -> incomplete");
-        break;
-
-      case "complete":
-        console.log("editTaskHandler -> complete");
-        break;
-
-      default:
-        break;
-    }
-  };
-
-  const handleChange = (field, e) => {
-    console.log("handleChange -> field, e", field, e);
-  };
-
-  const handleCreateTask = (field, e) => {
-    console.log("handleChange -> field, e", field, e);
-  };
+  const hasTodos = TODOS.length !== 0;
+  const hasCompleted = COMPLETED.length !== 0;
+  const hasInCompleted = INCOMPLETES.length !== 0;
 
   return (
     <>
       <CreateTask
-        handleChange={handleChange}
-        handleClick={() => handleCreateTask()}
         buttonText="Create New Task"
         header="Create New Task"
-      />
-      <TasksList
-        editTaskHandler={editTaskHandler}
-        header="To Do"
-        tasks={[
-          {
-            title: "take out bins",
-            dueDate: "Tuesday 11th August",
-            id: 1,
-          },
-        ]}
+        handleButtonClick={createTaskHandler}
       />
 
-      <TasksList
-        header="In Complete"
-        editTaskHandler={editTaskHandler}
-        tasks={[
-          {
-            title: "take out bins",
-            dueDate: "Tuesday 11th August",
-            id: 2,
-          },
-        ]}
-      />
+      {hasTodos && <TasksList header="To Do" tasks={TODOS} />}
 
-      <TasksList
-        editTaskHandler={editTaskHandler}
-        header="Complete"
-        tasks={[
-          {
-            title: "take out bins",
-            dueDate: "Tuesday 11th August",
-            id: 3,
-          },
-        ]}
-      />
+      {hasInCompleted && <TasksList header="In Complete" tasks={INCOMPLETES} />}
+
+      {hasCompleted && <TasksList header="Complete" tasks={COMPLETED} />}
     </>
   );
 };

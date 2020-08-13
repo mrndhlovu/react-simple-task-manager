@@ -11,6 +11,10 @@ body {
   box-sizing: border-box;
 }
 
+.content__container::-webkit-scrollbar {
+  display: none;
+}
+
 .app__container {
   height: 100vh;
   background: $lightGrey;

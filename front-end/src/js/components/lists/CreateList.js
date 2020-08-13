@@ -1,17 +1,19 @@
-import React from "react";
-// import PropTypes from "prop-types";
+import React, { useState } from "react";
 
+import { useMainContent } from "../../utils/hookUtils";
 import CreateItemWrapper from "../shared/CreateItemWrapper";
 import UIInput from "../shared/UIInput";
 
 const CreateList = () => {
-  const handleCreateList = () => {};
-  const handleChange = (e) => {};
+  const { createListHandler } = useMainContent();
+  const [title, setTitle] = useState(undefined);
+
+  const handleChange = (e) => setTitle(e.target.value);
 
   return (
     <CreateItemWrapper
       buttonText="Create List"
-      clickHandler={() => handleCreateList()}
+      clickHandler={() => createListHandler(title)}
       header="Create New List"
       className="create__list__form"
     >
@@ -24,7 +26,5 @@ const CreateList = () => {
     </CreateItemWrapper>
   );
 };
-
-// CreateList.propTypes = {};
 
 export default CreateList;

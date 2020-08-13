@@ -1,10 +1,9 @@
 export const baseURL = "http://localhost:5000";
 
-export const LISTS_EP = `/v1/api/boards`;
-export const TASKS_EP = `/v1/api/cards`;
+export const TASKS_EP = `/v1/api/tasks`;
 export const AUTH_EP = `/v1/api/auth`;
 
-export const params = {
+export const PARAMS = {
   baseURL,
   headers: {
     Accept: "application/json",
@@ -29,5 +28,3 @@ export const parseUrl = (search) => {
 };
 
 export const getQueryString = (location) => location.search.slice(1);
-
-// export const getSearchQueryString = (query) =>

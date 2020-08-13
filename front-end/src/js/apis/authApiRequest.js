@@ -1,7 +1,7 @@
 import axios from "axios";
-import { AUTH_EP, params } from "../utils/urls";
+import { AUTH_EP, PARAMS } from "../utils/urls";
 
-const axiosInstance = axios.create({ ...params });
+const axiosInstance = axios.create({ ...PARAMS });
 
 export const requestDeleteAccount = () =>
   axiosInstance.delete(`${AUTH_EP}/delete-account`);

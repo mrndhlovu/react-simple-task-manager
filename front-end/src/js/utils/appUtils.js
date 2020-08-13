@@ -8,3 +8,9 @@ export const getValidUpdateFields = (data, allowedUpdates) => {
 
   return filtered;
 };
+
+export const resetForm = (data) => {
+  if (typeof data === "object")
+    return data.forEach((id) => (document.getElementById(id).value = ""));
+  document.getElementById(data).value = "";
+};

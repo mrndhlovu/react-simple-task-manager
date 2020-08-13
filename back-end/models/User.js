@@ -47,14 +47,14 @@ const UserSchema = new mongoose.Schema(
   { timestamps: true, toJSON: { virtuals: true } }
 );
 
-UserSchema.virtual("list", {
-  ref: "ListAddress",
+UserSchema.virtual("lists", {
+  ref: "List",
   localField: "_id",
   foreignField: "owner",
   justOne: false,
 });
 
-UserSchema.virtual("task", {
+UserSchema.virtual("tasks", {
   ref: "Task",
   localField: "_id",
   foreignField: "owner",
@@ -136,12 +136,6 @@ UserSchema.methods.runEncryption = function (
     return next(error);
   }
 };
-
-UserSchema.virtual("tasks", {
-  ref: "Task",
-  localField: "_id",
-  foreignField: "owner",
-});
 
 UserSchema.pre("save", function (next) {
   const user = this;

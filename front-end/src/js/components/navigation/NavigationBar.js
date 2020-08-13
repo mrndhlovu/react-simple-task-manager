@@ -1,16 +1,23 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router";
+import update from "immutability-helper";
 
 import { Plus, Trash2 } from "react-feather";
 
 import { useMainContent } from "../../utils/hookUtils";
 import LinkItem from "../shared/LinkItem";
 
-const NavigationBar = ({ lists = [], className, toggleMenu }) => {
+const NavigationBar = ({ className, toggleMenu }) => {
   const history = useHistory();
 
-  const { handleLogout, auth } = useMainContent();
+  const {
+    handleLogout,
+    auth,
+    deleteListHandler,
+    lists,
+    updateListHandler,
+  } = useMainContent();
 
   const clickHandler = (callback) => {
     toggleMenu && toggleMenu();
@@ -32,10 +39,27 @@ const NavigationBar = ({ lists = [], className, toggleMenu }) => {
                   <LinkItem
                     content={list?.title}
                     clickHandler={() =>
-                      clickHandler(() => history.push(`/lists/${list.id}`))
+                      clickHandler(() => history.push(`/lists/${list._id}`))
                     }
                   />
-                  <Trash2 className="delete__button" size={15} />
+                  <Trash2
+                    className="delete__button"
+                    size={15}
+                    onClick={() =>
+                      deleteListHandler(list._id, () => {
+                        const isListPage =
+                          history.location.pathname.split("/")[2] === list._id;
+
+                        const updatedLists = update(lists, {
+                          $splice: [[index, 1]],
+                        });
+
+                        updateListHandler(updatedLists);
+
+                        if (isListPage) history.push("/");
+                      })
+                    }
+                  />
                 </div>
               ))}
             <div className="icon__link__container">
