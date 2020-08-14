@@ -2,7 +2,8 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-const isDevelopment = process.env.NODE_ENV === "development";
+const isDevelopment = process.env.DEVELOPMENT === "development";
+
 const S_GRID_API_KEY = process.env.SEND_GRID_API_KEY;
 
 const CONNECTION_URI = process.env.MONGODB_URI;
