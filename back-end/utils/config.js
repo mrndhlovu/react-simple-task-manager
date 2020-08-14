@@ -8,12 +8,12 @@ const S_GRID_API_KEY = process.env.SEND_GRID_API_KEY;
 const CONNECTION_URI = process.env.MONGODB_URI;
 const { LOCAL_MONGO_DB } = process.env;
 
-const PORT = isDevelopment ? 5000 : process.env.PORT || 80;
+const PORT = isDevelopment ? 5000 : process.env.PORT;
 
 const { PRIVATE_SIGNATURE, PUBLIC_SIGNATURE } = process.env;
 const BASE_URL = isDevelopment
   ? "http://localhost:3000"
-  : `http://ec2-3-248-208-68.eu-west-1.compute.amazonaws.com:${PORT}`;
+  : `http://ec2-3-248-208-68.eu-west-1.compute.amazonaws.com:${PORT || 80}`;
 
 const ALLOWED_UPDATE_FIELDS_USER = [
   "firstName",
