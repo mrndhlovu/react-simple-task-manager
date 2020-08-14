@@ -39,7 +39,7 @@ const AppContainer = ({ children, notify }) => {
   const [userInfo, setUserInfo] = useState(INITIAL_STATE);
   const [lists, setLists] = useState([]);
   const [tasks, setTasks] = useState([]);
-  const [header, setHeader] = useState();
+  const [header, setHeader] = useState("Create New Task");
   const paramPath = location.pathname.split("/");
 
   const [isLoading, setIsLoading] = useState(true);
@@ -160,7 +160,9 @@ const AppContainer = ({ children, notify }) => {
   const loginHandler = async (credentials) => {
     await requestLogin(credentials)
       .then((res) => {
-        authListener(res.data);
+        authListener(res.data.user);
+        setTasks(res.data.tasks);
+        setLists(res.data.lists);
         history.push("/");
         notify("Welcome Back!");
       })
@@ -214,7 +216,9 @@ const AppContainer = ({ children, notify }) => {
   const registrationHandler = async (credentials) => {
     await requestRegistration(credentials)
       .then((res) => {
-        authListener(res.data);
+        authListener(res.data.user);
+        setTasks(res.data.tasks);
+        setLists(res.data.lists);
         notify("Welcome!");
       })
       .catch((error) => {
@@ -228,8 +232,6 @@ const AppContainer = ({ children, notify }) => {
   };
 
   useEffect(() => {
-    console.log(paramPath[1]);
-
     switch (paramPath[1]) {
       case "settings":
         return setHeader("Account Details");

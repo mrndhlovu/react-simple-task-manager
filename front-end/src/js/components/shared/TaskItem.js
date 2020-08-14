@@ -3,6 +3,10 @@ import PropTypes from "prop-types";
 
 import { Card } from "@material-ui/core";
 import { CheckCircle, X, Edit2, Trash2 } from "react-feather";
+import {
+  getFormattedDateString,
+  taskStylingClassName,
+} from "../../utils/appUtils";
 
 const TaskItem = ({ title, dueDate, editTaskHandler, status }) => {
   return (
@@ -34,16 +38,8 @@ const TaskItem = ({ title, dueDate, editTaskHandler, status }) => {
         </ul>
         <p className="task__title">{title}</p>
       </div>
-      <p
-        className={`${
-          status === "incomplete"
-            ? "task__expired"
-            : status === "complete"
-            ? "task__completed"
-            : "task__todo"
-        }`}
-      >
-        {dueDate}
+      <p className={taskStylingClassName(status, dueDate)}>
+        {getFormattedDateString(dueDate, status) || "Due date not set."}
       </p>
     </Card>
   );

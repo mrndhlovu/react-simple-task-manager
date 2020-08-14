@@ -41,4 +41,12 @@ const getUser = async (userData) => {
   return user;
 };
 
-module.exports = { auth, getUser, generateAccessCookie };
+const populateUser = async (user, res) => {
+  await user.populate("tasks").execPopulate();
+  await user.populate("lists").execPopulate();
+
+  const context = { user, tasks: user.tasks, lists: user.lists };
+  res.send(context);
+};
+
+module.exports = { auth, getUser, generateAccessCookie, populateUser };

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
+import { resetForm, getLocaleString } from "../../utils/appUtils";
 import CreateItemWrapper from "./CreateItemWrapper";
 import UIInput from "./UIInput";
-import { resetForm } from "../../utils/appUtils";
 
 const INITIAL_STATE = {
   title: undefined,
@@ -12,6 +12,7 @@ const INITIAL_STATE = {
 
 const CreateTask = ({ task, buttonText, handleButtonClick }) => {
   const [newTask, setNewTask] = useState(task || INITIAL_STATE);
+
   const inputId = buttonText.toLowerCase().split(" ").join("-");
 
   const handleChange = (field, e) => {
@@ -37,11 +38,10 @@ const CreateTask = ({ task, buttonText, handleButtonClick }) => {
       />
       <UIInput
         id={`${inputId}-duedate`}
-        type="text"
+        type="datetime-local"
         label="Due Date"
-        placeholder="Tuesday 11th August"
         handleChange={(e) => handleChange("dueDate", e)}
-        defaultValue={task?.dueDate}
+        defaultValue={task?.dueDate || getLocaleString()}
       />
     </CreateItemWrapper>
   );
@@ -49,7 +49,6 @@ const CreateTask = ({ task, buttonText, handleButtonClick }) => {
 
 CreateTask.propTypes = {
   task: PropTypes.object,
-  header: PropTypes.string.isRequired,
   buttonText: PropTypes.string.isRequired,
   handleButtonClick: PropTypes.func.isRequired,
 };
