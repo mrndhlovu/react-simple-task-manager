@@ -2,6 +2,7 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const path = require("path");
 const { BASE_URL } = require("../utils/config");
+const errorHandler = require("./errorHandlerConfig");
 
 const BUILD_DIR = "../../front-end/build";
 
@@ -16,6 +17,7 @@ const serverConfig = (app, express) => {
   );
 
   app.use(express.static(path.resolve(__dirname, BUILD_DIR)));
+  app.use(errorHandler);
 };
 
 module.exports = serverConfig;
