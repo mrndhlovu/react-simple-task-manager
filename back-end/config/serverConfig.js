@@ -3,7 +3,7 @@ const cors = require("cors");
 
 const { ROOT_URL } = require("../utils/config");
 
-const BUILD_DIR = "../../front-end/build";
+const BUILD_DIR = "front-end/build";
 
 const serverConfig = (app, express) => {
   app.use(express.json());
