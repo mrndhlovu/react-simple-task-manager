@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 5000;
 const { PRIVATE_SIGNATURE, PUBLIC_SIGNATURE } = process.env;
 const ROOT_URL = isDevelopment
   ? "http://localhost:3000"
-  : `https://ec2-3-248-208-68.eu-west-1.compute.amazonaws.com:${PORT}`;
+  : `http://ec2-3-248-208-68.eu-west-1.compute.amazonaws.com:${PORT}`;
 
 const ALLOWED_UPDATE_FIELDS_USER = [
   "firstName",
