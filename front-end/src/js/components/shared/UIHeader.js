@@ -7,6 +7,7 @@ const UIHeader = ({ content, className = "content__header" }) => {
 
 UIHeader.propTypes = {
   content: PropTypes.string.isRequired,
+  className: PropTypes.string,
 };
 
 export default UIHeader;

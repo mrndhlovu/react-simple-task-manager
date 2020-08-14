@@ -39,7 +39,7 @@ const AppContainer = ({ children, notify }) => {
   const [userInfo, setUserInfo] = useState(INITIAL_STATE);
   const [lists, setLists] = useState([]);
   const [tasks, setTasks] = useState([]);
-  const [header, setHeader] = useState();
+  const [header, setHeader] = useState("Create New Task");
   const paramPath = location.pathname.split("/");
 
   const [isLoading, setIsLoading] = useState(true);
@@ -232,8 +232,6 @@ const AppContainer = ({ children, notify }) => {
   };
 
   useEffect(() => {
-    console.log(paramPath[1]);
-
     switch (paramPath[1]) {
       case "settings":
         return setHeader("Account Details");
