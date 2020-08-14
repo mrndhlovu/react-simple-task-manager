@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const User = require("../models/User");
-const { PRIVATE_SIGNATURE, ROOT_URL } = require("../utils/config");
+const { PRIVATE_SIGNATURE, BASE_URL } = require("../utils/config");
 
 const auth = async (req, res, next) => {
   try {
@@ -23,7 +23,7 @@ const auth = async (req, res, next) => {
 };
 
 const generateAccessCookie = async (res, token) => {
-  res.setHeader("Access-Control-Allow-Origin", ROOT_URL);
+  res.setHeader("Access-Control-Allow-Origin", BASE_URL);
   res.cookie("access_token", token, {
     maxAge: 9999999,
     httpOnly: true,

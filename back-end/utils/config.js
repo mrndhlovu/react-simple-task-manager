@@ -11,7 +11,7 @@ const { LOCAL_MONGO_DB } = process.env;
 const PORT = process.env.PORT || 5000;
 
 const { PRIVATE_SIGNATURE, PUBLIC_SIGNATURE } = process.env;
-const ROOT_URL = isDevelopment
+const BASE_URL = isDevelopment
   ? "http://localhost:3000"
   : `http://ec2-3-248-208-68.eu-west-1.compute.amazonaws.com:${PORT}`;
 
@@ -26,15 +26,15 @@ const ALLOWED_UPDATE_LIST_FIELDS = ["title"];
 
 module.exports = {
   ALLOWED_UPDATE_FIELDS_USER,
-  ALLOWED_UPDATE_TASK_FIELDS,
   ALLOWED_UPDATE_LIST_FIELDS,
-  environment,
-  ROOT_URL,
+  ALLOWED_UPDATE_TASK_FIELDS,
   CONNECTION_URI,
+  environment,
+  isDevelopment,
   LOCAL_MONGO_DB,
   PORT,
-  S_GRID_API_KEY,
-  PUBLIC_SIGNATURE,
   PRIVATE_SIGNATURE,
-  isDevelopment,
+  PUBLIC_SIGNATURE,
+  BASE_URL,
+  S_GRID_API_KEY,
 };
