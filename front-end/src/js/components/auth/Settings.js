@@ -23,37 +23,41 @@ const Settings = () => {
       clickHandler={() => updateUserHandler(credentials)}
       buttonText="Save Changes"
     >
-      <UIInput
-        id="outlined-search"
-        label="First Name"
-        defaultValue={user?.lastName}
-        type="text"
-        handleChange={(e) => handleChange("lastName", e)}
-      />
-      <UIInput
-        id="outlined-search"
-        label="Last Name"
-        defaultValue={user?.firstName}
-        type="text"
-        handleChange={(e) => handleChange("firstName", e)}
-      />
+      <div className="setting__registration__container">
+        <div>
+          <UIInput
+            id="outlined-search"
+            label="First Name"
+            defaultValue={user?.lastName}
+            type="text"
+            handleChange={(e) => handleChange("lastName", e)}
+          />
+          <UIInput
+            id="outlined-search"
+            label="Last Name"
+            defaultValue={user?.firstName}
+            type="text"
+            handleChange={(e) => handleChange("firstName", e)}
+          />
+        </div>
+        <div>
+          <UIInput
+            id="outlined-search"
+            label="Email Address"
+            defaultValue={user?.email}
+            type="email"
+            handleChange={(e) => handleChange("email", e)}
+          />
 
-      <UIInput
-        id="outlined-search"
-        label="Email Address"
-        defaultValue={user?.email}
-        type="email"
-        handleChange={(e) => handleChange("email", e)}
-      />
-
-      <UIInput
-        id="outlined-search"
-        label="Password"
-        defaultValue={user?.password}
-        type="password"
-        handleChange={(e) => handleChange("password", e)}
-      />
-
+          <UIInput
+            id="outlined-search"
+            label="Password"
+            defaultValue={user?.password}
+            type="password"
+            handleChange={(e) => handleChange("password", e)}
+          />
+        </div>
+      </div>
       <span className="delete__account__action">
         <button onClick={() => deleteAccountHandler()}>Delete Account</button>
       </span>

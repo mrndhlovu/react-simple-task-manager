@@ -35,32 +35,37 @@ const Register = () => {
       clickHandler={() => registrationHandler(credentials)}
       buttonText="Register"
     >
-      <UIInput
-        id="register-name"
-        label="First Name"
-        type="text"
-        handleChange={(e) => handleChange("lastName", e)}
-      />
-      <UIInput
-        id="register-lastname"
-        label="Last Name"
-        type="text"
-        handleChange={(e) => handleChange("firstName", e)}
-      />
+      <div className="setting__registration__container">
+        <div>
+          <UIInput
+            id="outlined-search"
+            label="First Name"
+            type="text"
+            handleChange={(e) => handleChange("lastName", e)}
+          />
+          <UIInput
+            id="outlined-search"
+            label="Last Name"
+            type="text"
+            handleChange={(e) => handleChange("firstName", e)}
+          />
+        </div>
+        <div>
+          <UIInput
+            id="outlined-search"
+            label="Email Address"
+            type="email"
+            handleChange={(e) => handleChange("email", e)}
+          />
 
-      <UIInput
-        id="register-email"
-        label="Email Address"
-        type="email"
-        handleChange={(e) => handleChange("email", e)}
-      />
-
-      <UIInput
-        id="register-password"
-        label="Password"
-        type="password"
-        handleChange={(e) => handleChange("password", e)}
-      />
+          <UIInput
+            id="outlined-search"
+            label="Password"
+            type="password"
+            handleChange={(e) => handleChange("password", e)}
+          />
+        </div>
+      </div>
     </CreateItemWrapper>
   );
 };

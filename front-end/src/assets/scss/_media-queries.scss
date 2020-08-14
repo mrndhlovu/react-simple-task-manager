@@ -1,15 +1,3 @@
-@media only screen and (min-width: 1920px) {
-}
-
-@media only screen and (min-width: 992px) {
-}
-
-@media only screen and (max-width: 1571px) {
-}
-
-@media only screen and (max-width: 1191px) {
-}
-
 @media only screen and (min-width: 700px) {
   .mobile__icon_container {
     display: none;
@@ -24,17 +12,23 @@
     @include gridLayout(1fr 2fr);
   }
 
+  .ui__header {
+    left: 50%;
+    transform: translate(-50%);
+    font-size: 27px;
+  }
+
   .content__container {
     position: absolute;
     top: 0;
     left: 27%;
     width: stretch;
-    max-width: 68%;
-    height: fit-content;
+    max-width: 71%;
+    height: 95%;
     padding: 45px;
   }
 
-  .lg__screen__menu {
+  .navigation__menu {
     display: block;
   }
 
@@ -49,22 +43,31 @@
 
   .nav__bar {
     width: 28%;
-    height: 14%;
+    height: 12%;
     padding: 20px;
     .logo .logo__text {
-      font-size: 36px;
+      font-size: 32px;
     }
   }
 
   .task__item {
     @include flexSpacing(row, space-between);
+
+    .task__item__button__text {
+      width: 74%;
+      justify-content: flex-start;
+      flex-direction: row;
+    }
+    .task__action__buttons__container {
+      margin-right: 15px;
+    }
   }
 
   .navigation {
     width: 28%;
     height: 86%;
 
-    top: 14.1%;
+    top: 12.1%;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.05);
 
     .nav__list__container {
@@ -72,7 +75,7 @@
       padding: 20px;
 
       .nav__item {
-        padding: 15px 0;
+        padding: 13px 0;
       }
 
       .icon__link__container {
@@ -84,13 +87,24 @@
     }
   }
   .create__item__container .create__item__card {
-    padding: 78px;
+    padding: 30px;
   }
 }
 
 @media only screen and (min-width: 1256px) {
   .ui__alert {
     width: 45%;
+  }
+
+  .setting__registration__container {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+
+    & > div {
+      width: 100%;
+      margin: 10px;
+    }
   }
 
   .navigation,
@@ -103,42 +117,45 @@
   }
 
   .create__item__container .create__item__card {
-    padding: 110px;
+    padding: 65px;
   }
 }
 
 @media only screen and (min-width: 1490px) {
   .navigation,
   .nav__bar {
-    width: 19%;
+    width: 16%;
+  }
+
+  .ui__input__container {
+    margin: 10px;
   }
 
   .nav__bar .logo .logo__text {
-    font-size: 50px;
+    font-size: 30px;
   }
 
   .navigation .nav__list__container {
     padding: 27px;
-
-    .nav__item {
-      padding: 26px 0;
-    }
   }
 
   .create__item__container .create__item__card {
-    padding: 85px;
-  }
-
-  .content__container {
-    left: 22%;
-    max-width: 76.5%;
-    height: 97vh;
-    padding: 100px 10% 0 10%;
+    padding: 26px;
   }
 }
 
-@media only screen and (max-width: 980px) {
-}
+@media only screen and (min-width: 1024px) {
+  .create__item__container {
+    .create__input__container {
+      flex-direction: row;
+    }
 
-@media only screen and (max-width: 768px) {
+    .ui__input__container {
+      margin: 10px;
+    }
+  }
+
+  .ui__header {
+    font-size: 28px;
+  }
 }

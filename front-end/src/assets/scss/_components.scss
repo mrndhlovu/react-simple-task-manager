@@ -9,7 +9,7 @@
     & label {
       font-family: $montserrat, "sans-serif";
       font-weight: $bold;
-      font-size: 14px;
+      font-size: 11px;
     }
 
     & div {
@@ -19,7 +19,7 @@
     }
 
     & div > input {
-      padding: 18px !important;
+      padding: 14px !important;
       font-family: $montserrat, "sans-serif";
       font-size: 14px;
       background: $lightGrey;
@@ -43,25 +43,46 @@
   }
 }
 
-.ui__header {
+.ui__header,
+.content__header {
   color: $grey;
   text-transform: uppercase;
   font-size: 18px;
-  margin: 30px 0;
+  font-weight: $bold;
+  padding-left: 5px;
+}
+
+.ui__header {
+  position: absolute;
+  z-index: 100;
+  left: 6%;
+  top: 2%;
+  margin: 0;
+  font-size: 20px;
+}
+
+.task__item,
+.create__item__card {
+  box-shadow: -12px 8px 45px -22px rgba(0, 0, 0, 0.75) !important;
+  margin: 8px;
 }
 
 .task__item {
   padding: 10px;
-  margin-bottom: 10px;
+  max-height: 90px;
+
+  .task__item__button__text {
+    @include flexSpacing(column, flex-start);
+    align-items: flex-start;
+  }
 
   & p {
-    margin: 9px 0;
+    margin: 5px 0;
     font-size: 12px;
   }
 
   .task__action__buttons__container {
-    @include flexSpacing(row, space-around);
-    max-width: 40%;
+    @include flexSpacing(row, flex-start);
     padding-left: 0;
     margin: 0;
 
@@ -69,8 +90,8 @@
       list-style: none;
       padding: 5px;
       margin-right: 5px;
-      width: 30px;
-      height: 30px;
+      width: 27px;
+      height: 27px;
       border: 2px solid $grey;
       border-radius: 50%;
       cursor: pointer;
@@ -89,8 +110,70 @@
     }
   }
 
-  .task__duedate {
+  .task__expired {
+    color: $red;
+    text-decoration: line-through;
+  }
+
+  .task__completed {
     color: $primary-color;
+    text-decoration: line-through;
+  }
+
+  .task__todo {
+    color: $grey;
+  }
+
+  .complete__icon {
+    &.complete__active {
+      border: 2px solid $primary_color;
+      & > svg {
+        color: $primary_color;
+      }
+    }
+
+    &:hover {
+      border: 2px solid $primary_color;
+    }
+    & > svg:hover {
+      color: $primary_color;
+    }
+  }
+  .incomplete__icon {
+    &.incomplete__active {
+      border: 2px solid $red;
+      & > svg {
+        color: $red;
+      }
+    }
+
+    &:hover {
+      border: 2px solid $red;
+    }
+    & > svg:hover {
+      color: $red;
+    }
+  }
+
+  .edit__icon {
+    &:hover {
+      border: 2px solid $black;
+    }
+    & > svg:hover {
+      color: $black;
+    }
+  }
+
+  .delete__icon {
+    &:hover {
+      border: 2px solid $red;
+      opacity: 0.5;
+    }
+
+    & > svg:hover {
+      color: $red;
+      opacity: 0.5;
+    }
   }
 }
 

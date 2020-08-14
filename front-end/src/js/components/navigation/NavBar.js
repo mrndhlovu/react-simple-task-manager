@@ -4,6 +4,7 @@ import { Menu, X } from "react-feather";
 
 import NavigationBar from "./NavigationBar";
 import { useHistory } from "react-router-dom";
+import Logo from "../shared/Logo";
 
 const NavBar = () => {
   const history = useHistory();
@@ -15,11 +16,7 @@ const NavBar = () => {
   return (
     <>
       <header className="nav__bar">
-        <div className="logo">
-          <h1 className="logo__text" onClick={() => history.push("/")}>
-            Checklists
-          </h1>
-        </div>
+        <Logo history={history} />
         <div className="mobile__icon_container">
           {showMobileMenu ? (
             <X
@@ -35,19 +32,12 @@ const NavBar = () => {
             />
           )}
         </div>
-      </header>
-      {showMobileMenu && (
+
         <NavigationBar
-          className="mobile__menu"
+          className={showMobileMenu ? "mobile__menu" : "navigation__menu"}
           toggleMenu={toggleMenu}
-          lists={[
-            {
-              title: "Life",
-              id: 1,
-            },
-          ]}
         />
-      )}
+      </header>
     </>
   );
 };

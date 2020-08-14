@@ -10,9 +10,9 @@ const INITIAL_STATE = {
   dueDate: undefined,
 };
 
-const CreateTask = ({ task, header, buttonText, handleButtonClick }) => {
+const CreateTask = ({ task, buttonText, handleButtonClick }) => {
   const [newTask, setNewTask] = useState(task || INITIAL_STATE);
-  const inputId = header.toLowerCase().split(" ").join("-");
+  const inputId = buttonText.toLowerCase().split(" ").join("-");
 
   const handleChange = (field, e) => {
     setNewTask({ ...newTask, [field]: e.target.value });
@@ -25,7 +25,6 @@ const CreateTask = ({ task, header, buttonText, handleButtonClick }) => {
           resetForm([`${inputId}-title`, `${inputId}-duedate`])
         )
       }
-      header={header}
       buttonText={buttonText}
     >
       <UIInput

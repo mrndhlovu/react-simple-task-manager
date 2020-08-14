@@ -21,8 +21,15 @@ body {
 }
 
 .content__container {
-  margin: 20px;
+  padding: 15px;
   overflow-y: auto;
+  position: relative;
+  height: 89%;
+}
+
+.content__wrapper {
+  position: relative;
+  top: 6%;
 }
 
 .delete__account__action {
@@ -39,4 +46,8 @@ body {
     cursor: pointer;
     font-family: $montserrat, "sans-serif";
   }
+}
+
+.task__container {
+  margin-top: 20px;
 }

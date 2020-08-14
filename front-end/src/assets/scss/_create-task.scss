@@ -1,5 +1,4 @@
 .create__item__container {
-  position: relative;
   .create__item__card {
     padding: 18px;
     border-radius: 6px;
@@ -11,7 +10,6 @@
 
   .create__input__container {
     @include flexCenter(column);
-    min-height: 200px;
     height: fit-content;
     justify-content: space-around;
     padding-bottom: 20px;
@@ -22,10 +20,15 @@
     color: $white;
     font-family: $montserrat, "sans-serif";
     font-weight: $bold;
+    font-size: 12px;
 
     &:hover {
       background: $primary-color;
       opacity: 0.9;
     }
+  }
+
+  .setting__registration__container {
+    width: 100%;
   }
 }

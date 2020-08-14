@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import update from "immutability-helper";
 
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 
 import { MainContext } from "../utils/contextUtils";
 import {
@@ -22,10 +22,10 @@ import {
 } from "../apis/tasksApiRequests";
 
 import NavBar from "../components/navigation/NavBar";
-import NavigationBar from "../components/navigation/NavigationBar";
 import { getValidUpdateFields } from "../utils/appUtils";
 import { EDITABLE_TASK_FIELDS } from "../constants/constants";
 import withAlert from "../hoc/withAlert";
+import UIHeader from "../components/shared/UIHeader";
 
 const INITIAL_STATE = {
   user: undefined,
@@ -33,13 +33,16 @@ const INITIAL_STATE = {
 };
 
 const AppContainer = ({ children, notify }) => {
-  console.log("AppContainer -> notify", notify);
+  const history = useHistory();
+  const location = useLocation();
+
   const [userInfo, setUserInfo] = useState(INITIAL_STATE);
   const [lists, setLists] = useState([]);
   const [tasks, setTasks] = useState([]);
+  const [header, setHeader] = useState();
+  const paramPath = location.pathname.split("/");
 
   const [isLoading, setIsLoading] = useState(true);
-  const history = useHistory();
 
   const logoutHandler = async () => {
     await requestLogout()
@@ -224,6 +227,23 @@ const AppContainer = ({ children, notify }) => {
   };
 
   useEffect(() => {
+    console.log(paramPath[1]);
+
+    switch (paramPath[1]) {
+      case "settings":
+        return setHeader("Account Details");
+      case "register":
+        return setHeader("Register");
+      case "create-list":
+        return setHeader("Create List");
+      case "edit-task":
+        return setHeader("Edit-task");
+      default:
+        return setHeader("Create New Task");
+    }
+  }, [paramPath]);
+
+  useEffect(() => {
     const getUserInfo = async () => {
       await requestUserProfile()
         .then((res) => {
@@ -258,14 +278,17 @@ const AppContainer = ({ children, notify }) => {
     updatedTaskHandler,
     updateListHandler,
     updateUserHandler,
+    setHeader,
   };
 
   return (
     <MainContext.Provider value={CONTEXT}>
       <div data-test-id="appContainer" className="app__container">
         <NavBar />
-        <NavigationBar className="lg__screen__menu" />
-        <div className="content__container">{children}</div>
+        <div className="content__container">
+          <UIHeader content={header} className="ui__header" />
+          <div className="content__wrapper">{children}</div>
+        </div>
       </div>
     </MainContext.Provider>
   );

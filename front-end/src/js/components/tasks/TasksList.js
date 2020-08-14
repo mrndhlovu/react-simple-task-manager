@@ -9,7 +9,7 @@ const TasksList = ({ header, tasks }) => {
   const { taskActionHandler } = useMainContent();
 
   return (
-    <div>
+    <>
       <UIHeader content={header} />
 
       {tasks.map((task, index) => (
@@ -17,10 +17,11 @@ const TasksList = ({ header, tasks }) => {
           key={index}
           title={task?.title}
           dueDate={task?.dueDate}
+          status={task?.status}
           editTaskHandler={(action) => taskActionHandler(action, task)}
         />
       ))}
-    </div>
+    </>
   );
 };
 

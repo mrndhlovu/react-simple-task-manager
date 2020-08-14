@@ -20,15 +20,17 @@ const HomeContainer = () => {
     <>
       <CreateTask
         buttonText="Create New Task"
-        header="Create New Task"
         handleButtonClick={createTaskHandler}
       />
+      <div className="task__container">
+        {hasTodos && <TasksList header="To Do" tasks={TODOS} />}
 
-      {hasTodos && <TasksList header="To Do" tasks={TODOS} />}
+        {hasInCompleted && (
+          <TasksList header="In Complete" tasks={INCOMPLETES} />
+        )}
 
-      {hasInCompleted && <TasksList header="In Complete" tasks={INCOMPLETES} />}
-
-      {hasCompleted && <TasksList header="Complete" tasks={COMPLETED} />}
+        {hasCompleted && <TasksList header="Complete" tasks={COMPLETED} />}
+      </div>
     </>
   );
 };
