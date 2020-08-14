@@ -22,11 +22,12 @@ const STRINGS = require("../../lang/en");
 router.post("/register", async (req, res, next) => {
   const user = new User({ ...req.body });
 
-  await user.getAuthToken(next, async (token) => {
-    if (!token)
-      return res
-        .status(400)
-        .send(`User with that email: '${req.body.email}'  already exists!`);
+  await user.getAuthToken(next, async (token, error) => {
+    if (error) {
+      if (JSON.stringify(error.code) === "11000")
+        return res.status(400).send("User with that email already exists!");
+      return res.status(400).send(error.message);
+    }
 
     await generateAccessCookie(res, token);
     res.status(201).send(user);
@@ -44,7 +45,7 @@ router.post("/login", async (req, res, next) => {
       res.send(user);
     });
   } catch (error) {
-    res.status(400).send(error.message);
+    res.status(400).send(error);
   }
 });
 
@@ -71,7 +72,7 @@ router.post("/logout", auth, async (req, res) => {
     await req.user.save();
     res.send(STRINGS.auth.logoutSuccess);
   } catch (error) {
-    res.status(500).send(error.message);
+    res.status(500).send(error);
   }
 });
 
@@ -133,7 +134,7 @@ router.post("/recovery/email", (req, res, next) => {
         });
       },
     ],
-    (err) => res.status(422).json({ message: err })
+    (error) => res.status(422).send(error)
   );
 });
 
@@ -151,8 +152,7 @@ router.post("/recovery/reset-code", (req, res) => {
         user.resetPasswordCode
       );
 
-      if (!isMatch)
-        return res.status(400).send({ error: STRINGS.auth.resetCodeExpired });
+      if (!isMatch) return res.status(400).send(STRINGS.auth.resetCodeExpired);
 
       const notification = {
         subject: `${user.email}, your password has been changed.`,
@@ -182,7 +182,7 @@ router.post("/update-password", (req, res) => {
     },
     async (err, user) => {
       if (!user) {
-        return res.status(400).send({ error: STRINGS.auth.resetTokenExpired });
+        return res.status(400).send(STRINGS.auth.resetTokenExpired);
       }
       try {
         user.password = password;
@@ -217,7 +217,7 @@ router.post("/logoutAll", auth, async (req, res) => {
 
     res.send();
   } catch (error) {
-    res.status(500).send();
+    res.status(500).send(error);
   }
 });
 
@@ -240,7 +240,7 @@ router.patch("/update-user", auth, async (req, res) => {
 
     res.send(req.user);
   } catch (error) {
-    return res.status(400).send(error.message);
+    return res.status(400).send(error);
   }
 });
 
@@ -264,9 +264,7 @@ router.post("/verify-account", auth, async (req, res) => {
     const isValid = await getUser(req.user);
 
     if (!isMatch || !isValid) {
-      return res
-        .status(400)
-        .send({ error: STRINGS.auth.verificationCodeExpired });
+      return res.status(400).send(STRINGS.auth.verificationCodeExpired);
     }
 
     req.user.confirmed = true;
@@ -281,7 +279,7 @@ router.post("/verify-account", auth, async (req, res) => {
     req.user.save();
     res.send({ message: "Account verified!", user: req.user });
   } catch (error) {
-    return res.status(400).send({ error: STRINGS.auth.failedToVerifyAccount });
+    return res.status(400).send(STRINGS.auth.failedToVerifyAccount);
   }
 });
 
@@ -312,9 +310,7 @@ router.get("/verify-account-renew", auth, async (req, res, next) => {
       }
     );
   } catch (error) {
-    return res
-      .status(400)
-      .send({ error: STRINGS.auth.renewActivationCodeFailed });
+    return res.status(400).send(STRINGS.auth.renewActivationCodeFailed);
   }
 });
 

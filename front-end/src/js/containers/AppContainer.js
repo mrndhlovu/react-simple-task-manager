@@ -162,11 +162,10 @@ const AppContainer = ({ children, notify }) => {
       .then((res) => {
         authListener(res.data);
         history.push("/");
-        notify("Welcome!");
+        notify("Welcome Back!");
       })
       .catch((error) => {
         notify(error.message);
-
         authListener();
       });
   };
@@ -216,9 +215,11 @@ const AppContainer = ({ children, notify }) => {
     await requestRegistration(credentials)
       .then((res) => {
         authListener(res.data);
+        notify("Welcome!");
       })
-      .catch(() => {
+      .catch((error) => {
         authListener();
+        notify(error?.response?.data || "Failed to register!");
       });
   };
 

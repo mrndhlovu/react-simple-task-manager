@@ -34,7 +34,9 @@ const NavBar = () => {
         </div>
 
         <NavigationBar
-          className={showMobileMenu ? "mobile__menu" : "navigation__menu"}
+          className={`${
+            showMobileMenu ? "mobile__menu" : ""
+          } navigation__menu `}
           toggleMenu={toggleMenu}
         />
       </header>

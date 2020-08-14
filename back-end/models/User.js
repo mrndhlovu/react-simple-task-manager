@@ -91,7 +91,7 @@ UserSchema.methods.getAuthToken = async function (next, callback) {
       await user.save();
       callback(token);
     } catch (error) {
-      callback();
+      callback(undefined, error);
     }
   });
 };
