@@ -160,7 +160,9 @@ const AppContainer = ({ children, notify }) => {
   const loginHandler = async (credentials) => {
     await requestLogin(credentials)
       .then((res) => {
-        authListener(res.data);
+        authListener(res.data.user);
+        setTasks(res.data.tasks);
+        setLists(res.data.lists);
         history.push("/");
         notify("Welcome Back!");
       })
@@ -214,7 +216,9 @@ const AppContainer = ({ children, notify }) => {
   const registrationHandler = async (credentials) => {
     await requestRegistration(credentials)
       .then((res) => {
-        authListener(res.data);
+        authListener(res.data.user);
+        setTasks(res.data.tasks);
+        setLists(res.data.lists);
         notify("Welcome!");
       })
       .catch((error) => {

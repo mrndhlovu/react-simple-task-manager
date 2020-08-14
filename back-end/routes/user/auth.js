@@ -9,6 +9,7 @@ const {
   auth,
   getUser,
   generateAccessCookie,
+  populateUser,
 } = require("../../middleware/authMiddleware");
 
 const { ALLOWED_UPDATE_FIELDS_USER } = require("../../utils/config.js");
@@ -30,7 +31,7 @@ router.post("/register", async (req, res, next) => {
     }
 
     await generateAccessCookie(res, token);
-    res.status(201).send(user);
+    await populateUser(user, res);
   });
 });
 
@@ -42,7 +43,8 @@ router.post("/login", async (req, res, next) => {
       await generateAccessCookie(res, token);
 
       await user.save();
-      res.send(user);
+
+      await populateUser(user, res);
     });
   } catch (error) {
     res.status(400).send(error);
@@ -53,11 +55,7 @@ router.get("/me", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user._id);
 
-    await user.populate("tasks").execPopulate();
-    await user.populate("lists").execPopulate();
-    const context = { user, tasks: user.tasks, lists: user.lists };
-
-    res.send(context);
+    await populateUser(user, res);
   } catch (error) {
     res.status(400).send(STRINGS.auth.noUserProfile);
   }
