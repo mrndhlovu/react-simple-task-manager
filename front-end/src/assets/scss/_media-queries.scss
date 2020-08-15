@@ -65,7 +65,7 @@
 
     .logo {
       left: 9%;
-      top: 5%;
+      top: 3.5%;
       height: 6%;
       position: absolute;
     }
@@ -78,6 +78,7 @@
       width: 74%;
       justify-content: flex-start;
       flex-direction: row;
+      align-items: center;
     }
     .task__action__buttons__container {
       margin-right: 15px;

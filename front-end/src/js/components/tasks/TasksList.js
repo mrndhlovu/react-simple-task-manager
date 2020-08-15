@@ -18,6 +18,7 @@ const TasksList = ({ header, tasks }) => {
           title={task?.title}
           dueDate={task?.dueDate}
           status={task?.status}
+          list={task?.list}
           editTaskHandler={(action) => taskActionHandler(action, task)}
         />
       ))}

@@ -18,13 +18,14 @@
   .submit__button {
     background: $primary-color;
     color: $white;
-    font-family: $montserrat, "sans-serif";
+    font-family: $roboto, "sans-serif";
     font-weight: $bold;
     font-size: 12px;
 
     &:hover {
       background: $primary-color;
-      opacity: 0.9;
+      opacity: 0.5;
+      @include hoverTransition(color);
     }
   }
 

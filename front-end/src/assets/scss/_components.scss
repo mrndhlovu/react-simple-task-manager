@@ -7,7 +7,7 @@
     }
 
     & label {
-      font-family: $montserrat, "sans-serif";
+      font-family: $roboto, "sans-serif";
       font-weight: $bold;
       font-size: 11px;
     }
@@ -20,7 +20,7 @@
 
     & div > input {
       padding: 14px !important;
-      font-family: $montserrat, "sans-serif";
+      font-family: $roboto, "sans-serif";
       font-size: 14px;
       background: $lightGrey;
     }
@@ -65,6 +65,15 @@
   border-radius: 10px;
 }
 
+.task__list {
+  font-weight: $bold;
+  color: $darkGrey;
+}
+
+.task__title {
+  color: $grey;
+}
+
 .task__item {
   padding: 10px;
   max-height: 90px;
@@ -98,13 +107,6 @@
 
     & svg {
       color: $grey;
-
-      &::after {
-        content: "";
-        width: 15px;
-        height: 15px;
-        background: red;
-      }
     }
   }
 
@@ -132,9 +134,11 @@
 
     &:hover {
       border: 2px solid $primary_color;
+      @include hoverTransition(border);
     }
     & > svg:hover {
       color: $primary_color;
+      @include hoverTransition(color);
     }
   }
   .incomplete__icon {
@@ -147,18 +151,22 @@
 
     &:hover {
       border: 2px solid $red;
+      @include hoverTransition(border);
     }
     & > svg:hover {
       color: $red;
+      @include hoverTransition(color);
     }
   }
 
   .edit__icon {
     &:hover {
       border: 2px solid $black;
+      @include hoverTransition(border);
     }
     & > svg:hover {
       color: $black;
+      @include hoverTransition(color);
     }
   }
 
@@ -166,11 +174,13 @@
     &:hover {
       border: 2px solid $red;
       opacity: 0.5;
+      @include hoverTransition(border);
     }
 
     & > svg:hover {
       color: $red;
-      opacity: 0.5;
+      opacity: 0.9;
+      @include hoverTransition(color);
     }
   }
 }
@@ -181,10 +191,9 @@
   left: 50%;
   top: 7%;
   transform: translate(-50%);
-  font-family: $montserrat !important;
+  font-family: $roboto !important;
   font-weight: $bold !important;
   color: $darkGrey !important;
-  text-transform: capitalize;
   z-index: 10000;
 
   & div > svg {

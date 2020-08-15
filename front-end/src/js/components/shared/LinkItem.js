@@ -9,7 +9,13 @@ const LinkItem = ({ content, clickHandler, active }) => {
       }`}
       onClick={clickHandler}
     >
-      <span>{content}</span>
+      <span
+        className={`nav__item ${
+          active === content.toLowerCase() ? "active__link__text" : ""
+        }`}
+      >
+        {content}
+      </span>
     </li>
   );
 };

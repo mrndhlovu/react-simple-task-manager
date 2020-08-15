@@ -6,9 +6,10 @@ import { CheckCircle, X, Edit2, Trash2 } from "react-feather";
 import {
   getFormattedDateString,
   taskStylingClassName,
+  capitalize,
 } from "../../utils/appUtils";
 
-const TaskItem = ({ title, dueDate, editTaskHandler, status }) => {
+const TaskItem = ({ title, dueDate, editTaskHandler, status, list }) => {
   return (
     <Card className="task__item">
       <div className="task__item__button__text">
@@ -36,10 +37,15 @@ const TaskItem = ({ title, dueDate, editTaskHandler, status }) => {
             <Trash2 onClick={() => editTaskHandler("delete")} />
           </li>
         </ul>
-        <p className="task__title">{title}</p>
+        <div className="task__item__description">
+          <p className="task__title">{capitalize(title)}</p>
+          <p className="task__list">{capitalize(list)}</p>
+        </div>
       </div>
       <p className={taskStylingClassName(status, dueDate)}>
-        {getFormattedDateString(dueDate, status) || "Due date not set."}
+        {dueDate
+          ? getFormattedDateString(dueDate, status)
+          : "Due date not set!"}
       </p>
     </Card>
   );

@@ -1,5 +1,5 @@
 body {
-  font-family: $montserrat, "sans-serif";
+  font-family: $roboto, $montserrat, "sans-serif";
   position: relative;
   left: 0;
   top: 0;
@@ -43,7 +43,7 @@ body {
     color: $darkGrey;
     font-weight: $bold;
     cursor: pointer;
-    font-family: $montserrat, "sans-serif";
+    font-family: $roboto, "sans-serif";
   }
 }
 

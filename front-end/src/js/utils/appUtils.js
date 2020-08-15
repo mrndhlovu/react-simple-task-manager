@@ -17,6 +17,9 @@ export const resetForm = (data) => {
   document.getElementById(data).value = "";
 };
 
+export const capitalize = (string) =>
+  string ? `${string.charAt(0).toUpperCase()}${string.slice(1)}` : "";
+
 export const getLocaleString = () =>
   moment().format().split(":").slice(0, 2).join(":");
 

@@ -16,8 +16,7 @@ const TaskSchema = new mongoose.Schema({
     ref: "User",
   },
   list: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "List",
+    type: String,
   },
 });
 

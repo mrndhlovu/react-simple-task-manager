@@ -54,19 +54,24 @@
     margin: 0;
     padding: 15px;
 
-    .menu__item {
-    }
-
     .nav__item {
       list-style: none;
       font-weight: $bold;
-      color: $darkGrey;
+      color: $grey;
       padding: 10px 0;
       cursor: pointer;
       letter-spacing: 0.6px;
 
       & > span {
         font-size: 15px;
+      }
+
+      &:hover {
+        color: $darkGrey;
+        @include hoverTransition(color);
+      }
+      .active__link__text {
+        color: $darkGrey;
       }
 
       &.menu__item__active::before {

@@ -36,8 +36,10 @@ router.post("/register", async (req, res, next) => {
 });
 
 router.post("/login", async (req, res, next) => {
+  const { email = null, password = null } = req.body;
+
   try {
-    const { email = null, password = null } = req.body;
+    if (!email) res.status(400).send("Email field is required!");
     const user = await User.findByCredentials(email, password);
     user.getAuthToken(next, async (token) => {
       await generateAccessCookie(res, token);
@@ -47,7 +49,7 @@ router.post("/login", async (req, res, next) => {
       await populateUser(user, res);
     });
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send(`User with email: '${email}' not found!`);
   }
 });
 

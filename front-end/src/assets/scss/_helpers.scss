@@ -27,6 +27,12 @@
   justify-content: center;
 }
 
+@mixin hoverTransition($property) {
+  transition: 500ms !important;
+  transition-property: $property;
+  transition-timing-function: ease-in-out;
+}
+
 @mixin position($position, $top) {
   position: $position;
   top: $top;
