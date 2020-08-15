@@ -54,6 +54,9 @@
     margin: 0;
     padding: 15px;
 
+    .menu__item {
+    }
+
     .nav__item {
       list-style: none;
       font-weight: $bold;
@@ -64,6 +67,18 @@
 
       & > span {
         font-size: 15px;
+      }
+
+      &.menu__item__active::before {
+        content: "";
+        display: inline-block;
+        background: $primary-color;
+        height: 15px;
+        width: 3px;
+        border-radius: 5px;
+        margin-right: 5px;
+        vertical-align: middle;
+        padding-bottom: 5px;
       }
     }
 

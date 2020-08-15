@@ -282,6 +282,7 @@ const AppContainer = ({ children, notify }) => {
     updateListHandler,
     updateUserHandler,
     setHeader,
+    header,
   };
 
   return (

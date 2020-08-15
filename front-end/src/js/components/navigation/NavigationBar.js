@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router";
 import update from "immutability-helper";
@@ -10,16 +10,18 @@ import LinkItem from "../shared/LinkItem";
 
 const NavigationBar = ({ className, toggleMenu }) => {
   const history = useHistory();
+  const [activeLink, setActiveLink] = useState("all");
 
   const {
-    logoutHandler,
     auth,
     deleteListHandler,
     lists,
+    logoutHandler,
     updateListHandler,
   } = useMainContent();
 
-  const clickHandler = (callback) => {
+  const clickHandler = (callback, active) => {
+    setActiveLink(active.toLowerCase());
     toggleMenu && toggleMenu();
     return callback();
   };
@@ -30,16 +32,28 @@ const NavigationBar = ({ className, toggleMenu }) => {
         {auth?.authenticated ? (
           <>
             <LinkItem
+              active={activeLink}
               content="All"
-              clickHandler={() => clickHandler(() => history.push("/"))}
+              clickHandler={() => clickHandler(() => history.push("/"), "all")}
             />
             {lists &&
               lists.map((list, index) => (
-                <div key={index} className="icon__link__container">
+                <div
+                  key={index}
+                  className={`icon__link__container ${
+                    activeLink === list?.title.toLowerCase()
+                      ? "menu__item__active"
+                      : ""
+                  }`}
+                >
                   <LinkItem
+                    active={activeLink}
                     content={list?.title}
                     clickHandler={() =>
-                      clickHandler(() => history.push(`/lists/${list._id}`))
+                      clickHandler(
+                        () => history.push(`/lists/${list._id}`),
+                        list?.title
+                      )
                     }
                   />
                   <Trash2
@@ -65,25 +79,32 @@ const NavigationBar = ({ className, toggleMenu }) => {
             <div className="icon__link__container">
               <Plus size={15} />
               <LinkItem
+                active={activeLink}
                 content="Create New List"
                 clickHandler={() =>
-                  clickHandler(() => history.push("/create-list"))
+                  clickHandler(
+                    () => history.push("/create-list"),
+                    "create new list"
+                  )
                 }
               />
             </div>
             <div className="page__side__settings">
               <LinkItem
+                active={activeLink}
                 content="Settings"
                 clickHandler={() =>
-                  clickHandler(() => history.push("/settings"))
+                  clickHandler(() => history.push("/settings"), "settings")
                 }
               />
               <LinkItem
                 content="Logout"
-                clickHandler={() => clickHandler(() => logoutHandler())}
+                clickHandler={() =>
+                  clickHandler(() => logoutHandler(), "logout")
+                }
               />
 
-              <span className="menu__text">
+              <span className="menu__text ">
                 &#169; 2020 NDHLOVU.COM All Rights Reserved
               </span>
             </div>
@@ -91,12 +112,18 @@ const NavigationBar = ({ className, toggleMenu }) => {
         ) : (
           <>
             <LinkItem
+              active={activeLink}
               content="Login"
-              clickHandler={() => clickHandler(() => history.push("/login"))}
+              clickHandler={() =>
+                clickHandler(() => history.push("/login"), "login")
+              }
             />
             <LinkItem
               content="Register"
-              clickHandler={() => clickHandler(() => history.push("/register"))}
+              active={activeLink}
+              clickHandler={() =>
+                clickHandler(() => history.push("/register"), "register")
+              }
             />
           </>
         )}

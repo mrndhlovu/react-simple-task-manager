@@ -1,9 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const LinkItem = ({ content, clickHandler }) => {
+const LinkItem = ({ content, clickHandler, active }) => {
   return (
-    <li className="nav__item" onClick={clickHandler}>
+    <li
+      className={`nav__item ${
+        active === content.toLowerCase() ? "menu__item__active" : ""
+      }`}
+      onClick={clickHandler}
+    >
       <span>{content}</span>
     </li>
   );
