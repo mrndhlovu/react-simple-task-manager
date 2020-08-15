@@ -12,24 +12,33 @@
     @include gridLayout(1fr 2fr);
   }
 
+  .page__side__settings {
+    width: 100%;
+    padding-top: 50px;
+    &::before {
+      content: "";
+      display: block;
+      box-shadow: $box-shadow;
+      height: 2px;
+    }
+  }
+
   .ui__header {
-    left: 50%;
-    transform: translate(-50%);
-    font-size: 27px;
+    font-size: $h1Size;
   }
 
   .content__container {
-    position: absolute;
     top: 0;
-    left: 27%;
-    width: stretch;
-    max-width: 71%;
-    height: 95%;
-    padding: 45px;
-  }
+    right: 0;
+    width: 100% - $sideWidth;
+    position: absolute;
+    padding: $contentPadding;
 
-  .navigation__menu {
-    display: block;
+    .header__container {
+      height: $navHeight / 2;
+      padding-left: $contentPadding;
+      @include flexLeftCenter(column);
+    }
   }
 
   .main__header {
@@ -40,13 +49,25 @@
   .mobile__menu {
     display: none;
   }
+  .menu__text,
+  .navigation__menu {
+    display: block;
+  }
 
   .nav__bar {
-    width: 28%;
-    height: 12%;
-    padding: 20px;
-    .logo .logo__text {
-      font-size: 32px;
+    display: block;
+    position: absolute;
+    height: 100%;
+    width: $sideWidth;
+    top: 0;
+    left: 0;
+    padding: 0;
+
+    .logo {
+      left: 9%;
+      top: 5%;
+      height: 6%;
+      position: absolute;
     }
   }
 
@@ -63,17 +84,17 @@
     }
   }
 
-  .navigation {
-    width: 28%;
-    height: 86%;
-
-    top: 12.1%;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.05);
+  .navigation__menu {
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    height: 80%;
+    margin-top: 20%;
 
     .nav__list__container {
       @include flexLeftCenter(column);
-      padding: 20px;
-
+      padding: $sideBarPadding;
       .nav__item {
         padding: 13px 0;
       }
@@ -84,16 +105,52 @@
           margin-left: 7px;
         }
       }
+
+      .menu__text {
+        font-size: 10px;
+        font-weight: $bold;
+        color: $darkGrey;
+        padding-top: 10px;
+      }
+    }
+
+    &::before {
+      content: "";
+      display: block;
+      box-shadow: $box-shadow;
+      height: 3px;
     }
   }
-  .create__item__container .create__item__card {
-    padding: 30px;
+
+  .content__wrapper {
+    position: relative;
+    top: 6%;
+    top: $navHeight - ($divider * 7);
+    padding: $contentPadding;
+    margin-top: 0;
+  }
+
+  .delete__account__action {
+    bottom: 3%;
+    right: 2%;
   }
 }
 
 @media only screen and (min-width: 1256px) {
   .ui__alert {
     width: 45%;
+  }
+
+  .nav__bar {
+    width: ($sideWidth) /1.8;
+  }
+
+  .header__container {
+    padding-left: $contentPadding * 2;
+  }
+
+  .content__container {
+    width: 100% - ($sideWidth / 1.8);
   }
 
   .setting__registration__container {
@@ -106,33 +163,11 @@
       margin: 10px;
     }
   }
-
-  .navigation,
-  .nav__bar {
-    width: 25%;
-  }
-
-  .content__container {
-    left: 25%;
-  }
-
-  .create__item__container .create__item__card {
-    padding: 65px;
-  }
 }
 
 @media only screen and (min-width: 1490px) {
-  .navigation,
-  .nav__bar {
-    width: 16%;
-  }
-
   .ui__input__container {
     margin: 10px;
-  }
-
-  .nav__bar .logo .logo__text {
-    font-size: 30px;
   }
 
   .navigation .nav__list__container {
@@ -157,5 +192,9 @@
 
   .ui__header {
     font-size: 28px;
+  }
+
+  .nav__bar .logo .logo__text {
+    font-size: $h1Size + 3px;
   }
 }

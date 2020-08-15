@@ -16,27 +16,26 @@ body {
 }
 
 .app__container {
-  height: 100vh;
-  background: $lightGrey;
+  letter-spacing: 0.6px;
 }
 
 .content__container {
+  background: $lightGrey;
   padding: 15px;
   overflow-y: auto;
   position: relative;
-  height: 89%;
+  height: 100%;
 }
 
 .content__wrapper {
-  position: relative;
-  top: 6%;
+  margin-top: $navHeight + 6%;
 }
 
 .delete__account__action {
   font-size: 15px;
   position: absolute;
-  bottom: 3%;
-  right: 8%;
+  bottom: 0%;
+  right: 6%;
 
   & button {
     background: transparent;

@@ -27,18 +27,15 @@ const NavBar = () => {
           ) : (
             <Menu
               className="mobile__menu__icon"
-              size={36}
+              size={30}
               onClick={() => toggleMenu()}
             />
           )}
         </div>
-
-        <NavigationBar
-          className={`${
-            showMobileMenu ? "mobile__menu" : ""
-          } navigation__menu `}
-          toggleMenu={toggleMenu}
-        />
+        <NavigationBar className="navigation__menu" />
+        {showMobileMenu && (
+          <NavigationBar className="mobile__menu" toggleMenu={toggleMenu} />
+        )}
       </header>
     </>
   );

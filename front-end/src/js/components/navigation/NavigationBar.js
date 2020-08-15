@@ -71,14 +71,22 @@ const NavigationBar = ({ className, toggleMenu }) => {
                 }
               />
             </div>
-            <LinkItem
-              content="Settings"
-              clickHandler={() => clickHandler(() => history.push("/settings"))}
-            />
-            <LinkItem
-              content="Logout"
-              clickHandler={() => clickHandler(() => logoutHandler())}
-            />
+            <div className="page__side__settings">
+              <LinkItem
+                content="Settings"
+                clickHandler={() =>
+                  clickHandler(() => history.push("/settings"))
+                }
+              />
+              <LinkItem
+                content="Logout"
+                clickHandler={() => clickHandler(() => logoutHandler())}
+              />
+
+              <span className="menu__text">
+                &#169; 2020 NDHLOVU.COM All Rights Reserved
+              </span>
+            </div>
           </>
         ) : (
           <>

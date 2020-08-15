@@ -1,15 +1,14 @@
 .nav__bar {
-  height: 65px;
   width: 100%;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: $box-shadow;
   padding: 10px 15px;
   @include flexSpacing(row, space-between);
   background: $white;
+  z-index: 100;
+  height: $navHeight;
 
   .logo {
     @include flexCenter(column);
-    height: 100%;
-    width: fit-content;
     cursor: pointer;
 
     .logo__text {
@@ -17,6 +16,7 @@
       font-weight: $bold;
       margin: 0;
       font-size: 25px;
+      letter-spacing: 1px;
     }
   }
 
@@ -27,6 +27,7 @@
   }
 }
 
+.menu__text,
 .navigation__menu {
   display: none;
 }
@@ -34,11 +35,18 @@
 .navigation {
   position: absolute;
   left: 0;
-  height: 93vh;
+  height: 100% - $navHeight;
   width: 100vw;
   background: $white;
-  top: 5.9%;
-  z-index: 1000;
+  top: $navHeight - 4%;
+  z-index: 100;
+
+  &.mobile__menu::before {
+    content: "";
+    display: block;
+    height: $divider;
+    box-shadow: $box-shadow;
+  }
 
   .nav__list__container {
     @include flexCenter(column);

@@ -289,7 +289,9 @@ const AppContainer = ({ children, notify }) => {
       <div data-test-id="appContainer" className="app__container">
         <NavBar />
         <div className="content__container">
-          <UIHeader content={header} className="ui__header" />
+          <div className="header__container">
+            <UIHeader content={header} className="ui__header" />
+          </div>
           <div className="content__wrapper">{children}</div>
         </div>
       </div>

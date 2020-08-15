@@ -1,26 +1,20 @@
-import { Component } from "react";
+import { useEffect } from "react";
 import { createPortal } from "react-dom";
 
 const portalRoot = document.getElementById("root");
 
-class UIPortal extends Component {
-  constructor(props) {
-    super(props);
-    this.el = document.createElement("div");
-  }
+const UIPortal = ({ children }) => {
+  const portal = document.createElement("div");
 
-  componentDidMount() {
-    portalRoot.appendChild(this.el);
-  }
+  useEffect(() => {
+    portalRoot.insertAdjacentElement("afterEnd", portal);
 
-  componentWillUnmount() {
-    portalRoot.removeChild(this.el);
-  }
+    return () => {
+      portalRoot.removeChild(portal);
+    };
+  }, []);
 
-  render() {
-    const { children } = this.props;
-    return createPortal(children, this.el);
-  }
-}
+  return createPortal(children, portal);
+};
 
 export default UIPortal;

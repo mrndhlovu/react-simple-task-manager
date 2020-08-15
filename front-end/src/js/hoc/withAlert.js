@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 import Alert from "@material-ui/lab/Alert";
 
-import UIPortal from "../components/shared/UIPortal";
 import { useEffect } from "react";
 
 const withAlert = (WrappedComponent) => (props) => {
@@ -15,7 +14,7 @@ const withAlert = (WrappedComponent) => (props) => {
   }, [message]);
 
   return (
-    <UIPortal>
+    <>
       {message && (
         <Alert className="ui__alert" severity="info">
           {message}
@@ -25,7 +24,7 @@ const withAlert = (WrappedComponent) => (props) => {
         notify={(newMessage) => setMessage(newMessage)}
         {...props}
       />
-    </UIPortal>
+    </>
   );
 };
 
