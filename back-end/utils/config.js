@@ -14,7 +14,7 @@ const PORT = isDevelopment ? 5000 : process.env.PORT;
 const { PRIVATE_SIGNATURE, PUBLIC_SIGNATURE } = process.env;
 const BASE_URL = isDevelopment
   ? "http://localhost:3000"
-  : `http://ec2-3-248-208-68.eu-west-1.compute.amazonaws.com`;
+  : `http://ec2-3-248-208-68.eu-west-1.compute.amazonaws.com:3000`;
 
 const ALLOWED_UPDATE_FIELDS_USER = [
   "firstName",
