@@ -1,4 +1,4 @@
-export const baseURL = process.env.NODE_ENV === "http://localhost:5000";
+export const baseURL = "http://localhost:5000";
 
 export const TASKS_EP = `/v1/api/tasks`;
 export const AUTH_EP = `/v1/api/auth`;
