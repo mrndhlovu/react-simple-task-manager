@@ -223,7 +223,7 @@ const AppContainer = ({ children, notify }) => {
       })
       .catch((error) => {
         authListener();
-        notify(error?.response?.data || "Failed to register!");
+        notify(error?.response?.data.message || "Failed to register!");
       });
   };
 
