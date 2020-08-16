@@ -26,8 +26,8 @@ router.post("/register", async (req, res, next) => {
   await user.getAuthToken(next, async (token, error) => {
     if (error) {
       if (JSON.stringify(error.code) === "11000")
-        return res.status(400).send("User with that email already exists!");
-      return res.status(400).send(error.message);
+        next("User with that email already exists!");
+      next(error);
     }
 
     await generateAccessCookie(res, token);
@@ -36,34 +36,35 @@ router.post("/register", async (req, res, next) => {
 });
 
 router.post("/login", async (req, res, next) => {
-  const { email = null, password = null } = req.body;
+  const { email, password } = req.body;
 
   try {
-    if (!email) res.status(400).send("Email field is required!");
+    if (!email) return next("Email field is required!");
+    if (!password) return next("Password field is required!");
     const user = await User.findByCredentials(email, password);
+
     user.getAuthToken(next, async (token) => {
       await generateAccessCookie(res, token);
 
       await user.save();
-
       await populateUser(user, res);
     });
   } catch (error) {
-    res.status(400).send(`User with email: '${email}' not found!`);
+    next(error);
   }
 });
 
-router.get("/me", auth, async (req, res) => {
+router.get("/me", auth, async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id);
 
     await populateUser(user, res);
   } catch (error) {
-    res.status(400).send(STRINGS.auth.noUserProfile);
+    next(STRINGS.auth.noUserProfile);
   }
 });
 
-router.post("/logout", auth, async (req, res) => {
+router.post("/logout", auth, async (req, res, next) => {
   try {
     req.user.tokens = req.user.tokens.filter(
       (token) => token.token !== req.token
@@ -72,7 +73,7 @@ router.post("/logout", auth, async (req, res) => {
     await req.user.save();
     res.send(STRINGS.auth.logoutSuccess);
   } catch (error) {
-    res.status(500).send(error);
+    next(error);
   }
 });
 
@@ -104,7 +105,6 @@ router.post("/recovery/email", (req, res, next) => {
           { upsert: true, new: true }
         ).exec(async (err, newUser) => {
           const resetCode = getRandom();
-          console.log("resetCode", resetCode);
 
           await user.runEncryption(
             next,
@@ -134,11 +134,11 @@ router.post("/recovery/email", (req, res, next) => {
         });
       },
     ],
-    (error) => res.status(422).send(error)
+    (error) => next(error)
   );
 });
 
-router.post("/recovery/reset-code", (req, res) => {
+router.post("/recovery/reset-code", (req, res, next) => {
   const { resetPin, resetToken } = req.body;
 
   User.findOne(
@@ -152,7 +152,7 @@ router.post("/recovery/reset-code", (req, res) => {
         user.resetPasswordCode
       );
 
-      if (!isMatch) return res.status(400).send(STRINGS.auth.resetCodeExpired);
+      if (!isMatch) return next(STRINGS.auth.resetCodeExpired);
 
       const notification = {
         subject: `${user.email}, your password has been changed.`,
@@ -172,7 +172,7 @@ router.post("/recovery/reset-code", (req, res) => {
   );
 });
 
-router.post("/update-password", (req, res) => {
+router.post("/update-password", (req, res, next) => {
   const { password, resetToken } = req.body;
 
   User.findOne(
@@ -181,9 +181,8 @@ router.post("/update-password", (req, res) => {
       resetPasswordExpires: { $gt: Date.now() },
     },
     async (err, user) => {
-      if (!user) {
-        return res.status(400).send(STRINGS.auth.resetTokenExpired);
-      }
+      if (!user) return next(STRINGS.auth.resetTokenExpired);
+
       try {
         user.password = password;
         user.resetPasswordToken = undefined;
@@ -200,36 +199,33 @@ router.post("/update-password", (req, res) => {
             message: "Password changed!",
           });
         }
-        return res.status(400).send({
-          error: STRINGS.auth.failedToSendPasswordChangeEmail,
-        });
+        return next(STRINGS.auth.failedToSendPasswordChangeEmail);
       } catch (error) {
-        return res.status(400).send(error);
+        next(error);
       }
     }
   );
 });
 
-router.post("/logoutAll", auth, async (req, res) => {
+router.post("/logoutAll", auth, async (req, res, next) => {
   try {
     req.user.tokens = [];
     await req.user.save();
 
     res.send();
   } catch (error) {
-    res.status(500).send(error);
+    next(error);
   }
 });
 
-router.patch("/update-user", auth, async (req, res) => {
+router.patch("/update-user", auth, async (req, res, next) => {
   const updates = Object.keys(req.body);
 
   const isValidField = updates.every((update) =>
     ALLOWED_UPDATE_FIELDS_USER.includes(update)
   );
 
-  if (!isValidField)
-    return res.status(400).send(STRINGS.auth.invalidUpdateField);
+  if (!isValidField) return next(STRINGS.auth.invalidUpdateField);
 
   try {
     updates.forEach((update) => {
@@ -240,20 +236,20 @@ router.patch("/update-user", auth, async (req, res) => {
 
     res.send(req.user);
   } catch (error) {
-    return res.status(400).send(error);
+    next(error);
   }
 });
 
-router.delete("/delete-account", auth, async (req, res) => {
+router.delete("/delete-account", auth, async (req, res, next) => {
   try {
     await req.user.remove();
     res.send({ message: STRINGS.auth.accountDeleted });
   } catch (error) {
-    return res.status(400).send(STRINGS.auth.deleteAccountFail);
+    next(STRINGS.auth.deleteAccountFail);
   }
 });
 
-router.post("/verify-account", auth, async (req, res) => {
+router.post("/verify-account", auth, async (req, res, next) => {
   const { verificationCode } = req.body;
   try {
     const isMatch = await bcrypt.compare(
@@ -263,9 +259,7 @@ router.post("/verify-account", auth, async (req, res) => {
 
     const isValid = await getUser(req.user);
 
-    if (!isMatch || !isValid) {
-      return res.status(400).send(STRINGS.auth.verificationCodeExpired);
-    }
+    if (!isMatch || !isValid) return next(STRINGS.auth.verificationCodeExpired);
 
     req.user.confirmed = true;
     req.user.confirmationCode = undefined;
@@ -279,7 +273,7 @@ router.post("/verify-account", auth, async (req, res) => {
     req.user.save();
     res.send({ message: "Account verified!", user: req.user });
   } catch (error) {
-    return res.status(400).send(STRINGS.auth.failedToVerifyAccount);
+    next(STRINGS.auth.failedToVerifyAccount);
   }
 });
 
@@ -289,7 +283,6 @@ router.get("/verify-account-renew", auth, async (req, res, next) => {
     req.user.confirmationExpires = undefined;
 
     const verificationCode = getRandom();
-    console.log("verificationCode", verificationCode);
     await req.user.runEncryption(
       next,
       "confirmationCode",
@@ -310,7 +303,7 @@ router.get("/verify-account-renew", auth, async (req, res, next) => {
       }
     );
   } catch (error) {
-    return res.status(400).send(STRINGS.auth.renewActivationCodeFailed);
+    next(STRINGS.auth.renewActivationCodeFailed);
   }
 });
 

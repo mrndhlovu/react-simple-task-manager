@@ -167,7 +167,7 @@ const AppContainer = ({ children, notify }) => {
         notify("Welcome Back!");
       })
       .catch((error) => {
-        notify(error.response?.data || error.response?.data.error);
+        notify(error.response?.data.message);
         authListener();
       });
   };
