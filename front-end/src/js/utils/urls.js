@@ -1,6 +1,6 @@
 export const baseURL =
   process.env.NODE_ENV === "production"
-    ? "http://ec2-18-203-115-88.eu-west-1.compute.amazonaws.com/"
+    ? "http://ec2-18-203-115-88.eu-west-1.compute.amazonaws.com:5000/"
     : "http://localhost:5000/";
 
 export const TASKS_EP = `v1/api/tasks`;
