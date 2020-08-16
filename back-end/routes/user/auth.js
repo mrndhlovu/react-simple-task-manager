@@ -26,8 +26,8 @@ router.post("/register", async (req, res, next) => {
   await user.getAuthToken(next, async (token, error) => {
     if (error) {
       if (JSON.stringify(error.code) === "11000")
-        next("User with that email already exists!");
-      next(error);
+        return next("User with that email already exists!");
+      return next(error);
     }
 
     await generateAccessCookie(res, token);
