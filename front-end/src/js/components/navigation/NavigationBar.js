@@ -56,6 +56,7 @@ const NavigationBar = ({ className, toggleMenu }) => {
                       )
                     }
                   />
+
                   <Trash2
                     className="delete__button"
                     size={15}
@@ -103,10 +104,6 @@ const NavigationBar = ({ className, toggleMenu }) => {
                   clickHandler(() => logoutHandler(), "logout")
                 }
               />
-
-              <span className="menu__text ">
-                &#169; 2020 NDHLOVU.COM All Rights Reserved
-              </span>
             </div>
           </>
         ) : (
@@ -127,6 +124,10 @@ const NavigationBar = ({ className, toggleMenu }) => {
             />
           </>
         )}
+
+        <span className="menu__text ">
+          &#169; 2020 NDHLOVU.COM All Rights Reserved
+        </span>
       </ul>
     </div>
   );

@@ -142,6 +142,10 @@
     width: 45%;
   }
 
+  .content__container {
+    padding: $contentPadding 13%;
+  }
+
   .nav__bar {
     width: ($sideWidth) /1.8;
   }
@@ -192,7 +196,7 @@
   }
 
   .ui__header {
-    font-size: 28px;
+    font-size: 22px;
   }
 
   .nav__bar .logo .logo__text {
