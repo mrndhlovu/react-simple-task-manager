@@ -1,7 +1,6 @@
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-
-const BUILD_DIR = "../../frontend/build";
+const path = require("path");
 
 const serverConfig = (app, express) => {
   app.use(express.json());
@@ -13,7 +12,10 @@ const serverConfig = (app, express) => {
     })
   );
 
-  app.use(express.static(BUILD_DIR));
+  app.use(express.static(path.join(__dirname, "/../frontend/build")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(`${__dirname}/../frontend/build/index.html`));
+  });
 };
 
 module.exports = serverConfig;
