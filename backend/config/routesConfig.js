@@ -1,5 +1,5 @@
 const authRoutes = require("../routes/user/auth");
-const taskRoutes = require("../routes/user/tasks");
+const taskRoutes = require("../routes/tasks/tasks");
 const errorHandler = require("./errorHandler");
 
 const API_SUFFIX = "/v1/api";

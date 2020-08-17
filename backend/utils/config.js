@@ -2,15 +2,12 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-const isDevelopment = process.env.DEVELOPMENT === "development";
+const PORT = process.env.PORT || 5000;
 
 const S_GRID_API_KEY = process.env.SEND_GRID_API_KEY;
 const CONNECTION_URI = process.env.MONGODB_URI;
-const { LOCAL_MONGO_DB } = process.env;
 
-const PORT = process.env.PORT || 5000;
-
-const { PRIVATE_SIGNATURE, PUBLIC_SIGNATURE } = process.env;
+const { PRIVATE_SIGNATURE, PUBLIC_SIGNATURE, LOCAL_MONGO_DB } = process.env;
 
 const ALLOWED_UPDATE_FIELDS_USER = [
   "firstName",
@@ -26,7 +23,6 @@ module.exports = {
   ALLOWED_UPDATE_LIST_FIELDS,
   ALLOWED_UPDATE_TASK_FIELDS,
   CONNECTION_URI,
-  isDevelopment,
   LOCAL_MONGO_DB,
   PORT,
   PRIVATE_SIGNATURE,
