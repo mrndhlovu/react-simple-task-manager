@@ -36,6 +36,7 @@ router.post("/register", async (req, res, next) => {
 });
 
 router.post("/login", async (req, res, next) => {
+  req.connection.setTimeout(100000);
   const { email, password } = req.body;
 
   try {
