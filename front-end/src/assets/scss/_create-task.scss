@@ -16,16 +16,16 @@
   }
 
   .submit__button {
-    background: $primary-color;
+    background: $primaryColor;
     color: $white;
     font-family: $montserrat, "sans-serif";
     font-weight: $bold;
     font-size: 12px;
 
     &:hover {
-      background: $primary-color;
-      opacity: 0.5;
       @include hoverTransition(color);
+      background: $primaryColor;
+      opacity: 0.5;
     }
   }
 

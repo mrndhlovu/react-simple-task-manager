@@ -31,14 +31,12 @@ const generateAccessCookie = async (res, token) => {
   await res.append("Set-Cookie", `access_token="${token}";`);
 };
 
-const getUser = async (userData) => {
-  const user = await User.findOne({
+const getUser = async (userData) =>
+  await User.findOne({
     _id: userData._id,
     email: userData.email,
     confirmationExpires: { $gt: Date.now() },
   });
-  return user;
-};
 
 const populateUser = async (user, res) => {
   await user.populate("tasks").execPopulate();

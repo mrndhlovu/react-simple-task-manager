@@ -48,8 +48,8 @@ const AppContainer = ({ children, notify }) => {
     await requestLogout()
       .then(() => authListener())
       .catch(() => {
-        notify("Fail to logout!");
         authListener();
+        notify("Fail to logout!");
       });
   };
 
@@ -64,8 +64,8 @@ const AppContainer = ({ children, notify }) => {
         notify("Profile updated");
       })
       .catch(() => {
-        notify("Failed to updated profile");
         authListener();
+        notify("Failed to updated profile");
       });
   };
 
@@ -118,7 +118,7 @@ const AppContainer = ({ children, notify }) => {
         setTasks(updatedTasks);
         callback && callback();
       })
-      .catch((err) => {
+      .catch(() => {
         notify("Failed to create a task!");
       });
   };
@@ -167,8 +167,8 @@ const AppContainer = ({ children, notify }) => {
         notify("Welcome Back!");
       })
       .catch((error) => {
-        notify(error.response?.data.message);
         authListener();
+        notify(error.response?.data.message);
       });
   };
 
@@ -227,9 +227,7 @@ const AppContainer = ({ children, notify }) => {
       });
   };
 
-  const updateListHandler = (newList) => {
-    setLists(newList);
-  };
+  const updateListHandler = (newList) => setLists(newList);
 
   useEffect(() => {
     switch (paramPath[1]) {
@@ -254,9 +252,7 @@ const AppContainer = ({ children, notify }) => {
           setTasks(res.data.tasks);
           setLists(res.data.lists);
         })
-        .catch(() => {
-          authListener();
-        });
+        .catch(() => authListener());
     };
 
     getUserInfo();

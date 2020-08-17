@@ -1,8 +1,8 @@
 .nav__bar {
+  @include flexSpacing(row, space-between);
   width: 100%;
   box-shadow: $box-shadow;
   padding: 10px 15px;
-  @include flexSpacing(row, space-between);
   background: $white;
   z-index: 100;
   height: $navHeight;
@@ -10,24 +10,35 @@
   .logo {
     @include flexCenter(column);
     cursor: pointer;
+    font-family: $roboto;
 
     .logo__text {
-      color: $primary-color;
+      color: $primaryColor;
       font-weight: $bold;
       margin: 0;
       font-size: 25px;
-      letter-spacing: 1px;
+      letter-spacing: 3px;
     }
   }
 
   .mobile__menu__icon {
     font-size: 30px;
-    color: $primary-color;
+    color: $primaryColor;
     cursor: pointer;
   }
 }
 
-.menu__text,
+.menu__text > a {
+  @include hoverTransition(color);
+  text-decoration: none;
+  color: inherit;
+  padding: 0 2px;
+
+  &:hover {
+    color: $grey;
+  }
+}
+
 .navigation__menu {
   display: none;
 }
@@ -67,8 +78,8 @@
       }
 
       &:hover {
-        color: $darkGrey;
         @include hoverTransition(color);
+        color: $darkGrey;
       }
       .active__link__text {
         color: $darkGrey;
@@ -77,7 +88,7 @@
       &.menu__item__active::before {
         content: "";
         display: inline-block;
-        background: $primary-color;
+        background: $primaryColor;
         height: 15px;
         width: 3px;
         border-radius: 5px;

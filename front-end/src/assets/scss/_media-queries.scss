@@ -35,9 +35,9 @@
     padding: $contentPadding;
 
     .header__container {
+      @include flexLeftCenter(column);
       height: $navHeight / 2;
       padding-left: $contentPadding;
-      @include flexLeftCenter(column);
     }
   }
 

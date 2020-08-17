@@ -124,9 +124,15 @@ const NavigationBar = ({ className, toggleMenu }) => {
             />
           </>
         )}
-
-        <span className="menu__text ">
-          &#169; 2020 NDHLOVU.COM All Rights Reserved
+        <span className="menu__text">
+          <span className="copyright">&#169; </span>2020 Developer:
+          <a
+            href="https://ndhlovu.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            ndhlovu.com
+          </a>
         </span>
       </ul>
     </div>
