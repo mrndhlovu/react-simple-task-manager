@@ -1,8 +1,10 @@
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const path = require("path");
+const timeout = require("connect-timeout");
 
 const serverConfig = (app, express) => {
+  app.use(timeout("60s"));
   app.use(express.json());
   app.use(cookieParser());
   app.use(
