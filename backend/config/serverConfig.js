@@ -14,6 +14,10 @@ const serverConfig = (app, express) => {
   );
 
   app.use(express.static(BUILD_DIR));
+  app.get("*", function (req, res) {
+    res.sendFile(path.resolve(BUILD_DIR, "/index.html"));
+    res.end();
+  });
 };
 
 module.exports = serverConfig;
