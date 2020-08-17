@@ -3,7 +3,7 @@ const cors = require("cors");
 const path = require("path");
 const timeout = require("connect-timeout");
 
-const BUILD_DIR = "../../frontend/build";
+const BUILD_DIR = path.join(__dirname, "../../frontend/build");
 
 const serverConfig = (app, express) => {
   app.use(timeout("60s"));
