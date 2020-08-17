@@ -4,7 +4,7 @@ node_js:
 cache: yarn
 
 install:
-  - cd front-end
+  - cd frontend
   - yarn install
 
 script:

@@ -24,10 +24,10 @@
   "scripts": {
     "start": "node server.js",
     "start:server": "nodemon server.js",
-    "client-install": "cd ../front-end && yarn install",
-    "client": "cd ../front-end && yarn start",
+    "client-install": "cd ../frontend && yarn install",
+    "client": "cd ../frontend && yarn start",
     "dev": "concurrently --kill-others-on-fail \"yarn run start:server\"  \"yarn run client\" ",
-    "heroku-postbuild": "cd ../front-end && yarn && yarn run build"
+    "heroku-postbuild": "cd ../frontend && yarn && yarn run build"
   },
   "devDependencies": {
     "concurrently": "^5.2.0",

@@ -1,7 +1,7 @@
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
-const BUILD_DIR = "../../front-end/build";
+const BUILD_DIR = "../../frontend/build";
 
 const serverConfig = (app, express) => {
   app.use(express.json());
