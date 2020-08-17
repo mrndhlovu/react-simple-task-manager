@@ -8,7 +8,7 @@ const S_GRID_API_KEY = process.env.SEND_GRID_API_KEY;
 const CONNECTION_URI = process.env.MONGODB_URI;
 const { LOCAL_MONGO_DB } = process.env;
 
-const PORT = !isDevelopment ? process.env.PORT || 80 : 5000;
+const PORT = process.env.PORT || 5000;
 
 const { PRIVATE_SIGNATURE, PUBLIC_SIGNATURE } = process.env;
 
