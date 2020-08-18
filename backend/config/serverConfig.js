@@ -4,7 +4,6 @@ const path = require("path");
 const timeout = require("connect-timeout");
 
 const BUILD_DIR = path.join(__dirname, "../../frontend/build");
-isProd = process.env.PRODUCTION;
 
 var CORS_OPTIONS = {
   credentials: true,
@@ -18,12 +17,6 @@ const serverConfig = (app, express) => {
   app.use(cookieParser());
 
   app.use(express.static(BUILD_DIR));
-
-  if (isProd) {
-    app.get("*", (req, res) => {
-      res.sendFile(`${BUILD_DIR}/index.html`);
-    });
-  }
 };
 
 module.exports = serverConfig;
