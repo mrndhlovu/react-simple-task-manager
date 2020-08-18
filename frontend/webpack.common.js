@@ -1,4 +1,3 @@
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 const path = require("path");
@@ -45,7 +44,6 @@ module.exports = {
     extensions: [".js", ".jsx", ".scss"],
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en/),
     new webpack.DefinePlugin({
       __isBrowser__: "true",

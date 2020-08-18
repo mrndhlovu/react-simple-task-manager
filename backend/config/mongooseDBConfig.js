@@ -10,8 +10,8 @@ const mongooseConfig = () => {
       useCreateIndex: true,
       useFindAndModify: false,
     })
-    .then(() => log.success("Connected to DB"))
-    .catch((err) => log.warning(err, "Error connecting to DB"));
+    .then(() => log.success("Connected to MongoDB"))
+    .catch((err) => log.warning(err, "Error connecting to MongoDB"));
 };
 
 module.exports = mongooseConfig;

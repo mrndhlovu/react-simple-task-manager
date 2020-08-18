@@ -5,21 +5,21 @@ const timeout = require("connect-timeout");
 
 const BUILD_DIR = path.join(__dirname, "../../frontend/build");
 
+var CORS_OPTIONS = {
+  credentials: true,
+  origin: process.env.FRONTEND_URL,
+  optionsSuccessStatus: 200,
+};
+
 const serverConfig = (app, express) => {
   app.use(timeout("60s"));
-  app.use(express.json());
+  app.use(cors(CORS_OPTIONS));
   app.use(cookieParser());
-  app.use(
-    cors({
-      origin: (origin, callback) => callback(null, true),
-      credentials: true,
-    })
-  );
 
   app.use(express.static(BUILD_DIR));
-  app.get("*", (req, res) => {
-    res.sendFile(`${BUILD_DIR}/index.html`);
-  });
+  // app.get("*", (req, res) => {
+  //   res.sendFile(`${BUILD_DIR}`);
+  // });
 };
 
 module.exports = serverConfig;

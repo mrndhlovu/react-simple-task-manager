@@ -1,7 +1,6 @@
 const express = require("express");
 const http = require("http");
 
-const { PORT } = require("./utils/config");
 const log = require("./utils/console-alert");
 const mongooseDBConfig = require("./config/mongooseDBConfig");
 const routesConfig = require("./config/routesConfig");
@@ -9,6 +8,8 @@ const serverConfig = require("./config/serverConfig");
 
 const app = express();
 const server = http.createServer(app);
+
+const PORT = process.env.PORT || 5000;
 
 mongooseDBConfig();
 serverConfig(app, express);
