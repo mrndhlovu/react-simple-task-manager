@@ -5,7 +5,7 @@ const authRoutes = require("../routes/user/auth");
 const taskRoutes = require("../routes/tasks/tasks");
 const errorHandler = require("./errorHandler");
 
-const API_SUFFIX = "/v1/api";
+const API_SUFFIX = "/api";
 const BUILD_DIR = path.join(__dirname, "../../frontend/build");
 
 const routesConfig = (app) => {
