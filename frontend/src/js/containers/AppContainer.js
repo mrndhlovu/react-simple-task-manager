@@ -126,16 +126,11 @@ const AppContainer = ({ children, notify }) => {
       });
   };
 
-  const updatedTaskHandler = async (task, taskId, callback) => {
-    const taskIndex = tasks.indexOf(task);
-
+  const updatedTaskHandler = async (task, taskId, taskIndex, callback) => {
     await requestUpdateTask(task, taskId)
       .then((res) => {
         const updatedTasks = update(tasks, {
-          $splice: [
-            [taskIndex, 1],
-            [taskIndex, 0, res.data],
-          ],
+          [taskIndex]: { $set: res.data },
         });
 
         setTasks(updatedTasks);
@@ -204,12 +199,14 @@ const AppContainer = ({ children, notify }) => {
             ...body,
             status: task.status === "incomplete" ? "todo" : "incomplete",
           },
-          task._id
+          task._id,
+          taskIndex
         );
       case "complete":
         return updatedTaskHandler(
           { ...body, status: task.status === "complete" ? "todo" : "complete" },
-          task._id
+          task._id,
+          taskIndex
         );
       default:
         break;
