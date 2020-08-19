@@ -16,7 +16,10 @@ const TaskSchema = new mongoose.Schema({
     ref: "User",
   },
   list: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+  },
+  listName: {
+    type: mongoose.Schema.Types.String,
   },
 });
 

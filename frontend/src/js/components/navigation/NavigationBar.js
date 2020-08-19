@@ -51,7 +51,7 @@ const NavigationBar = ({ className, toggleMenu }) => {
                     content={list?.title}
                     clickHandler={() =>
                       clickHandler(
-                        () => history.push(`/lists/${list._id}`),
+                        () => history.push(`/${list._id}/lists`),
                         list?.title
                       )
                     }

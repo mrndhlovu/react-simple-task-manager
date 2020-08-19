@@ -79,7 +79,7 @@ const AppContainer = ({ children, notify }) => {
           $push: [res.data],
         });
         setLists(updatedLists);
-        history.push(`/lists/${res.data._id}`);
+        history.push(`/${res.data._id}/lists`);
         notify("List created");
       })
       .catch((err) => {
@@ -192,7 +192,7 @@ const AppContainer = ({ children, notify }) => {
           setTasks(updatedTasks);
         });
       case "edit":
-        return history.push(`/edit-task/${task._id}`);
+        return history.push(`/${task._id}/edit-task`);
       case "incomplete":
         return updatedTaskHandler(
           {
@@ -237,6 +237,8 @@ const AppContainer = ({ children, notify }) => {
         return setHeader("Register");
       case "create-list":
         return setHeader("Create List");
+      case "login":
+        return setHeader("Login");
       case "edit-task":
         return setHeader("Edit-task");
       default:

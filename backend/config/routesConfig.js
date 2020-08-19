@@ -15,6 +15,9 @@ const routesConfig = (app) => {
 
   app.use(errorHandler);
   app.use(express.static(BUILD_DIR));
+  app.get("/*", (req, res) => {
+    res.sendFile(path.join(BUILD_DIR, "index.html"));
+  });
 };
 
 module.exports = routesConfig;
