@@ -8,7 +8,7 @@ const {
   ALLOWED_UPDATE_LIST_FIELDS,
 } = require("../../utils/config.js");
 
-const { auth } = require("../../middleware/authMiddleware");
+const { auth } = require("../../middleware/authenticate");
 
 router.post("/create-task", auth, async (req, res) => {
   const task = new Task({ ...req.body, owner: req.user._id });

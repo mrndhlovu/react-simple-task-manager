@@ -1,9 +1,6 @@
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const isEmail = require("validator/lib/isEmail");
-const { PRIVATE_SIGNATURE } = require("../utils/config");
-const { getRandom } = require("../utils/serverUtils");
 
 const UserSchema = new mongoose.Schema(
   {
@@ -71,76 +68,27 @@ UserSchema.methods.toJSON = function () {
   return userObject;
 };
 
-UserSchema.methods.getAuthToken = async function (next, callback) {
-  const user = this;
-  const KEY_IDENTIFIER = getRandom(20);
+UserSchema.methods.getHashedString = async (string) => {
+  const SALT_FACTOR = 12;
 
-  return user.runEncryption(next, null, `${KEY_IDENTIFIER}`, async (hash) => {
-    const token = jwt.sign(
-      {
-        algorithm: "RS256",
-        _id: user._id.toString(),
-        expiresIn: 3600,
-        kid: `kid-${hash}`,
-      },
-      PRIVATE_SIGNATURE
-    );
-    user.tokens = user.tokens.concat({ token });
-
-    try {
-      await user.save();
-      callback(token);
-    } catch (error) {
-      callback(undefined, error);
-    }
+  return await new Promise((resolve, reject) => {
+    bcrypt.genSalt(SALT_FACTOR, async (err, salt) => {
+      bcrypt.hash(string, salt, (error, hash) => {
+        if (err) reject(err);
+        resolve(hash);
+      });
+    });
   });
 };
 
-UserSchema.statics.findByCredentials = async function (email, password) {
-  let isMatch;
-  let user;
-  if (email) {
-    user = await this.findOne({ email });
-    if (!user) throw new Error("Login error: check your email or password.");
-    isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) throw new Error("Login error: check your email or password.");
-  }
-  return user;
-};
-
-UserSchema.methods.runEncryption = function (
-  next,
-  targetId,
-  stringToHash,
-  callback
-) {
+UserSchema.pre("save", async function (next) {
   const user = this;
-  const SALT_FACTOR = 12;
-  try {
-    return bcrypt.genSalt(SALT_FACTOR, (err, salt) => {
-      if (err) return next(err);
 
-      return bcrypt.hash(
-        stringToHash || user[targetId],
-        salt,
-        (error, hash) => {
-          if (error) return next(error);
-          if (targetId) user[targetId] = hash;
-          if (!stringToHash) next();
-
-          if (callback) callback(hash);
-        }
-      );
-    });
-  } catch (error) {
-    return next(error);
-  }
-};
-
-UserSchema.pre("save", function (next) {
-  const user = this;
   if (!user.isModified("password")) return next();
-  user.runEncryption(next, "password");
+  const hashedPassword = await user.getHashedString(user.password);
+
+  user.password = hashedPassword;
+  next();
 });
 
 const User = mongoose.model("User", UserSchema);

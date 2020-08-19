@@ -37,6 +37,7 @@ const AppContainer = ({ children, notify }) => {
   const location = useLocation();
 
   const [userInfo, setUserInfo] = useState(INITIAL_STATE);
+
   const [lists, setLists] = useState([]);
   const [tasks, setTasks] = useState([]);
   const [header, setHeader] = useState("Create New Task");
@@ -60,7 +61,9 @@ const AppContainer = ({ children, notify }) => {
 
     await requestUserUpdate(body)
       .then((res) => {
-        authListener(res.data);
+        authListener(res.data.user);
+        setTasks(res.data.tasks);
+        setLists(res.data.lists);
         notify("Profile updated");
       })
       .catch(() => {
@@ -252,11 +255,14 @@ const AppContainer = ({ children, notify }) => {
           setTasks(res.data.tasks);
           setLists(res.data.lists);
         })
-        .catch(() => authListener());
+        .catch((error) => {
+          notify(error?.response?.data.message);
+          authListener();
+        });
     };
 
     getUserInfo();
-  }, []);
+  }, [notify]);
 
   const CONTEXT = {
     auth: userInfo,

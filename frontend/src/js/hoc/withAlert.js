@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 
 import Alert from "@material-ui/lab/Alert";
 
@@ -13,6 +13,8 @@ const withAlert = (WrappedComponent) => (props) => {
     }, 3000);
   }, [message]);
 
+  const notify = useCallback((newMessage) => setMessage(newMessage), []);
+
   return (
     <>
       {message && (
@@ -20,10 +22,7 @@ const withAlert = (WrappedComponent) => (props) => {
           {message}
         </Alert>
       )}
-      <WrappedComponent
-        notify={(newMessage) => setMessage(newMessage)}
-        {...props}
-      />
+      <WrappedComponent notify={notify} {...props} />
     </>
   );
 };
