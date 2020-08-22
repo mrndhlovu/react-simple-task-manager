@@ -7,7 +7,7 @@ var CORS_OPTIONS = {
   optionsSuccessStatus: 200,
 };
 
-const serverConfig = (app, express) => {
+const serverConfig = (app) => {
   app.use(cors(CORS_OPTIONS));
   app.use(cookieParser());
 };
