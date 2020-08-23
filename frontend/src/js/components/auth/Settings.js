@@ -28,6 +28,7 @@ const Settings = () => {
           <UIInput
             id="outlined-search"
             label="First Name"
+            placeholder="First Name"
             defaultValue={user?.lastName}
             type="text"
             handleChange={(e) => handleChange("lastName", e)}
@@ -35,6 +36,7 @@ const Settings = () => {
           <UIInput
             id="outlined-search"
             label="Last Name"
+            placeholder="Last Name"
             defaultValue={user?.firstName}
             type="text"
             handleChange={(e) => handleChange("firstName", e)}
@@ -44,6 +46,7 @@ const Settings = () => {
           <UIInput
             id="outlined-search"
             label="Email Address"
+            placeholder="Email Address"
             defaultValue={user?.email}
             type="email"
             handleChange={(e) => handleChange("email", e)}
@@ -59,7 +62,9 @@ const Settings = () => {
         </div>
       </div>
       <span className="delete__account__action">
-        <button onClick={() => deleteAccountHandler()}>Delete Account</button>
+        <button type="submit" onClick={() => deleteAccountHandler()}>
+          Delete Account
+        </button>
       </span>
     </CreateItemWrapper>
   );

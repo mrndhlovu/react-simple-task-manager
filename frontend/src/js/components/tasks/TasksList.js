@@ -12,9 +12,9 @@ const TasksList = ({ header, tasks }) => {
     <>
       <UIHeader content={header} />
 
-      {tasks.map((task, index) => (
+      {tasks.map((task) => (
         <TaskItem
-          key={index}
+          key={task._id}
           title={task?.title}
           dueDate={task?.dueDate}
           status={task?.status}
@@ -26,9 +26,13 @@ const TasksList = ({ header, tasks }) => {
   );
 };
 
+TasksList.defaultProps = {
+  tasks: PropTypes.arrayOf(PropTypes.object),
+};
+
 TasksList.propTypes = {
   header: PropTypes.string.isRequired,
-  tasks: PropTypes.arrayOf(PropTypes.object.isRequired),
+  tasks: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default TasksList;

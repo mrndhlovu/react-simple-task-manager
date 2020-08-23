@@ -13,20 +13,17 @@ const List = () => {
 
   const [list, setList] = useState(undefined);
 
-  const TODOS =
-    tasks &&
-    tasks.filter(
-      (task) => task.status === "todo" && task?.listName === list?.title
+  const TODOS = tasks
+    && tasks.filter(
+      (task) => task.status === "todo" && task?.listName === list?.title,
     );
-  const COMPLETED =
-    tasks &&
-    tasks.filter(
-      (task) => task.status === "complete" && task?.listName === list?.title
+  const COMPLETED = tasks
+    && tasks.filter(
+      (task) => task.status === "complete" && task?.listName === list?.title,
     );
-  const INCOMPLETES =
-    tasks &&
-    tasks.filter(
-      (task) => task.status === "incomplete" && task?.listName === list?.title
+  const INCOMPLETES = tasks
+    && tasks.filter(
+      (task) => task.status === "incomplete" && task?.listName === list?.title,
     );
 
   const hasTodos = TODOS.length !== 0;
@@ -51,9 +48,7 @@ const List = () => {
     <>
       <CreateTask
         buttonText="Create New Task"
-        handleButtonClick={(data) =>
-          createTaskHandler({ ...data, listName: list?.title })
-        }
+        handleButtonClick={(data) => createTaskHandler({ ...data, listName: list?.title })}
       />
 
       {hasTodos && <TasksList header="To Do" tasks={TODOS} />}

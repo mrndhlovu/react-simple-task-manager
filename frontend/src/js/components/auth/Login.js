@@ -21,8 +21,7 @@ const Login = () => {
 
   const [credentials, setCredentials] = useState(INITIAL_STATE);
 
-  const handleChange = (field, e) =>
-    setCredentials({ ...credentials, [field]: e.target.value });
+  const handleChange = (field, e) => setCredentials({ ...credentials, [field]: e.target.value });
 
   if (authenticated) return <Redirect to={from.pathname} />;
 
@@ -35,12 +34,14 @@ const Login = () => {
       <UIInput
         id="login-email"
         label="Email Address"
+        placeholder="Email"
         type="email"
         handleChange={(e) => handleChange("email", e)}
       />
 
       <UIInput
         id="login-password"
+        placeholder="Password"
         label="Password"
         type="password"
         handleChange={(e) => handleChange("password", e)}
