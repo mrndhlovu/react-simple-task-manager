@@ -2,8 +2,8 @@ import React, { useState } from "react";
 
 import { Menu, X } from "react-feather";
 
-import NavigationBar from "./NavigationBar";
 import { useHistory } from "react-router-dom";
+import NavigationBar from "./NavigationBar";
 import Logo from "../shared/Logo";
 
 const NavBar = () => {

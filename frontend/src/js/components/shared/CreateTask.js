@@ -1,5 +1,8 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable comma-dangle */
+/* eslint-disable function-paren-newline */
+/* eslint-disable implicit-arrow-linebreak */
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 
 import { resetForm, getLocaleString } from "../../utils/appUtils";
 import CreateItemWrapper from "./CreateItemWrapper";
@@ -21,10 +24,12 @@ const CreateTask = ({ task, buttonText, handleButtonClick }) => {
 
   return (
     <CreateItemWrapper
-      clickHandler={() =>
-        handleButtonClick(newTask, () =>
-          resetForm([`${inputId}-title`, `${inputId}-duedate`])
-        )
+      clickHandler={
+        () =>
+          handleButtonClick(newTask, () =>
+            resetForm([`${inputId}-title`, `${inputId}-duedate`])
+          )
+        // eslint-disable-next-line react/jsx-curly-newline
       }
       buttonText={buttonText}
     >
@@ -42,15 +47,10 @@ const CreateTask = ({ task, buttonText, handleButtonClick }) => {
         label="Due Date"
         handleChange={(e) => handleChange("dueDate", e)}
         defaultValue={task?.dueDate || getLocaleString()}
+        placeholder={task?.dueDate || getLocaleString()}
       />
     </CreateItemWrapper>
   );
-};
-
-CreateTask.propTypes = {
-  task: PropTypes.object,
-  buttonText: PropTypes.string.isRequired,
-  handleButtonClick: PropTypes.func.isRequired,
 };
 
 export default CreateTask;

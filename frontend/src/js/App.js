@@ -6,16 +6,14 @@ import AppContainer from "./containers/AppContainer";
 import BaseRouter from "./Routes";
 import store from "./store";
 
-const App = () => {
-  return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <AppContainer>
-          <BaseRouter />
-        </AppContainer>
-      </BrowserRouter>
-    </Provider>
-  );
-};
+const App = () => (
+  <Provider store={store}>
+    <BrowserRouter>
+      <AppContainer>
+        <BaseRouter />
+      </AppContainer>
+    </BrowserRouter>
+  </Provider>
+);
 
 export default App;

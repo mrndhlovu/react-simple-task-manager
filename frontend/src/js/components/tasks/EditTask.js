@@ -9,7 +9,7 @@ import CreateTask from "../shared/CreateTask";
 
 const EditTask = () => {
   const { taskId } = useParams();
-  const { updatedTaskHandler, tasks } = useMainContent();
+  const { updatedTaskHandler, tasks, notify } = useMainContent();
   const [task, setTask] = useState(undefined);
 
   const editTaskHandler = async (newTask) => {
@@ -17,8 +17,8 @@ const EditTask = () => {
     const taskIndex = tasks.indexOf(task);
 
     updatedTaskHandler(body, taskId, taskIndex, (data, error) => {
-      if (error) return console.log(error);
-      setTask(data);
+      if (error) return notify(error?.response.data?.error);
+      return setTask(data);
     });
   };
 
@@ -28,8 +28,8 @@ const EditTask = () => {
         .then((res) => {
           setTask(res.data);
         })
-        .catch((err) => {
-          console.log("deleteTask -> err", err.message);
+        .catch((error) => {
+          notify(error?.response.data?.error);
         });
     };
     getTask();

@@ -1,6 +1,8 @@
+/* eslint-disable operator-linebreak */
+/* eslint-disable implicit-arrow-linebreak */
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import update from "immutability-helper";
 
 import { Plus, Trash2 } from "react-feather";
@@ -22,7 +24,7 @@ const NavigationBar = ({ className, toggleMenu }) => {
 
   const clickHandler = (callback, active) => {
     setActiveLink(active.toLowerCase());
-    toggleMenu && toggleMenu();
+    if (toggleMenu) toggleMenu();
     return callback();
   };
 
@@ -39,7 +41,7 @@ const NavigationBar = ({ className, toggleMenu }) => {
             {lists &&
               lists.map((list, index) => (
                 <div
-                  key={index}
+                  key={list._id}
                   className={`icon__link__container ${
                     activeLink === list?.title.toLowerCase()
                       ? "menu__item__active"
@@ -125,13 +127,14 @@ const NavigationBar = ({ className, toggleMenu }) => {
           </>
         )}
         <span className="menu__text">
-          <span className="copyright">&#169; </span>2020 Developer:
+          <span className="copyright">&#169; </span>
+          2020 Developer:
           <a
             href="https://ndhlovu.com"
             target="_blank"
             rel="noopener noreferrer"
           >
-            ndhlovu.com
+            NDHLOVU.COM
           </a>
         </span>
       </ul>
@@ -139,8 +142,11 @@ const NavigationBar = ({ className, toggleMenu }) => {
   );
 };
 
+NavigationBar.defaultProps = {
+  toggleMenu: () => {},
+};
+
 NavigationBar.propTypes = {
-  tasks: PropTypes.array,
   className: PropTypes.string.isRequired,
   toggleMenu: PropTypes.func,
 };

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
@@ -15,7 +16,7 @@ export default function Routes() {
     <Switch>
       <ProtectedRoute
         path="/"
-        exact={true}
+        exact
         component={(props) => <HomeContainer {...props} />}
       />
 

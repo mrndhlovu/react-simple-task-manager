@@ -1,15 +1,14 @@
-import React, { useState, useMemo, useCallback } from "react";
+/* eslint-disable react/jsx-props-no-spreading */
+import React, { useState, useCallback, useEffect } from "react";
 
 import Alert from "@material-ui/lab/Alert";
-
-import { useEffect } from "react";
 
 const withAlert = (WrappedComponent) => (props) => {
   const [message, setMessage] = useState(undefined);
 
   useEffect(() => {
     setTimeout(() => {
-      message && setMessage(undefined);
+      setMessage(undefined);
     }, 3000);
   }, [message]);
 

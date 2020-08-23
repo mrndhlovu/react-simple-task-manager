@@ -9,6 +9,7 @@ const HomeContainer = () => {
 
   const TODOS = tasks && tasks.filter((task) => task.status === "todo");
   const COMPLETED = tasks && tasks.filter((task) => task.status === "complete");
+  // eslint-disable-next-line operator-linebreak
   const INCOMPLETES =
     tasks && tasks.filter((task) => task.status === "incomplete");
 

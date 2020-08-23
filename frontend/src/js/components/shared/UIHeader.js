@@ -5,6 +5,10 @@ const UIHeader = ({ content, className = "content__header" }) => (
   <h1 className={`${className}`}>{content}</h1>
 );
 
+UIHeader.defaultProps = {
+  className: "content__header",
+};
+
 UIHeader.propTypes = {
   content: PropTypes.string.isRequired,
   className: PropTypes.string,

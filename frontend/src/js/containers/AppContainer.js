@@ -1,5 +1,7 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from "react";
 import update from "immutability-helper";
+import PropTypes from "prop-types";
 
 import { useHistory, useLocation } from "react-router";
 
@@ -45,6 +47,15 @@ const AppContainer = ({ children, notify }) => {
 
   const [isLoading, setIsLoading] = useState(true);
 
+  const authListener = (user) => {
+    setUserInfo({
+      user,
+      authenticated: user?.firstName !== undefined,
+    });
+
+    setIsLoading(false);
+  };
+
   const logoutHandler = async () => {
     await requestLogout()
       .then(() => authListener())
@@ -82,7 +93,7 @@ const AppContainer = ({ children, notify }) => {
         history.push(`/${res.data._id}/lists`);
         notify("List created");
       })
-      .catch((err) => {
+      .catch(() => {
         notify("Failed to create List!");
       });
   };
@@ -90,11 +101,11 @@ const AppContainer = ({ children, notify }) => {
   const deleteTaskHandler = async (taskId, callback) => {
     await requestDeleteTask(taskId)
       .then((res) => {
-        callback && callback(res.data);
+        if (callback) callback(res.data);
         notify("Task deleted!");
       })
       .catch((err) => {
-        callback && callback(undefined, err.message);
+        if (callback) callback(undefined, err.message);
         notify("Failed to delete Task!");
       });
   };
@@ -102,11 +113,11 @@ const AppContainer = ({ children, notify }) => {
   const deleteListHandler = async (listId, callback) => {
     await requestDeleteList(listId)
       .then((res) => {
-        callback && callback(res.data);
+        if (callback) callback(res.data);
         notify("List deleted!");
       })
       .catch((err) => {
-        callback && callback(undefined, err.message);
+        if (callback) callback(undefined, err.message);
         notify("Failed to delete List!");
       });
   };
@@ -119,7 +130,7 @@ const AppContainer = ({ children, notify }) => {
           $push: [res.data],
         });
         setTasks(updatedTasks);
-        callback && callback();
+        if (callback) callback();
       })
       .catch(() => {
         notify("Failed to create a task!");
@@ -134,15 +145,15 @@ const AppContainer = ({ children, notify }) => {
         });
 
         setTasks(updatedTasks);
-        callback && callback();
+        if (callback) callback();
         notify("Task updated!");
       })
-      .catch((err) => {
+      .catch(() => {
         notify("Failed to update a task!");
       });
   };
 
-  const deleteAccountHandler = async (data) => {
+  const deleteAccountHandler = async () => {
     await requestDeleteAccount()
       .then(() => {
         history.push("/login");
@@ -170,22 +181,13 @@ const AppContainer = ({ children, notify }) => {
       });
   };
 
-  const authListener = (user) => {
-    setUserInfo({
-      user,
-      authenticated: user?.firstName !== undefined,
-    });
-
-    setIsLoading(false);
-  };
-
   const taskActionHandler = (action, task) => {
     const taskIndex = tasks.indexOf(task);
     const body = getValidUpdateFields(task, EDITABLE_TASK_FIELDS);
 
     switch (action) {
       case "delete":
-        return deleteTaskHandler(task._id, (err) => {
+        return deleteTaskHandler(task._id, () => {
           const updatedTasks = update(tasks, {
             $splice: [[taskIndex, 1]],
           });
@@ -209,7 +211,7 @@ const AppContainer = ({ children, notify }) => {
           taskIndex
         );
       default:
-        break;
+        return null;
     }
   };
 
@@ -288,7 +290,7 @@ const AppContainer = ({ children, notify }) => {
 
   return (
     <MainContext.Provider value={CONTEXT}>
-      <div data-test-id="appContainer" className="app__container">
+      <div data-test-id="app-container" className="app__container">
         <NavBar />
         <div className="content__container">
           <div className="header__container">
@@ -299,6 +301,14 @@ const AppContainer = ({ children, notify }) => {
       </div>
     </MainContext.Provider>
   );
+};
+
+AppContainer.propTypes = {
+  notify: PropTypes.func.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
 };
 
 export default withAlert(AppContainer);

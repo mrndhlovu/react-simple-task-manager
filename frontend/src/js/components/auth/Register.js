@@ -40,12 +40,14 @@ const Register = () => {
           <UIInput
             id="outlined-search"
             label="First Name"
+            placeholder="First Name"
             type="text"
             handleChange={(e) => handleChange("lastName", e)}
           />
           <UIInput
             id="outlined-search"
             label="Last Name"
+            placeholder="Last Name"
             type="text"
             handleChange={(e) => handleChange("firstName", e)}
           />
@@ -54,6 +56,7 @@ const Register = () => {
           <UIInput
             id="outlined-search"
             label="Email Address"
+            placeholder="Email Address"
             type="email"
             handleChange={(e) => handleChange("email", e)}
           />
@@ -61,6 +64,7 @@ const Register = () => {
           <UIInput
             id="outlined-search"
             label="Password"
+            placeholder="Password"
             type="password"
             handleChange={(e) => handleChange("password", e)}
           />
