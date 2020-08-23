@@ -4,18 +4,14 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { Card } from "@material-ui/core";
-import {
-  CheckCircle, X, Edit2, Trash2,
-} from "react-feather";
+import { CheckCircle, X, Edit2, Trash2 } from "react-feather";
 import {
   getFormattedDateString,
   taskStylingClassName,
   capitalize,
 } from "../../utils/appUtils";
 
-const TaskItem = ({
-  title, dueDate, editTaskHandler, status, list,
-}) => (
+const TaskItem = ({ title, dueDate, editTaskHandler, status, list }) => (
   <Card className="task__item">
     <div className="task__item__button__text">
       <ul className="task__action__buttons__container">
@@ -54,7 +50,7 @@ const TaskItem = ({
 );
 
 TaskItem.defaultProps = {
-  dueDate: PropTypes.string,
+  dueDate: "",
 };
 
 TaskItem.propTypes = {

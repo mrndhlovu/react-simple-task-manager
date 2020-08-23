@@ -27,7 +27,7 @@ const TasksList = ({ header, tasks }) => {
 };
 
 TasksList.defaultProps = {
-  tasks: PropTypes.arrayOf(PropTypes.object),
+  tasks: [],
 };
 
 TasksList.propTypes = {

@@ -6,7 +6,7 @@ const UIHeader = ({ content, className = "content__header" }) => (
 );
 
 UIHeader.defaultProps = {
-  className: PropTypes.string,
+  className: "content__header",
 };
 
 UIHeader.propTypes = {

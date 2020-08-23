@@ -26,7 +26,7 @@ const CreateItemWrapper = ({
 );
 
 CreateItemWrapper.defaultProps = {
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  className: "create",
 };
 
 CreateItemWrapper.propTypes = {

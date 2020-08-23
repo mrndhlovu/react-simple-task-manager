@@ -21,7 +21,7 @@ const LinkItem = ({ content, clickHandler, active }) => (
 );
 
 LinkItem.defaultProps = {
-  active: PropTypes.oneOf([PropTypes.string, PropTypes.func]),
+  active: "",
 };
 
 LinkItem.propTypes = {

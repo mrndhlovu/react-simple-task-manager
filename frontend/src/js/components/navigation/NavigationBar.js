@@ -2,7 +2,7 @@
 /* eslint-disable implicit-arrow-linebreak */
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import update from "immutability-helper";
 
 import { Plus, Trash2 } from "react-feather";
@@ -54,8 +54,9 @@ const NavigationBar = ({ className, toggleMenu }) => {
                     clickHandler={() =>
                       clickHandler(
                         () => history.push(`/${list._id}/lists`),
-                        list?.title,
-                      )}
+                        list?.title
+                      )
+                    }
                   />
 
                   <Trash2
@@ -73,7 +74,8 @@ const NavigationBar = ({ className, toggleMenu }) => {
                         updateListHandler(updatedLists);
 
                         if (isListPage) history.push("/");
-                      })}
+                      })
+                    }
                   />
                 </div>
               ))}
@@ -85,8 +87,9 @@ const NavigationBar = ({ className, toggleMenu }) => {
                 clickHandler={() =>
                   clickHandler(
                     () => history.push("/create-list"),
-                    "create new list",
-                  )}
+                    "create new list"
+                  )
+                }
               />
             </div>
             <div className="page__side__settings">
@@ -94,12 +97,14 @@ const NavigationBar = ({ className, toggleMenu }) => {
                 active={activeLink}
                 content="Settings"
                 clickHandler={() =>
-                  clickHandler(() => history.push("/settings"), "settings")}
+                  clickHandler(() => history.push("/settings"), "settings")
+                }
               />
               <LinkItem
                 content="Logout"
                 clickHandler={() =>
-                  clickHandler(() => logoutHandler(), "logout")}
+                  clickHandler(() => logoutHandler(), "logout")
+                }
               />
             </div>
           </>
@@ -109,13 +114,15 @@ const NavigationBar = ({ className, toggleMenu }) => {
               active={activeLink}
               content="Login"
               clickHandler={() =>
-                clickHandler(() => history.push("/login"), "login")}
+                clickHandler(() => history.push("/login"), "login")
+              }
             />
             <LinkItem
               content="Register"
               active={activeLink}
               clickHandler={() =>
-                clickHandler(() => history.push("/register"), "register")}
+                clickHandler(() => history.push("/register"), "register")
+              }
             />
           </>
         )}
@@ -127,7 +134,7 @@ const NavigationBar = ({ className, toggleMenu }) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            ndhlovu.com
+            NDHLOVU.COM
           </a>
         </span>
       </ul>
@@ -136,7 +143,7 @@ const NavigationBar = ({ className, toggleMenu }) => {
 };
 
 NavigationBar.defaultProps = {
-  toggleMenu: PropTypes.func,
+  toggleMenu: () => {},
 };
 
 NavigationBar.propTypes = {

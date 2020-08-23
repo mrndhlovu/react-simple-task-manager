@@ -33,10 +33,10 @@ const UIInput = ({
 );
 
 UIInput.defaultProps = {
-  id: PropTypes.string,
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-  placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  id: "ui-input",
+  className: "input",
+  defaultValue: "",
+  placeholder: "",
 };
 
 UIInput.propTypes = {
