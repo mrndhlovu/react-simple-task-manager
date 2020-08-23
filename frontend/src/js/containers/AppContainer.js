@@ -202,13 +202,13 @@ const AppContainer = ({ children, notify }) => {
             status: task.status === "incomplete" ? "todo" : "incomplete",
           },
           task._id,
-          taskIndex,
+          taskIndex
         );
       case "complete":
         return updatedTaskHandler(
           { ...body, status: task.status === "complete" ? "todo" : "complete" },
           task._id,
-          taskIndex,
+          taskIndex
         );
       default:
         return null;
@@ -290,7 +290,7 @@ const AppContainer = ({ children, notify }) => {
 
   return (
     <MainContext.Provider value={CONTEXT}>
-      <div data-test-id="appContainer" className="app__container">
+      <div data-test-id="app-container" className="app__container">
         <NavBar />
         <div className="content__container">
           <div className="header__container">
