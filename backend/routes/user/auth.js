@@ -49,14 +49,14 @@ router.patch("/update-user", auth, async (req, res, next) => {
   userService
     .updateUser(req, res)
     .then((user) => res.status(200).send(user))
-    .catch(() => next(STRINGS.auth.deleteAccountFail));
+    .catch((error) => next(error.message));
 });
 
 router.delete("/delete-account", auth, async (req, res, next) => {
   userService
     .deleteAccount(req, res)
     .then(() => res.status(200).send())
-    .catch(() => next(STRINGS.auth.deleteAccountFail));
+    .catch((error) => next(error));
 });
 
 module.exports = router;

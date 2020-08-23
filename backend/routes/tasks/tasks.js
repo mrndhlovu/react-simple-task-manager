@@ -26,7 +26,7 @@ router.get("/all", auth, async (req, res) => {
   try {
     const tasks = await Task.find({ owner: req.user._id });
 
-    res.send(tasks);
+    res.status(200).send(tasks);
   } catch (error) {
     res.status(400).send(error.message);
   }
@@ -34,6 +34,7 @@ router.get("/all", auth, async (req, res) => {
 
 router.get("/id/:taskId", auth, async (req, res) => {
   const _id = req.params.taskId;
+
   const task = await Task.findOne({ _id, owner: req.user._id });
 
   try {
@@ -95,7 +96,7 @@ router.post("/create-list", auth, async (req, res) => {
 
   try {
     await list.save();
-    res.send(list);
+    res.status(201).send(list);
   } catch (error) {
     res.status(400).send(error.message);
   }
@@ -140,8 +141,8 @@ router.delete("/id/:listId/delete-list", auth, async (req, res) => {
   }
 });
 
-router.patch("/id/:taskId/update-list", auth, async (req, res) => {
-  const _id = req.params.taskId;
+router.patch("/id/:listId/update-list", auth, async (req, res) => {
+  const _id = req.params.listId;
 
   const list = await List.findOne({ _id, owner: req.user._id });
 
