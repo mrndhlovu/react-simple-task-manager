@@ -24,11 +24,20 @@ body {
   padding: 15px;
   overflow-y: auto;
   position: relative;
-  height: 100%;
+  height: 92vh;
 }
 
 .content__wrapper {
   margin-top: $navHeight + 6%;
+}
+.loading__spinner__container {
+  height: 55vh;
+  width: 100%;
+  @include flexCenter(row);
+
+  & > div > svg {
+    color: $primaryColor;
+  }
 }
 
 .delete__account__action {

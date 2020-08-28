@@ -19,7 +19,6 @@ const Routes = () => {
       <ProtectedRoute path="/lists/:listId" component={List} />
       <ProtectedRoute path="/edit-task/:taskId" component={EditTask} />
       <ProtectedRoute path="/settings" component={Settings} />
-      <ProtectedRoute path="/*" component={HomeContainer} />
 
       <Route path="/register" render={(props) => <Register {...props} />} />
       <Route path="/login" render={(props) => <Login {...props} />} />

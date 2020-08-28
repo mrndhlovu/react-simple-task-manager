@@ -27,14 +27,20 @@
   }
 }
 
-.menu__text > a {
-  @include hoverTransition(color);
-  text-decoration: none;
-  color: inherit;
-  padding: 0 2px;
+.menu__text {
+  @include flexCenter(column);
+  padding-top: 15px;
+  font-size: 10px;
 
-  &:hover {
-    color: $grey;
+  & > a {
+    @include hoverTransition(color);
+    text-decoration: none;
+    color: inherit;
+    padding: 0 2px;
+
+    &:hover {
+      color: $grey;
+    }
   }
 }
 
@@ -48,7 +54,7 @@
   height: 100% - $navHeight;
   width: 100vw;
   background: $white;
-  top: $navHeight - 4%;
+  top: $navHeight - 2%;
   z-index: 100;
 
   &.mobile__menu::before {

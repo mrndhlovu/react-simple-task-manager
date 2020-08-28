@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import update from "immutability-helper";
 import PropTypes from "prop-types";
 
@@ -48,12 +48,14 @@ const AppContainer = ({ children, notify }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const authListener = (user) => {
-    setUserInfo({
-      user,
-      authenticated: user?.firstName !== undefined,
-    });
+    setIsLoading((isLoading) => !isLoading);
+    if (!user) return setUserInfo(INITIAL_STATE);
 
-    setIsLoading(false);
+    setUserInfo({
+      ...INITIAL_STATE,
+      user,
+      authenticated: true,
+    });
   };
 
   const logoutHandler = async () => {
@@ -257,8 +259,8 @@ const AppContainer = ({ children, notify }) => {
           setLists(res.data.lists);
         })
         .catch((error) => {
-          notify(error?.response?.data.message);
           authListener();
+          notify(error?.response?.data.message);
         });
     };
 
@@ -267,7 +269,6 @@ const AppContainer = ({ children, notify }) => {
 
   const CONTEXT = {
     auth: userInfo,
-    authListener,
     createListHandler,
     createTaskHandler,
     deleteAccountHandler,

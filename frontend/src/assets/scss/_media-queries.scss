@@ -33,6 +33,7 @@
     width: 100% - $sideWidth;
     position: absolute;
     padding: $contentPadding;
+    height: 100%;
 
     .header__container {
       @include flexLeftCenter(column);

@@ -11,7 +11,8 @@ const NavBar = () => {
 
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
-  const toggleMenu = () => setShowMobileMenu(!showMobileMenu);
+  const toggleMenu = () =>
+    setShowMobileMenu((showMobileMenu) => !showMobileMenu);
 
   return (
     <>

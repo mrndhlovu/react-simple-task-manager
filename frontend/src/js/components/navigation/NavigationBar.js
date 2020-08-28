@@ -1,6 +1,6 @@
 /* eslint-disable operator-linebreak */
 /* eslint-disable implicit-arrow-linebreak */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
 import update from "immutability-helper";
@@ -22,11 +22,20 @@ const NavigationBar = ({ className, toggleMenu }) => {
     updateListHandler,
   } = useMainContent();
 
+  // const isListDetailPage = history.location.pathname.split("/");
+  // console.log("NavigationBar -> isListDetailPage", isListDetailPage);
   const clickHandler = (callback, active) => {
     setActiveLink(active.toLowerCase());
     if (toggleMenu) toggleMenu();
     return callback();
   };
+
+  // useEffect(() => {
+  //   effect;
+  //   return () => {
+  //     cleanup;
+  //   };
+  // }, [input]);
 
   return (
     <div className={`${className} navigation`}>

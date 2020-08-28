@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import { Route, Redirect, useLocation } from "react-router-dom";
 
 import { useMainContent } from "../../utils/hookUtils";
+import UILoadingSpinner from "../shared/UILoadingSpinner";
 
 // eslint-disable-next-line react/prop-types
 const ProtectedRoute = ({ component: ComposedComponent, ...rest }) => {
@@ -15,7 +16,7 @@ const ProtectedRoute = ({ component: ComposedComponent, ...rest }) => {
   class Authentication extends Component {
     handleRender(props) {
       if (!auth.authenticated) {
-        if (isLoading) return <div>Loading...</div>;
+        if (isLoading) return <UILoadingSpinner />;
         return (
           <Redirect
             to={{

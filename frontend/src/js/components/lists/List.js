@@ -5,10 +5,12 @@ import { requestList } from "../../apis/tasksApiRequests";
 import { useMainContent } from "../../utils/hookUtils";
 import CreateTask from "../shared/CreateTask";
 import TasksList from "../tasks/TasksList";
+import UILoadingSpinner from "../shared/UILoadingSpinner";
 
 const List = () => {
   const history = useHistory();
   const { createTaskHandler, tasks } = useMainContent();
+  const [isLoading, setIsLoading] = useState(true);
   const { listId } = useParams();
 
   const [list, setList] = useState(undefined);
@@ -38,8 +40,10 @@ const List = () => {
       await requestList(listId)
         .then((res) => {
           setList(res.data);
+          setIsLoading((isLoading) => !isLoading);
         })
-        .catch(() => {
+        .catch(async () => {
+          setIsLoading((isLoading) => !isLoading);
           history.push("/");
         });
     };
@@ -56,12 +60,19 @@ const List = () => {
         }
         list={listId}
       />
+      {isLoading ? (
+        <UILoadingSpinner />
+      ) : (
+        <>
+          {hasTodos && <TasksList header="To Do" tasks={TODOS} />}
 
-      {hasTodos && <TasksList header="To Do" tasks={TODOS} />}
+          {hasInCompleted && (
+            <TasksList header="In Complete" tasks={INCOMPLETES} />
+          )}
 
-      {hasInCompleted && <TasksList header="In Complete" tasks={INCOMPLETES} />}
-
-      {hasCompleted && <TasksList header="Complete" tasks={COMPLETED} />}
+          {hasCompleted && <TasksList header="Complete" tasks={COMPLETED} />}
+        </>
+      )}
     </>
   );
 };
