@@ -5,7 +5,7 @@ const webpack = require("webpack");
 
 module.exports = {
   entry: {
-    main: ["./src/index.js", "./src/assets/scss/styles.scss"],
+    main: ["./src/index.js"],
   },
   output: {
     path: path.join(__dirname, "build"),

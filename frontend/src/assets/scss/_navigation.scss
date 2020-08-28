@@ -10,14 +10,13 @@
   .logo {
     @include flexCenter(column);
     cursor: pointer;
-    font-family: $roboto;
 
     .logo__text {
       color: $primaryColor;
-      font-weight: $bold;
-      margin: 0;
       font-size: 25px;
+      font-weight: $bold;
       letter-spacing: 3px;
+      margin: 0;
     }
   }
 

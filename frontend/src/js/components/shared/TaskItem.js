@@ -11,7 +11,14 @@ import {
   capitalize,
 } from "../../utils/appUtils";
 
-const TaskItem = ({ title, dueDate, editTaskHandler, status, list }) => (
+const TaskItem = ({
+  title,
+  dueDate,
+  editTaskHandler,
+  status,
+  list,
+  onListClickHandler,
+}) => (
   <Card className="task__item">
     <div className="task__item__button__text">
       <ul className="task__action__buttons__container">
@@ -40,7 +47,9 @@ const TaskItem = ({ title, dueDate, editTaskHandler, status, list }) => (
       </ul>
       <div className="task__item__description">
         <p className="task__title">{capitalize(title)}</p>
-        <p className="task__list">{capitalize(list)}</p>
+        <p className="task__list" onClick={onListClickHandler}>
+          {capitalize(list)}
+        </p>
       </div>
     </div>
     <p className={taskStylingClassName(status, dueDate)}>
@@ -51,10 +60,12 @@ const TaskItem = ({ title, dueDate, editTaskHandler, status, list }) => (
 
 TaskItem.defaultProps = {
   dueDate: "",
+  onListClickHandler: () => {},
 };
 
 TaskItem.propTypes = {
   title: PropTypes.string.isRequired,
+  onListClickHandler: PropTypes.func,
   dueDate: PropTypes.string,
   status: PropTypes.string.isRequired,
   list: PropTypes.string.isRequired,

@@ -68,6 +68,8 @@
 .task__list {
   font-weight: $bold;
   color: $darkGrey;
+  cursor: pointer;
+  @include hover-text($grey);
 }
 
 .task__title {

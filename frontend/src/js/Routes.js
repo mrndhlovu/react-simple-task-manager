@@ -11,39 +11,20 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 
-export default function Routes() {
+const Routes = () => {
   return (
     <Switch>
-      <ProtectedRoute
-        path="/"
-        exact
-        component={(props) => <HomeContainer {...props} />}
-      />
-
-      <ProtectedRoute
-        key="/create-list"
-        path="/create-list"
-        component={(props) => <CreateList {...props} />}
-      />
-      <ProtectedRoute
-        ket="/list-item"
-        path="/:listId/lists"
-        component={(props) => <List {...props} />}
-      />
-      <ProtectedRoute
-        key="/edit-task"
-        path="/:taskId/edit-task"
-        component={(props) => <EditTask {...props} />}
-      />
-
-      <ProtectedRoute
-        key="/settings"
-        path="/settings"
-        component={(props) => <Settings {...props} />}
-      />
+      <ProtectedRoute path="/" exact component={HomeContainer} />
+      <ProtectedRoute path="/create-list" component={CreateList} />
+      <ProtectedRoute path="/lists/:listId" component={List} />
+      <ProtectedRoute path="/edit-task/:taskId" component={EditTask} />
+      <ProtectedRoute path="/settings" component={Settings} />
+      <ProtectedRoute path="/*" component={HomeContainer} />
 
       <Route path="/register" render={(props) => <Register {...props} />} />
       <Route path="/login" render={(props) => <Login {...props} />} />
     </Switch>
   );
-}
+};
+
+export default Routes;

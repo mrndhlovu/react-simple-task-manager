@@ -11,15 +11,16 @@ import UIInput from "./UIInput";
 const INITIAL_STATE = {
   title: undefined,
   dueDate: undefined,
+  list: undefined,
 };
 
-const CreateTask = ({ task, buttonText, handleButtonClick }) => {
+const CreateTask = ({ task, buttonText, handleButtonClick, list }) => {
   const [newTask, setNewTask] = useState(task || INITIAL_STATE);
 
   const inputId = buttonText.toLowerCase().split(" ").join("-");
 
   const handleChange = (field, e) => {
-    setNewTask({ ...newTask, [field]: e.target.value });
+    setNewTask({ ...newTask, [field]: e.target.value, list });
   };
 
   return (

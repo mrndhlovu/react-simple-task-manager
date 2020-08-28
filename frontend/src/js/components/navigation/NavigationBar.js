@@ -53,7 +53,7 @@ const NavigationBar = ({ className, toggleMenu }) => {
                     content={list?.title}
                     clickHandler={() =>
                       clickHandler(
-                        () => history.push(`/${list._id}/lists`),
+                        () => history.push(`/lists/${list._id}`),
                         list?.title
                       )
                     }
@@ -128,7 +128,7 @@ const NavigationBar = ({ className, toggleMenu }) => {
         )}
         <span className="menu__text">
           <span className="copyright">&#169; </span>
-          2020 Developer:
+          2020 DEVELOPED BY:
           <a
             href="https://ndhlovu.com"
             target="_blank"

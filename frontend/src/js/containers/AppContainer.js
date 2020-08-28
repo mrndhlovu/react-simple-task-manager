@@ -43,7 +43,7 @@ const AppContainer = ({ children, notify }) => {
   const [lists, setLists] = useState([]);
   const [tasks, setTasks] = useState([]);
   const [header, setHeader] = useState("Create New Task");
-  const paramPath = location.pathname.split("/");
+  const pathParams = location.pathname.split("/");
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -194,7 +194,7 @@ const AppContainer = ({ children, notify }) => {
           setTasks(updatedTasks);
         });
       case "edit":
-        return history.push(`/${task._id}/edit-task`);
+        return history.push(`/edit-task/${task._id}`);
       case "incomplete":
         return updatedTaskHandler(
           {
@@ -232,7 +232,7 @@ const AppContainer = ({ children, notify }) => {
   const updateListHandler = (newList) => setLists(newList);
 
   useEffect(() => {
-    switch (paramPath[1]) {
+    switch (pathParams[1]) {
       case "settings":
         return setHeader("Account Details");
       case "register":
@@ -246,7 +246,7 @@ const AppContainer = ({ children, notify }) => {
       default:
         return setHeader("Create New Task");
     }
-  }, [paramPath]);
+  }, [pathParams]);
 
   useEffect(() => {
     const getUserInfo = async () => {

@@ -43,7 +43,9 @@ body {
     color: $darkGrey;
     font-weight: $bold;
     cursor: pointer;
+    outline: 0;
     font-family: $montserrat, "sans-serif";
+    @include hover-text($grey);
   }
 }
 
