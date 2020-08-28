@@ -92,7 +92,7 @@ const AppContainer = ({ children, notify }) => {
           $push: [res.data],
         });
         setLists(updatedLists);
-        history.push(`/${res.data._id}/lists`);
+        history.push(`/lists/${res.data._id}`);
         notify("List created");
       })
       .catch(() => {
