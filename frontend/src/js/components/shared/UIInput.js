@@ -28,6 +28,7 @@ const UIInput = ({
       defaultValue={defaultValue}
       placeholder={placeholder}
       fullWidth
+      label={label}
     />
   </div>
 );

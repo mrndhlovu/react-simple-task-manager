@@ -5,14 +5,14 @@ import { useMainContent } from "../../utils/hookUtils";
 import CreateItemWrapper from "../shared/CreateItemWrapper";
 import UIInput from "../shared/UIInput";
 
-const INITIAL_STATE = {
-  email: undefined,
-  password: undefined,
-  firstName: undefined,
-  lastName: undefined,
-};
-
 const Register = () => {
+  const INITIAL_STATE = {
+    email: undefined,
+    password: undefined,
+    firstName: undefined,
+    lastName: undefined,
+  };
+
   const location = useLocation();
   const { from } = location.state || { from: { pathname: "/" } };
 
@@ -34,6 +34,7 @@ const Register = () => {
       header="Register"
       clickHandler={() => registrationHandler(credentials)}
       buttonText="Register"
+      dataTestId="registration-form"
     >
       <div className="setting__registration__container">
         <div>

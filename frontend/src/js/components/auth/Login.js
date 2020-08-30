@@ -5,12 +5,12 @@ import { useMainContent } from "../../utils/hookUtils";
 import CreateItemWrapper from "../shared/CreateItemWrapper";
 import UIInput from "../shared/UIInput";
 
-const INITIAL_STATE = {
-  email: undefined,
-  password: undefined,
-};
-
 const Login = () => {
+  const INITIAL_STATE = {
+    email: undefined,
+    password: undefined,
+  };
+
   const {
     loginHandler,
     auth: { authenticated },
@@ -27,6 +27,7 @@ const Login = () => {
 
   return (
     <CreateItemWrapper
+      dataTestId="login-form"
       header="Login"
       clickHandler={() => loginHandler(credentials)}
       buttonText="Login"

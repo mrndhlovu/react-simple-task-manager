@@ -13,4 +13,11 @@ export const mockWindowObject = (pathname) => {
   });
 };
 
+export const MOCK_LOCATION_PROPS = {
+  pathname: "/",
+  hash: "",
+  search: "",
+  state: "",
+};
+
 export const emptyFunction = () => {};

@@ -1,20 +1,14 @@
 import React from "react";
-import { shallow } from "enzyme";
 import App from "../../../js/App";
 
-describe("App", () => {
-  let container;
+import { render } from "@testing-library/react";
 
-  const init = () => {
-    container = shallow(<App />);
-  };
+describe("App Container", () => {
+  it("should render the app content.", () => {
+    const { getByTestId, getByText } = render(<App />);
 
-  beforeEach(() => {
-    init();
-  });
-
-  it("should render the app content", () => {
-    const { children } = container.props();
-    expect(children).toBeDefined();
+    getByText(/Checklists/);
+    getByTestId(/app-container/);
+    getByTestId(/navigation-bar/);
   });
 });

@@ -9,8 +9,9 @@ const CreateItemWrapper = ({
   buttonText,
   clickHandler,
   className = "create",
+  dataTestId,
 }) => (
-  <div className="create__item__container">
+  <div data-testid={dataTestId} className="create__item__container">
     <Card className={`create__item__card ${className}`}>
       <div className="create__input__container">{children}</div>
       <Button
@@ -27,10 +28,12 @@ const CreateItemWrapper = ({
 
 CreateItemWrapper.defaultProps = {
   className: "create",
+  dataTestId: "",
 };
 
 CreateItemWrapper.propTypes = {
   buttonText: PropTypes.string.isRequired,
+  dataTestId: PropTypes.string,
   clickHandler: PropTypes.func.isRequired,
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   children: PropTypes.oneOfType([

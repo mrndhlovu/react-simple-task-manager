@@ -291,7 +291,7 @@ const AppContainer = ({ children, notify }) => {
 
   return (
     <MainContext.Provider value={CONTEXT}>
-      <div data-test-id="app-container" className="app__container">
+      <div data-testid="app-container" className="app__container">
         <NavBar />
         <div className="content__container">
           <div className="header__container">

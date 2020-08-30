@@ -16,7 +16,7 @@ const NavBar = () => {
 
   return (
     <>
-      <header className="nav__bar">
+      <header data-testid="navigation-bar" className="nav__bar">
         <Logo history={history} />
         <div className="mobile__icon_container">
           {showMobileMenu ? (
