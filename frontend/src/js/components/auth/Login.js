@@ -28,7 +28,6 @@ const Login = () => {
   return (
     <CreateItemWrapper
       dataTestId="login-form"
-      header="Login"
       clickHandler={() => loginHandler(credentials)}
       buttonText="Login"
     >

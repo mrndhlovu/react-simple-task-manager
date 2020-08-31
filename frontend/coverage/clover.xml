@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1598827063342" clover="3.2.0">
-  <project timestamp="1598827063342" name="All files">
-    <metrics statements="174" coveredstatements="79" conditionals="48" coveredconditionals="11" methods="64" coveredmethods="17" elements="286" coveredelements="107" complexity="0" loc="174" ncloc="174" packages="7" files="9" classes="9"/>
-    <package name="js">
-      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-      <file name="App.js" path="/home/ndhlovu/Documents/Dev/Javascript/task-manager/frontend/src/js/App.js">
-        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="9" count="1" type="stmt"/>
-        <line num="10" count="1" type="stmt"/>
-      </file>
-    </package>
+<coverage generated="1598832148826" clover="3.2.0">
+  <project timestamp="1598832148826" name="All files">
+    <metrics statements="54" coveredstatements="47" conditionals="12" coveredconditionals="8" methods="24" coveredmethods="18" elements="90" coveredelements="73" complexity="0" loc="54" ncloc="54" packages="4" files="6" classes="6"/>
     <package name="js.components.auth">
-      <metrics statements="28" coveredstatements="25" conditionals="8" coveredconditionals="6" methods="12" coveredmethods="9"/>
+      <metrics statements="40" coveredstatements="37" conditionals="8" coveredconditionals="6" methods="20" coveredmethods="17"/>
       <file name="Login.js" path="/home/ndhlovu/Documents/Dev/Javascript/task-manager/frontend/src/js/components/auth/Login.js">
         <metrics statements="13" coveredstatements="13" conditionals="4" coveredconditionals="3" methods="5" coveredmethods="5"/>
         <line num="8" count="2" type="stmt"/>
@@ -24,9 +16,9 @@
         <line num="24" count="2" type="stmt"/>
         <line num="26" count="4" type="cond" truecount="1" falsecount="1"/>
         <line num="28" count="4" type="stmt"/>
-        <line num="32" count="1" type="stmt"/>
-        <line num="40" count="1" type="stmt"/>
-        <line num="48" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
       </file>
       <file name="Register.js" path="/home/ndhlovu/Documents/Dev/Javascript/task-manager/frontend/src/js/components/auth/Register.js">
         <metrics statements="15" coveredstatements="12" conditionals="4" coveredconditionals="3" methods="7" coveredmethods="4"/>
@@ -40,174 +32,44 @@
         <line num="27" count="4" type="stmt"/>
         <line num="30" count="6" type="cond" truecount="1" falsecount="1"/>
         <line num="32" count="6" type="stmt"/>
-        <line num="35" count="1" type="stmt"/>
-        <line num="46" count="4" type="stmt"/>
-        <line num="53" count="0" type="stmt"/>
-        <line num="62" count="0" type="stmt"/>
-        <line num="70" count="0" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="45" count="4" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="69" count="0" type="stmt"/>
       </file>
-    </package>
-    <package name="js.components.navigation">
-      <metrics statements="8" coveredstatements="5" conditionals="4" coveredconditionals="2" methods="5" coveredmethods="1"/>
-      <file name="NavBar.js" path="/home/ndhlovu/Documents/Dev/Javascript/task-manager/frontend/src/js/components/navigation/NavBar.js">
-        <metrics statements="8" coveredstatements="5" conditionals="4" coveredconditionals="2" methods="5" coveredmethods="1"/>
-        <line num="9" count="1" type="stmt"/>
-        <line num="10" count="1" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="14" count="1" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="17" count="1" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
+      <file name="Settings.js" path="/home/ndhlovu/Documents/Dev/Javascript/task-manager/frontend/src/js/components/auth/Settings.js">
+        <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="8" coveredmethods="8"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="12" count="6" type="stmt"/>
+        <line num="14" count="6" type="stmt"/>
+        <line num="16" count="6" type="stmt"/>
+        <line num="17" count="4" type="stmt"/>
+        <line num="20" count="6" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="52" count="1" type="stmt"/>
+        <line num="60" count="1" type="stmt"/>
+        <line num="65" count="1" type="stmt"/>
       </file>
     </package>
     <package name="js.components.shared">
-      <metrics statements="8" coveredstatements="8" conditionals="5" coveredconditionals="2" methods="2" coveredmethods="2"/>
-      <file name="CreateItemWrapper.js" path="/home/ndhlovu/Documents/Dev/Javascript/task-manager/frontend/src/js/components/shared/CreateItemWrapper.js">
-        <metrics statements="4" coveredstatements="4" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="7" count="3" type="stmt"/>
-        <line num="14" count="10" type="stmt"/>
-        <line num="29" count="3" type="stmt"/>
-        <line num="34" count="3" type="stmt"/>
-      </file>
+      <metrics statements="4" coveredstatements="4" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
       <file name="UIInput.js" path="/home/ndhlovu/Documents/Dev/Javascript/task-manager/frontend/src/js/components/shared/UIInput.js">
         <metrics statements="4" coveredstatements="4" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
-        <line num="7" count="3" type="stmt"/>
-        <line num="16" count="32" type="stmt"/>
-        <line num="36" count="3" type="stmt"/>
-        <line num="43" count="3" type="stmt"/>
-      </file>
-    </package>
-    <package name="js.containers">
-      <metrics statements="118" coveredstatements="33" conditionals="31" coveredconditionals="1" methods="41" coveredmethods="4"/>
-      <file name="AppContainer.js" path="/home/ndhlovu/Documents/Dev/Javascript/task-manager/frontend/src/js/containers/AppContainer.js">
-        <metrics statements="118" coveredstatements="33" conditionals="31" coveredconditionals="1" methods="41" coveredmethods="4"/>
-        <line num="32" count="1" type="stmt"/>
-        <line num="37" count="1" type="stmt"/>
-        <line num="38" count="1" type="stmt"/>
-        <line num="39" count="1" type="stmt"/>
-        <line num="41" count="1" type="stmt"/>
-        <line num="43" count="1" type="stmt"/>
-        <line num="44" count="1" type="stmt"/>
-        <line num="45" count="1" type="stmt"/>
-        <line num="46" count="1" type="stmt"/>
-        <line num="48" count="1" type="stmt"/>
-        <line num="50" count="1" type="stmt"/>
-        <line num="51" count="0" type="stmt"/>
-        <line num="52" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="54" count="0" type="stmt"/>
-        <line num="61" count="1" type="stmt"/>
-        <line num="62" count="0" type="stmt"/>
-        <line num="63" count="0" type="stmt"/>
-        <line num="65" count="0" type="stmt"/>
-        <line num="66" count="0" type="stmt"/>
-        <line num="70" count="1" type="stmt"/>
-        <line num="71" count="0" type="stmt"/>
-        <line num="73" count="0" type="stmt"/>
-        <line num="75" count="0" type="stmt"/>
-        <line num="77" count="0" type="stmt"/>
-        <line num="78" count="0" type="stmt"/>
-        <line num="79" count="0" type="stmt"/>
-        <line num="80" count="0" type="stmt"/>
-        <line num="83" count="0" type="stmt"/>
-        <line num="84" count="0" type="stmt"/>
-        <line num="88" count="1" type="stmt"/>
-        <line num="89" count="0" type="stmt"/>
-        <line num="91" count="0" type="stmt"/>
-        <line num="94" count="0" type="stmt"/>
-        <line num="95" count="0" type="stmt"/>
-        <line num="96" count="0" type="stmt"/>
-        <line num="99" count="0" type="stmt"/>
-        <line num="103" count="1" type="stmt"/>
-        <line num="104" count="0" type="stmt"/>
-        <line num="106" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="107" count="0" type="stmt"/>
-        <line num="110" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="111" count="0" type="stmt"/>
-        <line num="115" count="1" type="stmt"/>
-        <line num="116" count="0" type="stmt"/>
-        <line num="118" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="119" count="0" type="stmt"/>
-        <line num="122" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="123" count="0" type="stmt"/>
-        <line num="127" count="1" type="stmt"/>
-        <line num="128" count="0" type="stmt"/>
-        <line num="130" count="0" type="stmt"/>
-        <line num="131" count="0" type="stmt"/>
-        <line num="134" count="0" type="stmt"/>
-        <line num="135" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="138" count="0" type="stmt"/>
-        <line num="142" count="1" type="stmt"/>
-        <line num="143" count="0" type="stmt"/>
-        <line num="145" count="0" type="stmt"/>
-        <line num="149" count="0" type="stmt"/>
-        <line num="150" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="151" count="0" type="stmt"/>
-        <line num="154" count="0" type="stmt"/>
-        <line num="158" count="1" type="stmt"/>
-        <line num="159" count="0" type="stmt"/>
-        <line num="161" count="0" type="stmt"/>
-        <line num="162" count="0" type="stmt"/>
-        <line num="163" count="0" type="stmt"/>
-        <line num="166" count="0" type="stmt"/>
-        <line num="167" count="0" type="stmt"/>
-        <line num="171" count="1" type="stmt"/>
-        <line num="172" count="0" type="stmt"/>
-        <line num="174" count="0" type="stmt"/>
-        <line num="175" count="0" type="stmt"/>
-        <line num="176" count="0" type="stmt"/>
-        <line num="177" count="0" type="stmt"/>
-        <line num="178" count="0" type="stmt"/>
-        <line num="181" count="0" type="stmt"/>
-        <line num="182" count="0" type="stmt"/>
-        <line num="186" count="1" type="stmt"/>
-        <line num="187" count="0" type="stmt"/>
-        <line num="188" count="0" type="stmt"/>
-        <line num="190" count="0" type="cond" truecount="0" falsecount="5"/>
-        <line num="192" count="0" type="stmt"/>
-        <line num="193" count="0" type="stmt"/>
-        <line num="196" count="0" type="stmt"/>
-        <line num="199" count="0" type="stmt"/>
-        <line num="201" count="0" type="stmt"/>
-        <line num="210" count="0" type="stmt"/>
-        <line num="216" count="0" type="stmt"/>
-        <line num="220" count="1" type="stmt"/>
-        <line num="221" count="0" type="stmt"/>
-        <line num="223" count="0" type="stmt"/>
-        <line num="224" count="0" type="stmt"/>
-        <line num="225" count="0" type="stmt"/>
-        <line num="226" count="0" type="stmt"/>
-        <line num="229" count="0" type="stmt"/>
-        <line num="230" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="234" count="1" type="stmt"/>
-        <line num="236" count="1" type="stmt"/>
-        <line num="237" count="1" type="cond" truecount="1" falsecount="5"/>
-        <line num="239" count="0" type="stmt"/>
-        <line num="241" count="0" type="stmt"/>
-        <line num="243" count="0" type="stmt"/>
-        <line num="245" count="0" type="stmt"/>
-        <line num="247" count="0" type="stmt"/>
-        <line num="249" count="1" type="stmt"/>
-        <line num="253" count="1" type="stmt"/>
-        <line num="254" count="1" type="stmt"/>
-        <line num="255" count="1" type="stmt"/>
-        <line num="257" count="0" type="stmt"/>
-        <line num="258" count="0" type="stmt"/>
-        <line num="259" count="0" type="stmt"/>
-        <line num="262" count="0" type="stmt"/>
-        <line num="263" count="0" type="stmt"/>
-        <line num="267" count="1" type="stmt"/>
-        <line num="270" count="1" type="stmt"/>
-        <line num="292" count="1" type="stmt"/>
-        <line num="307" count="1" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
+        <line num="16" count="56" type="stmt"/>
+        <line num="37" count="4" type="stmt"/>
+        <line num="44" count="4" type="stmt"/>
       </file>
     </package>
     <package name="js.utils">
       <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="contextUtils.js" path="/home/ndhlovu/Documents/Dev/Javascript/task-manager/frontend/src/js/utils/contextUtils.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="3" count="3" type="stmt"/>
-        <line num="5" count="3" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
       </file>
     </package>
     <package name="test">

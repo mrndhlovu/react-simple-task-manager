@@ -11,8 +11,15 @@ const CONTEXT_PROPS = {
   auth: { authenticated: false },
 };
 
+let USER = {
+  firstName: "Mock Name",
+  lastName: "Mock LastName",
+  email: "testemail@testing.com",
+  password: "fakePassCode",
+};
+
 describe("RegisterPage", () => {
-  let wrapper;
+  let wrapper, firstNameInput, emailInput, passwordInput, lastNameInput;
 
   const init = () => {
     jest.spyOn(routeData, "useLocation").mockReturnValue(MOCK_LOCATION_PROPS);
@@ -39,24 +46,23 @@ describe("RegisterPage", () => {
   it("should register user.", () => {
     const { getByLabelText, getByText } = wrapper();
 
-    const firstNameInput = getByLabelText(/First Name/);
-    const lastNameInput = getByLabelText(/Last Name/);
-    const emailInput = getByLabelText(/Email Address/);
-    const passwordInput = getByLabelText(/Password/);
+    firstNameInput = getByLabelText(/First Name/);
+    lastNameInput = getByLabelText(/Last Name/);
+    emailInput = getByLabelText(/Email Address/);
+    passwordInput = getByLabelText(/Password/);
 
     fireEvent.change(firstNameInput, {
-      target: { value: "Mock Name" },
+      target: { value: USER.firstName },
     });
 
     fireEvent.change(lastNameInput, {
-      target: { value: "Mock LastName" },
+      target: { value: USER.lastName },
     });
     fireEvent.change(emailInput, {
-      target: { value: "testemail@testing.com" },
+      target: { value: USER.email },
     });
-    fireEvent.change(passwordInput, { target: { value: "fakePassCode" } });
+    fireEvent.change(passwordInput, { target: { value: USER.password } });
     fireEvent.click(getByText(/Register/));
-
     expect(CONTEXT_PROPS.registrationHandler).toHaveBeenCalledTimes(1);
   });
 });

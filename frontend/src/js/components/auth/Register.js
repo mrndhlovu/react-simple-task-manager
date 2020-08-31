@@ -31,13 +31,12 @@ const Register = () => {
 
   return (
     <CreateItemWrapper
-      header="Register"
       clickHandler={() => registrationHandler(credentials)}
       buttonText="Register"
       dataTestId="registration-form"
     >
       <div className="setting__registration__container">
-        <div>
+        <div id="registration-form">
           <UIInput
             id="outlined-search"
             label="First Name"
