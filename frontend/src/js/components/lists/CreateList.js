@@ -14,8 +14,8 @@ const CreateList = () => {
     <CreateItemWrapper
       buttonText="Create List"
       clickHandler={() => createListHandler(title)}
-      header="Create New List"
       className="create__list__form"
+      dataTestId="create-list-page"
     >
       <UIInput
         placeholder="e.g Workout"

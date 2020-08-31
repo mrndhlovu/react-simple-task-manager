@@ -22,20 +22,11 @@ const NavigationBar = ({ className, toggleMenu }) => {
     updateListHandler,
   } = useMainContent();
 
-  // const isListDetailPage = history.location.pathname.split("/");
-  // console.log("NavigationBar -> isListDetailPage", isListDetailPage);
   const clickHandler = (callback, active) => {
     setActiveLink(active.toLowerCase());
     if (toggleMenu) toggleMenu();
     return callback();
   };
-
-  // useEffect(() => {
-  //   effect;
-  //   return () => {
-  //     cleanup;
-  //   };
-  // }, [input]);
 
   return (
     <div className={`${className} navigation`}>

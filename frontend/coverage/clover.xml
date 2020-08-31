@@ -1,43 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1598832148826" clover="3.2.0">
-  <project timestamp="1598832148826" name="All files">
-    <metrics statements="54" coveredstatements="47" conditionals="12" coveredconditionals="8" methods="24" coveredmethods="18" elements="90" coveredelements="73" complexity="0" loc="54" ncloc="54" packages="4" files="6" classes="6"/>
-    <package name="js.components.auth">
-      <metrics statements="40" coveredstatements="37" conditionals="8" coveredconditionals="6" methods="20" coveredmethods="17"/>
-      <file name="Login.js" path="/home/ndhlovu/Documents/Dev/Javascript/task-manager/frontend/src/js/components/auth/Login.js">
-        <metrics statements="13" coveredstatements="13" conditionals="4" coveredconditionals="3" methods="5" coveredmethods="5"/>
-        <line num="8" count="2" type="stmt"/>
-        <line num="9" count="4" type="stmt"/>
-        <line num="17" count="4" type="stmt"/>
-        <line num="18" count="4" type="stmt"/>
-        <line num="20" count="4" type="cond" truecount="2" falsecount="0"/>
-        <line num="21" count="4" type="stmt"/>
-        <line num="23" count="4" type="stmt"/>
-        <line num="24" count="2" type="stmt"/>
-        <line num="26" count="4" type="cond" truecount="1" falsecount="1"/>
-        <line num="28" count="4" type="stmt"/>
-        <line num="31" count="1" type="stmt"/>
-        <line num="39" count="1" type="stmt"/>
-        <line num="47" count="1" type="stmt"/>
-      </file>
-      <file name="Register.js" path="/home/ndhlovu/Documents/Dev/Javascript/task-manager/frontend/src/js/components/auth/Register.js">
-        <metrics statements="15" coveredstatements="12" conditionals="4" coveredconditionals="3" methods="7" coveredmethods="4"/>
-        <line num="8" count="2" type="stmt"/>
-        <line num="9" count="6" type="stmt"/>
-        <line num="16" count="6" type="stmt"/>
-        <line num="17" count="6" type="cond" truecount="2" falsecount="0"/>
-        <line num="22" count="6" type="stmt"/>
-        <line num="24" count="6" type="stmt"/>
-        <line num="26" count="6" type="stmt"/>
-        <line num="27" count="4" type="stmt"/>
-        <line num="30" count="6" type="cond" truecount="1" falsecount="1"/>
-        <line num="32" count="6" type="stmt"/>
-        <line num="34" count="1" type="stmt"/>
-        <line num="45" count="4" type="stmt"/>
-        <line num="52" count="0" type="stmt"/>
-        <line num="61" count="0" type="stmt"/>
-        <line num="69" count="0" type="stmt"/>
-      </file>
+<coverage generated="1598861211879" clover="3.2.0">
+  <project timestamp="1598861211879" name="All files">
+    <metrics statements="40" coveredstatements="22" conditionals="10" coveredconditionals="1" methods="28" coveredmethods="9" elements="78" coveredelements="32" complexity="0" loc="40" ncloc="40" packages="3" files="3" classes="3"/>
+    <package name="components.auth">
+      <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="8" coveredmethods="8"/>
       <file name="Settings.js" path="/home/ndhlovu/Documents/Dev/Javascript/task-manager/frontend/src/js/components/auth/Settings.js">
         <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="8" coveredmethods="8"/>
         <line num="7" count="2" type="stmt"/>
@@ -54,36 +20,44 @@
         <line num="65" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="js.components.shared">
-      <metrics statements="4" coveredstatements="4" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
-      <file name="UIInput.js" path="/home/ndhlovu/Documents/Dev/Javascript/task-manager/frontend/src/js/components/shared/UIInput.js">
-        <metrics statements="4" coveredstatements="4" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
-        <line num="7" count="4" type="stmt"/>
-        <line num="16" count="56" type="stmt"/>
-        <line num="37" count="4" type="stmt"/>
-        <line num="44" count="4" type="stmt"/>
+    <package name="components.navigation">
+      <metrics statements="26" coveredstatements="8" conditionals="10" coveredconditionals="1" methods="20" coveredmethods="1"/>
+      <file name="NavigationBar.js" path="/home/ndhlovu/Documents/Dev/Javascript/task-manager/frontend/src/js/components/navigation/NavigationBar.js">
+        <metrics statements="26" coveredstatements="8" conditionals="10" coveredconditionals="1" methods="20" coveredmethods="1"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="27" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="66" count="0" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="70" count="0" type="stmt"/>
+        <line num="74" count="0" type="stmt"/>
+        <line num="76" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="88" count="0" type="stmt"/>
+        <line num="89" count="0" type="stmt"/>
+        <line num="100" count="0" type="stmt"/>
+        <line num="106" count="0" type="stmt"/>
+        <line num="117" count="0" type="stmt"/>
+        <line num="124" count="0" type="stmt"/>
+        <line num="145" count="1" type="stmt"/>
+        <line num="149" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="js.utils">
+    <package name="utils">
       <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="contextUtils.js" path="/home/ndhlovu/Documents/Dev/Javascript/task-manager/frontend/src/js/utils/contextUtils.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="3" count="4" type="stmt"/>
-        <line num="5" count="4" type="stmt"/>
-      </file>
-    </package>
-    <package name="test">
-      <metrics statements="8" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
-      <file name="utils.js" path="/home/ndhlovu/Documents/Dev/Javascript/task-manager/frontend/src/test/utils.js">
-        <metrics statements="8" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
-        <line num="1" count="2" type="stmt"/>
-        <line num="2" count="0" type="stmt"/>
-        <line num="3" count="0" type="stmt"/>
-        <line num="6" count="2" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="16" count="2" type="stmt"/>
-        <line num="23" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
       </file>
     </package>
   </project>

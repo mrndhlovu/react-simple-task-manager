@@ -29,7 +29,7 @@ const UIInput = ({
       placeholder={placeholder}
       fullWidth
       label={label}
-      InputLabelProps={{ disabled: true }}
+      InputLabelProps={{ opacity: 0, className: "label__input" }}
     />
   </div>
 );

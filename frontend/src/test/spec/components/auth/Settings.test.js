@@ -32,10 +32,6 @@ describe("SettingsPage", () => {
     init();
   });
 
-  afterEach(() => {
-    wrapper = "";
-  });
-
   it("should render settings form.", () => {
     const { getByTestId } = wrapper();
 

@@ -12,17 +12,17 @@
       font-size: 11px;
     }
 
-    & div {
-      &:focus {
-        outline: 1px solid $primaryColor !important;
-      }
-    }
-
     & div > input {
       padding: 14px !important;
       font-family: $montserrat, "sans-serif";
       font-size: 14px;
       background: $lightGrey;
+      border: 1px solid $darkGrey !important;
+      border-radius: 4px;
+    }
+
+    .label__input {
+      visibility: hidden !important;
     }
   }
 
