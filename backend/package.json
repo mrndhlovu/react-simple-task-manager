@@ -31,7 +31,7 @@
     "client-install": "cd ../frontend && yarn install",
     "client": "cd ../frontend && yarn start",
     "dev": "concurrently --kill-others-on-fail \"yarn run start:server\"  \"yarn run client\" ",
-    "test": "jest",
+    "test": "jest --runInBand --detectOpenHandles",
     "test:watch": "jest --watch --runInBand --detectOpenHandles",
     "test:coverage": "jest --coverage --colors"
   },

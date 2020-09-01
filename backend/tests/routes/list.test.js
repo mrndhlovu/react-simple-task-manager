@@ -6,6 +6,7 @@ const User = require("./../../models/User");
 const Task = require("./../../models/Task");
 const List = require("./../../models/List");
 const { getAuthToken } = require("../../services/user.services");
+
 dotenv.config({ path: path.resolve(__dirname, "../test.env") });
 
 const TEST_TASK = {

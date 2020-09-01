@@ -4,6 +4,7 @@ const path = require("path");
 
 const User = require("./../../models/User");
 const { getAuthToken } = require("../../services/user.services");
+
 dotenv.config({ path: path.resolve(__dirname, "../test.env") });
 
 const TEST_USER = {
