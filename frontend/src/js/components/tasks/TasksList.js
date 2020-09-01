@@ -9,12 +9,21 @@ import { useHistory } from "react-router";
 const TasksList = ({ header, tasks }) => {
   const { taskActionHandler } = useMainContent();
   const history = useHistory();
-  return (
-    <>
-      <UIHeader content={header} />
+  const hasTasks = tasks.length !== 0;
 
-      {tasks.map((task) => (
+  return hasTasks ? (
+    <>
+      <UIHeader
+        dataTestId={`${header.split(" ").join("-").toLowerCase()}-tasks-header`}
+        content={header}
+      />
+
+      {tasks.map((task, index) => (
         <TaskItem
+          dataTestId={`${header
+            .split(" ")
+            .join("-")
+            .toLowerCase()}-task-item-${index}`}
           key={task._id}
           title={task?.title}
           dueDate={task?.dueDate}
@@ -25,7 +34,7 @@ const TasksList = ({ header, tasks }) => {
         />
       ))}
     </>
-  );
+  ) : null;
 };
 
 TasksList.defaultProps = {

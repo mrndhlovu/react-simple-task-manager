@@ -23,7 +23,6 @@ const UIInput = ({
       className={`${className} ui__input`}
       id={id}
       type={type}
-      variant="outlined"
       onChange={handleChange}
       defaultValue={defaultValue}
       placeholder={placeholder}

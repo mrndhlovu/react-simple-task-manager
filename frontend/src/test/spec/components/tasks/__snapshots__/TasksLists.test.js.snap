@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TasksListPage should render task items and click the edit buttons. 1`] = `undefined`;

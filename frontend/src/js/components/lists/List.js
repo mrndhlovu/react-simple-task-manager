@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
+import _ from "lodash";
 
 import { requestList } from "../../apis/tasksApiRequests";
 import { useMainContent } from "../../utils/hookUtils";
@@ -15,34 +16,26 @@ const List = () => {
 
   const [list, setList] = useState(undefined);
 
-  const TODOS =
-    tasks &&
-    tasks.filter(
-      (task) => task.status === "todo" && task?.listName === list?.title
-    );
-  const COMPLETED =
-    tasks &&
-    tasks.filter(
-      (task) => task.status === "complete" && task?.listName === list?.title
-    );
-  const INCOMPLETES =
-    tasks &&
-    tasks.filter(
-      (task) => task.status === "incomplete" && task?.listName === list?.title
-    );
+  const TODOS = _.filter(tasks, { status: "todo", listName: list?.title });
 
-  const hasTodos = TODOS.length !== 0;
-  const hasCompleted = COMPLETED.length !== 0;
-  const hasInCompleted = INCOMPLETES.length !== 0;
+  const INCOMPLETES = _.filter(tasks, {
+    status: "incomplete",
+    listName: list?.title,
+  });
+
+  const COMPLETED = _.filter(tasks, {
+    status: "complete",
+    listName: list?.title,
+  });
 
   useEffect(() => {
     const getList = async () => {
       await requestList(listId)
         .then((res) => {
-          setList(res.data);
           setIsLoading((isLoading) => !isLoading);
+          setList(res.data);
         })
-        .catch(async () => {
+        .catch(() => {
           setIsLoading((isLoading) => !isLoading);
           history.push("/");
         });
@@ -64,19 +57,13 @@ const List = () => {
         <UILoadingSpinner />
       ) : (
         <>
-          {hasTodos && <TasksList header="To Do" tasks={TODOS} />}
-
-          {hasInCompleted && (
-            <TasksList header="In Complete" tasks={INCOMPLETES} />
-          )}
-
-          {hasCompleted && <TasksList header="Complete" tasks={COMPLETED} />}
+          <TasksList header="To Do" tasks={TODOS} />
+          <TasksList header="In Complete" tasks={INCOMPLETES} />
+          <TasksList header="Complete" tasks={COMPLETED} />
         </>
       )}
     </>
   );
 };
-
-// List.propTypes = {};
 
 export default List;

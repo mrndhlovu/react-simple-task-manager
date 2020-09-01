@@ -33,6 +33,7 @@ const CreateTask = ({ task, buttonText, handleButtonClick, list }) => {
         // eslint-disable-next-line react/jsx-curly-newline
       }
       buttonText={buttonText}
+      dataTestId={task ? "edit-task-form" : "create-task-form"}
     >
       <UIInput
         id={`${inputId}-title`}
