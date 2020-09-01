@@ -1,0 +1,211 @@
+.ui__input__container {
+  width: 100%;
+  height: fit-content;
+  .ui__input {
+    & > div {
+      outline: none !important;
+    }
+
+    & label {
+      font-family: $montserrat, "sans-serif";
+      font-weight: $bold;
+      font-size: 11px;
+    }
+
+    & div > input {
+      border: none;
+      padding: 14px !important;
+      font-family: $montserrat, "sans-serif";
+      font-size: 14px;
+      background: $lightGrey;
+      border: 1px solid $darkGrey !important;
+      border-radius: 4px;
+    }
+
+    & div {
+      &::before {
+        display: none;
+      }
+    }
+
+    .label__input {
+      visibility: hidden !important;
+    }
+  }
+
+  .input__label {
+    color: $darkGrey;
+    font-weight: $bold;
+
+    &::before {
+      content: "";
+      padding-top: 15px;
+      width: 100%;
+      display: block;
+    }
+  }
+
+  .ui__input__label__container {
+    margin: 5px 0;
+  }
+}
+
+.ui__header,
+.content__header {
+  color: $grey;
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: $bold;
+  padding-left: 7px;
+}
+
+.ui__header {
+  position: absolute;
+  margin: 0;
+  font-size: $h1Size;
+}
+
+.task__item,
+.create__item__card {
+  box-shadow: $box-shadow !important;
+  margin: 8px;
+  border-radius: 10px;
+}
+
+.task__list {
+  font-weight: $bold;
+  color: $darkGrey;
+  cursor: pointer;
+  @include hover-text($grey);
+}
+
+.task__title {
+  color: $grey;
+}
+
+.task__item {
+  padding: 10px;
+  max-height: 90px;
+
+  .task__item__button__text {
+    @include flexSpacing(column, flex-start);
+    align-items: flex-start;
+  }
+
+  & p {
+    margin: 5px 0;
+    font-size: 12px;
+  }
+
+  .task__action__buttons__container {
+    @include flexSpacing(row, flex-start);
+    padding-left: 0;
+    margin: 0;
+
+    & > li {
+      @include flexCenter(column);
+      list-style: none;
+      padding: 5px;
+      margin-right: 5px;
+      width: 27px;
+      height: 27px;
+      border: 2px solid $grey;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    & svg {
+      color: $grey;
+    }
+  }
+
+  .task__expired {
+    color: $red;
+    text-decoration: line-through;
+  }
+
+  .task__completed {
+    color: $primaryColor;
+    text-decoration: line-through;
+  }
+
+  .task__todo {
+    color: $grey;
+  }
+
+  .complete__icon {
+    &.complete__active {
+      border: 2px solid $primaryColor;
+      & > svg {
+        color: $primaryColor;
+      }
+    }
+
+    &:hover {
+      @include hoverTransition(border);
+      border: 2px solid $primaryColor;
+    }
+    & > svg:hover {
+      @include hoverTransition(color);
+      color: $primaryColor;
+    }
+  }
+  .incomplete__icon {
+    &.incomplete__active {
+      border: 2px solid $red;
+      & > svg {
+        color: $red;
+      }
+    }
+
+    &:hover {
+      @include hoverTransition(border);
+      border: 2px solid $red;
+    }
+    & > svg:hover {
+      @include hoverTransition(color);
+      color: $red;
+    }
+  }
+
+  .edit__icon {
+    &:hover {
+      @include hoverTransition(border);
+      border: 2px solid $black;
+    }
+    & > svg:hover {
+      @include hoverTransition(color);
+      color: $black;
+    }
+  }
+
+  .delete__icon {
+    &:hover {
+      @include hoverTransition(border);
+      border: 2px solid $red;
+      opacity: 0.5;
+    }
+
+    & > svg:hover {
+      @include hoverTransition(color);
+      color: $red;
+      opacity: 0.9;
+    }
+  }
+}
+
+.ui__alert {
+  color: $darkGrey !important;
+  font-family: $montserrat !important;
+  font-weight: $bold !important;
+  left: 50%;
+  position: absolute;
+  top: 7%;
+  transform: translate(-50%);
+  width: 95%;
+  z-index: 10000;
+
+  & div > svg {
+    color: $primaryColor !important;
+  }
+}

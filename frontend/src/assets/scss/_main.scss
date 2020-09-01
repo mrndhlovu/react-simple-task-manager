@@ -1,0 +1,63 @@
+body {
+  font-family: $montserrat, $roboto, "sans-serif";
+  position: relative;
+  left: 0;
+  top: 0;
+  margin: 0;
+  height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.content__container::-webkit-scrollbar {
+  display: none;
+}
+
+.app__container {
+  letter-spacing: 0.6px;
+}
+
+.content__container {
+  background: $lightGrey;
+  padding: 15px;
+  overflow-y: auto;
+  position: relative;
+  height: 92vh;
+}
+
+.content__wrapper {
+  margin-top: $navHeight + 6%;
+}
+.loading__spinner__container {
+  height: 55vh;
+  width: 100%;
+  @include flexCenter(row);
+
+  & > div > svg {
+    color: $primaryColor;
+  }
+}
+
+.delete__account__action {
+  font-size: 15px;
+  position: absolute;
+  bottom: 0%;
+  right: 6%;
+
+  & button {
+    background: transparent;
+    border: none;
+    color: $darkGrey;
+    font-weight: $bold;
+    cursor: pointer;
+    outline: 0;
+    font-family: $montserrat, "sans-serif";
+    @include hover-text($grey);
+  }
+}
+
+.task__container {
+  margin-top: 20px;
+}

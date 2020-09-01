@@ -1,0 +1,120 @@
+.nav__bar {
+  @include flexSpacing(row, space-between);
+  width: 100%;
+  box-shadow: $box-shadow;
+  padding: 10px 15px;
+  background: $white;
+  z-index: 100;
+  height: $navHeight;
+
+  .logo {
+    @include flexCenter(column);
+    cursor: pointer;
+
+    .logo__text {
+      color: $primaryColor;
+      font-size: 25px;
+      font-weight: $bold;
+      letter-spacing: 3px;
+      margin: 0;
+    }
+  }
+
+  .mobile__menu__icon {
+    font-size: 30px;
+    color: $primaryColor;
+    cursor: pointer;
+  }
+}
+
+.menu__text {
+  @include flexCenter(column);
+  padding-top: 15px;
+  font-size: 10px;
+
+  & > a {
+    @include hoverTransition(color);
+    text-decoration: none;
+    color: inherit;
+    padding: 0 2px;
+
+    &:hover {
+      color: $grey;
+    }
+  }
+}
+
+.navigation__menu {
+  display: none;
+}
+
+.navigation {
+  position: absolute;
+  left: 0;
+  height: 100% - $navHeight;
+  width: 100vw;
+  background: $white;
+  top: $navHeight - 2%;
+  z-index: 100;
+
+  &.mobile__menu::before {
+    content: "";
+    display: block;
+    height: $divider;
+    box-shadow: $box-shadow;
+  }
+
+  .nav__list__container {
+    @include flexCenter(column);
+    height: fit-content;
+    margin: 0;
+    padding: 15px;
+
+    .nav__item {
+      list-style: none;
+      font-weight: $bold;
+      color: $grey;
+      padding: 10px 0;
+      cursor: pointer;
+      letter-spacing: 0.6px;
+
+      & > span {
+        font-size: 15px;
+      }
+
+      &:hover {
+        @include hoverTransition(color);
+        color: $darkGrey;
+      }
+      .active__link__text {
+        color: $darkGrey;
+      }
+
+      &.menu__item__active::before {
+        content: "";
+        display: inline-block;
+        background: $primaryColor;
+        height: 15px;
+        width: 3px;
+        border-radius: 5px;
+        margin-right: 5px;
+        vertical-align: middle;
+        padding-bottom: 5px;
+      }
+    }
+
+    .icon__link__container {
+      @include flexCenter(row);
+
+      & > svg {
+        margin-right: 5px;
+        color: $grey;
+        cursor: pointer;
+      }
+
+      .delete__button {
+        display: none;
+      }
+    }
+  }
+}

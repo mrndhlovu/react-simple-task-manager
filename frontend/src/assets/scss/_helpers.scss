@@ -1,0 +1,77 @@
+@mixin flexCenter($direction) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: $direction;
+}
+
+@mixin flexSpacing($direction, $justify) {
+  display: flex;
+  justify-content: $justify;
+  align-items: center;
+  flex-direction: $direction;
+}
+
+@mixin gridLayout($columns) {
+  display: grid;
+  grid-template-columns: $columns;
+}
+
+@mixin flexLeftCenter($direction) {
+  flex-direction: $direction;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+@mixin hoverTransition($property) {
+  transition: 500ms !important;
+  transition-property: $property;
+  transition-timing-function: ease-in-out;
+}
+
+@mixin position($position, $top) {
+  position: $position;
+  top: $top;
+}
+
+@mixin hover-text($color) {
+  &:hover {
+    color: $color;
+    transition-duration: 500ms;
+    transition-property: color;
+    transition-timing-function: ease-in-out;
+  }
+}
+
+@mixin background-transition($color) {
+  &:hover {
+    background-color: $color;
+    transition-duration: 350ms;
+    transition-property: background-color;
+    transition-timing-function: ease-in-out;
+  }
+}
+
+@mixin slider($range) {
+  @keyframes slide {
+    0% {
+      margin-left: 0;
+    }
+    16% {
+      margin-left: -100%;
+    }
+    32% {
+      margin-left: $range;
+    }
+  }
+}
+
+@mixin grid-auto-rows($columns, $rows) {
+  display: grid;
+  grid-template-columns: $columns;
+  grid-template-rows: $rows;
+}

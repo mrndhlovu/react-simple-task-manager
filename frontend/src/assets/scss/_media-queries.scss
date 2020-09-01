@@ -1,0 +1,206 @@
+@media only screen and (min-width: 700px) {
+  .mobile__icon_container {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .ui__alert {
+    top: 0%;
+  }
+  .app__content {
+    @include gridLayout(1fr 2fr);
+  }
+
+  .page__side__settings {
+    width: 100%;
+    padding-top: 50px;
+    &::before {
+      content: "";
+      display: block;
+      box-shadow: $box-shadow;
+      height: 2px;
+    }
+  }
+
+  .ui__header {
+    font-size: $h1Size;
+  }
+
+  .content__container {
+    top: 0;
+    right: 0;
+    width: 100% - $sideWidth;
+    position: absolute;
+    padding: $contentPadding;
+    height: 100%;
+
+    .header__container {
+      @include flexLeftCenter(column);
+      height: $navHeight / 2;
+      padding-left: $contentPadding;
+    }
+  }
+
+  .main__header {
+    font-size: 30px;
+    margin-top: -13px;
+  }
+
+  .mobile__menu {
+    display: none;
+  }
+  .menu__text,
+  .navigation__menu {
+    display: block;
+  }
+
+  .nav__bar {
+    display: block;
+    position: absolute;
+    height: 100%;
+    width: $sideWidth;
+    top: 0;
+    left: 0;
+    padding: 0;
+
+    .logo {
+      left: 9%;
+      top: 3.5%;
+      height: 6%;
+      position: absolute;
+    }
+  }
+
+  .task__item {
+    @include flexSpacing(row, space-between);
+
+    .task__item__button__text {
+      width: 74%;
+      justify-content: flex-start;
+      flex-direction: row;
+      align-items: center;
+    }
+    .task__action__buttons__container {
+      margin-right: 15px;
+    }
+  }
+
+  .navigation__menu {
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    height: 80%;
+    margin-top: 20%;
+
+    .nav__list__container {
+      @include flexLeftCenter(column);
+      padding: $sideBarPadding;
+      .nav__item {
+        padding: 13px 0;
+      }
+
+      .icon__link__container {
+        .delete__button {
+          display: inline;
+          margin-left: 7px;
+        }
+      }
+
+      .menu__text {
+        font-size: 10px;
+        font-weight: $bold;
+        color: $darkGrey;
+        padding-top: 10px;
+      }
+    }
+
+    &::before {
+      content: "";
+      display: block;
+      box-shadow: $box-shadow;
+      height: 3px;
+    }
+  }
+
+  .content__wrapper {
+    position: relative;
+    top: 6%;
+    top: $navHeight - ($divider * 7);
+    padding: $contentPadding;
+    margin-top: 0;
+  }
+
+  .delete__account__action {
+    bottom: 3%;
+    right: 2%;
+  }
+}
+
+@media only screen and (min-width: 1256px) {
+  .ui__alert {
+    width: 45%;
+  }
+
+  .content__container {
+    padding: $contentPadding 13%;
+  }
+
+  .nav__bar {
+    width: ($sideWidth) /1.8;
+  }
+
+  .header__container {
+    padding-left: $contentPadding * 2;
+  }
+
+  .content__container {
+    width: 100% - ($sideWidth / 1.8);
+  }
+
+  .setting__registration__container {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+
+    & > div {
+      width: 100%;
+      margin: 10px;
+    }
+  }
+}
+
+@media only screen and (min-width: 1490px) {
+  .ui__input__container {
+    margin: 10px;
+  }
+
+  .navigation .nav__list__container {
+    padding: 27px;
+  }
+
+  .create__item__container .create__item__card {
+    padding: 26px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .create__item__container {
+    .create__input__container {
+      flex-direction: row;
+    }
+
+    .ui__input__container {
+      margin: 10px;
+    }
+  }
+
+  .ui__header {
+    font-size: 22px;
+  }
+
+  .nav__bar .logo .logo__text {
+    font-size: $h1Size + 3px;
+  }
+}

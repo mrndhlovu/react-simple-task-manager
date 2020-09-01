@@ -1,0 +1,35 @@
+.create__item__container {
+  .create__item__card {
+    padding: 18px;
+    border-radius: 6px;
+  }
+
+  .create__list__form .create__input__container {
+    min-height: 100px;
+  }
+
+  .create__input__container {
+    @include flexCenter(column);
+    height: fit-content;
+    justify-content: space-around;
+    padding-bottom: 20px;
+  }
+
+  .submit__button {
+    background: $primaryColor;
+    color: $white;
+    font-family: $montserrat, "sans-serif";
+    font-weight: $bold;
+    font-size: 12px;
+
+    &:hover {
+      @include hoverTransition(color);
+      background: $primaryColor;
+      opacity: 0.5;
+    }
+  }
+
+  .setting__registration__container {
+    width: 100%;
+  }
+}
