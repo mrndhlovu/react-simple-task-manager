@@ -43,4 +43,4 @@ artifacts:
   files:
     - "**/*"
   discard-paths: no
-  base-directory: cd frontend/build
+  base-directory: "./frontend/build"
