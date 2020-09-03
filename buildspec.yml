@@ -15,18 +15,18 @@ phases:
     commands:
       - echo Installing dependencies...
       - cd frontend && yarn
-      - cd backend && yarn
+      - cd .. && cd  backend && yarn
 
   build:
     commands:
       - echo Testing Frontend...
-      - cd frontend && yarn test
+      - cd .. && cd frontend && yarn test
 
       - echo Testing Backend...
-      - cd backend && yarn test
+      - cd .. && cd backend && yarn test
 
       - echo Building...
-      - cd backend && yarn build
+      - cd .. && cd frontend && yarn build
 
 artifacts:
   files:
