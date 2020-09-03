@@ -20,7 +20,7 @@ phases:
       - echo "deb https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-4.0.list
       - apt update
       - apt install -y mongodb-org
-      - service mongod start
+      - service mongodb start
 
   pre_build:
     commands:
