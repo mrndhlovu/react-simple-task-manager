@@ -14,13 +14,13 @@ phases:
       - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
       - apt update && apt install --no-install-recommends yarn
 
-      - echo Installing MONGODB...
+    #   - echo Installing MONGODB...
 
-      - apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
-      - echo "deb https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-4.0.list
-      - apt update
-      - apt install -y mongodb-org
-      - service mongodb start
+    #   - apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
+    #   - echo "deb https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-4.0.list
+    #   - apt update
+    #   - apt install -y mongodb-org
+    #   - service mongodb start
 
   pre_build:
     commands:
@@ -33,14 +33,13 @@ phases:
       - echo Testing Frontend...
       - cd .. && cd frontend && yarn test
 
-      - echo Testing Backend...
-      - cd .. && cd backend && yarn test
+      #   - echo Testing Backend...
+      #   - cd .. && cd backend && yarn test
 
       - echo Building...
-      - cd .. && cd frontend && yarn build
+      - yarn build
 
 artifacts:
   files:
     - "**/*"
   discard-paths: no
-  base-directory: /frontend/build
