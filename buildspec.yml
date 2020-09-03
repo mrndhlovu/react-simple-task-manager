@@ -1,0 +1,35 @@
+versions: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Installing Node JS...
+      - curl -sL https://deb.nodesource.com/setup_12.x | -E bash -
+      - apt install -y nodejs
+
+      - echo Installing Yarn...
+      - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+      - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+      - apt update && apt install --no-install-recommends yarn
+  pre_build:
+    commands:
+      - echo Installing dependencies...
+      - cd frontend && yarn
+      - cd backend && yarn
+
+  build:
+    commands:
+      - echo Testing Frontend...
+      - cd frontend && yarn test
+
+      - echo Testing Backend...
+      - cd backend && yarn test
+
+      - echo Building...
+      - cd backend && yarn build
+
+artifacts:
+  files:
+    - "**/*"
+  discard-paths: no
+  base-directory: /frontend/build

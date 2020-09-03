@@ -27,7 +27,8 @@
   "scripts": {
     "lint": "eslint ./src --fix",
     "lint:test": "lint && jest",
-    "test": "jest && cd .. && cd backend && yarn test",
+    "test:backend": "jest && cd .. && cd backend && yarn test",
+    "test": "jest",
     "test:watch": "jest --watch",
     "coverage": "jest --coverage --watch",
     "start": "webpack-dev-server --mode development  --config webpack.dev.js --open",
