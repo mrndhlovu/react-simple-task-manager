@@ -4,7 +4,7 @@ phases:
   install:
     commands:
       - echo Installing Node JS...
-      - curl -sL https://deb.nodesource.com/setup_12.x | -E bash -
+      - curl -sL https://deb.nodesource.com/setup_12.x | bash -
       - apt install -y nodejs
 
       - echo Installing Yarn...
