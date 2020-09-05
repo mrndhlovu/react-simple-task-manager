@@ -1,3 +1,6 @@
+/* eslint-disable no-return-assign */
+/* eslint-disable react/jsx-props-no-spreading */
+
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import historyData from "react-router";
@@ -30,8 +33,8 @@ describe("TasksListPage", () => {
         (wrapper = await render(
           <MainContext.Provider value={CONTEXT_PROPS}>
             <TasksListPage {...DEFAULT_PROPS} />
-          </MainContext.Provider>
-        ))
+          </MainContext.Provider>,
+        )),
     );
   };
 
@@ -61,28 +64,28 @@ describe("TasksListPage", () => {
     fireEvent.click(completeButton);
     expect(CONTEXT_PROPS.taskActionHandler).toHaveBeenCalledWith(
       "complete",
-      MOCK_TASKS_LIST[0]
+      MOCK_TASKS_LIST[0],
     );
 
     const incompleteButton = getByTestId(`${TASK_TITLE}-x-edit-button`);
     fireEvent.click(incompleteButton);
     expect(CONTEXT_PROPS.taskActionHandler).toHaveBeenCalledWith(
       "incomplete",
-      MOCK_TASKS_LIST[0]
+      MOCK_TASKS_LIST[0],
     );
 
     const editButton = getByTestId(`${TASK_TITLE}-pen-edit-button`);
     fireEvent.click(editButton);
     expect(CONTEXT_PROPS.taskActionHandler).toHaveBeenCalledWith(
       "edit",
-      MOCK_TASKS_LIST[0]
+      MOCK_TASKS_LIST[0],
     );
 
     const deleteButton = getByTestId(`${TASK_TITLE}-delete-edit-button`);
     fireEvent.click(deleteButton);
     expect(CONTEXT_PROPS.taskActionHandler).toHaveBeenCalledWith(
       "delete",
-      MOCK_TASKS_LIST[0]
+      MOCK_TASKS_LIST[0],
     );
 
     expect(CONTEXT_PROPS.taskActionHandler).toHaveBeenCalledTimes(4);

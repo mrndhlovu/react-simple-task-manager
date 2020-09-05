@@ -32,11 +32,11 @@ const List = () => {
     const getList = async () => {
       await requestList(listId)
         .then((res) => {
-          setIsLoading((isLoading) => !isLoading);
+          setIsLoading(!isLoading);
           setList(res.data);
         })
         .catch(() => {
-          setIsLoading((isLoading) => !isLoading);
+          setIsLoading(!isLoading);
           history.push("/");
         });
     };
@@ -49,8 +49,7 @@ const List = () => {
       <CreateTask
         buttonText="Create New Task"
         handleButtonClick={(data) =>
-          createTaskHandler({ ...data, listName: list?.title })
-        }
+          createTaskHandler({ ...data, listName: list?.title })}
         list={listId}
       />
       {isLoading ? (

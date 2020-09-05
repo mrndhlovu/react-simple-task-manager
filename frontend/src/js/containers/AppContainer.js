@@ -26,7 +26,7 @@ import {
 import NavBar from "../components/navigation/NavBar";
 import { getValidUpdateFields } from "../utils/appUtils";
 import { EDITABLE_TASK_FIELDS } from "../constants/constants";
-import withAlert from "../hoc/withAlert";
+import UIAlert from "../components/shared/UIAlert";
 import UIHeader from "../components/shared/UIHeader";
 
 const INITIAL_STATE = {
@@ -34,12 +34,12 @@ const INITIAL_STATE = {
   authenticated: false,
 };
 
-const AppContainer = ({ children, notify }) => {
+const AppContainer = ({ children }) => {
   const history = useHistory();
   const location = useLocation();
 
   const [userInfo, setUserInfo] = useState(INITIAL_STATE);
-
+  const [message, setMessage] = useState(undefined);
   const [lists, setLists] = useState([]);
   const [tasks, setTasks] = useState([]);
   const [header, setHeader] = useState("Create New Task");
@@ -47,11 +47,13 @@ const AppContainer = ({ children, notify }) => {
 
   const [isLoading, setIsLoading] = useState(true);
 
+  const notify = useCallback((newMessage) => setMessage(newMessage), []);
+
   const authListener = (user) => {
-    setIsLoading((isLoading) => !isLoading);
+    setIsLoading(!isLoading);
     if (!user) return setUserInfo(INITIAL_STATE);
 
-    setUserInfo({
+    return setUserInfo({
       ...INITIAL_STATE,
       user,
       authenticated: true,
@@ -204,13 +206,13 @@ const AppContainer = ({ children, notify }) => {
             status: task.status === "incomplete" ? "todo" : "incomplete",
           },
           task._id,
-          taskIndex
+          taskIndex,
         );
       case "complete":
         return updatedTaskHandler(
           { ...body, status: task.status === "complete" ? "todo" : "complete" },
           task._id,
-          taskIndex
+          taskIndex,
         );
       default:
         return null;
@@ -291,6 +293,7 @@ const AppContainer = ({ children, notify }) => {
 
   return (
     <MainContext.Provider value={CONTEXT}>
+      <UIAlert message={message} notify={notify} />
       <div data-testid="app-container" className="app__container">
         <NavBar />
         <div className="content__container">
@@ -305,11 +308,10 @@ const AppContainer = ({ children, notify }) => {
 };
 
 AppContainer.propTypes = {
-  notify: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
 };
 
-export default withAlert(AppContainer);
+export default AppContainer;

@@ -1,10 +1,10 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 
+import routeData from "react-router";
 import { MainContext } from "../../../../js/utils/contextUtils";
 import { MOCK_LOCATION_PROPS } from "../../../utils";
 import LoginPage from "../../../../js/components/auth/Login";
-import routeData from "react-router";
 
 const CONTEXT_PROPS = {
   loginHandler: jest.fn(),
@@ -17,12 +17,11 @@ describe("LoginPage", () => {
   const init = () => {
     jest.spyOn(routeData, "useLocation").mockReturnValue(MOCK_LOCATION_PROPS);
 
-    wrapper = () =>
-      render(
-        <MainContext.Provider value={CONTEXT_PROPS}>
-          <LoginPage />
-        </MainContext.Provider>
-      );
+    wrapper = () => render(
+      <MainContext.Provider value={CONTEXT_PROPS}>
+        <LoginPage />
+      </MainContext.Provider>,
+    );
   };
 
   beforeEach(() => {

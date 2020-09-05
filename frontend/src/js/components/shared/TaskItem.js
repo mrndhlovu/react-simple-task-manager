@@ -4,7 +4,9 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { Card } from "@material-ui/core";
-import { CheckCircle, X, Edit2, Trash2 } from "react-feather";
+import {
+  CheckCircle, X, Edit2, Trash2,
+} from "react-feather";
 import {
   getFormattedDateString,
   taskStylingClassName,

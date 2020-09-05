@@ -1,7 +1,6 @@
 import React from "react";
-import App from "../../../js/App";
-
 import { render } from "@testing-library/react";
+import App from "../../../js/App";
 
 describe("App Container", () => {
   it("should render the app content.", () => {

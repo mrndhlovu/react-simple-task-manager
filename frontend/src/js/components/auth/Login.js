@@ -20,8 +20,7 @@ const Login = () => {
   const { from } = location.state || { from: { pathname: "/" } };
   const [credentials, setCredentials] = useState(INITIAL_STATE);
 
-  const handleChange = (field, e) =>
-    setCredentials({ ...credentials, [field]: e.target.value });
+  const handleChange = (field, e) => setCredentials({ ...credentials, [field]: e.target.value });
 
   if (authenticated) return <Redirect to={from.pathname} />;
 

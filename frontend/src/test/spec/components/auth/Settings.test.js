@@ -20,12 +20,11 @@ describe("SettingsPage", () => {
   let wrapper;
 
   const init = () => {
-    wrapper = () =>
-      render(
-        <MainContext.Provider value={CONTEXT_PROPS}>
-          <SettingsPage />
-        </MainContext.Provider>
-      );
+    wrapper = () => render(
+      <MainContext.Provider value={CONTEXT_PROPS}>
+        <SettingsPage />
+      </MainContext.Provider>,
+    );
   };
 
   beforeEach(() => {

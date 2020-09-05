@@ -20,9 +20,7 @@ module.exports = {
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
     quotes: [2, "double", { avoidEscape: true }],
     "no-underscore-dangle": "off",
-    "import/no-extraneous-dependencies": [
-      "error",
-      { devDependencies: ["**/*.test.js"] },
-    ],
+    "import/no-extraneous-dependencies": ["error", { devDependencies: true }],
+    "implicit-arrow-linebreak": "off",
   },
 };

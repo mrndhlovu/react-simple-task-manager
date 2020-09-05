@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import historyData from "react-router";
@@ -13,13 +14,11 @@ const CONTEXT_PROPS = {
   notify: jest.fn(),
 };
 
-jest.mock("../../../../js/apis/tasksApiRequests", () => {
-  return {
-    __esModule: true,
-    default: "requestTask",
-    requestTask: async () => ({ data: MOCK_TASKS_LIST[0] }),
-  };
-});
+jest.mock("../../../../js/apis/tasksApiRequests", () => ({
+  __esModule: true,
+  default: "requestTask",
+  requestTask: async () => ({ data: MOCK_TASKS_LIST[0] }),
+}));
 
 describe("ListPage", () => {
   let wrapper;
@@ -34,8 +33,8 @@ describe("ListPage", () => {
         (wrapper = await render(
           <MainContext.Provider value={props}>
             <EditTaskPage />
-          </MainContext.Provider>
-        ))
+          </MainContext.Provider>,
+        )),
     );
   };
 

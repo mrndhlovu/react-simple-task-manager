@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import historyData from "react-router";
@@ -17,13 +18,11 @@ const CONTEXT_PROPS = {
   tasks: [],
 };
 
-jest.mock("../../../../js/apis/tasksApiRequests", () => {
-  return {
-    __esModule: true,
-    default: "requestList",
-    requestList: async () => ({ data: MOCK_LIST }),
-  };
-});
+jest.mock("../../../../js/apis/tasksApiRequests", () => ({
+  __esModule: true,
+  default: "requestList",
+  requestList: async () => ({ data: MOCK_LIST }),
+}));
 
 describe("ListPage", () => {
   let wrapper;
@@ -39,8 +38,8 @@ describe("ListPage", () => {
         (wrapper = await render(
           <MainContext.Provider value={props}>
             <ListPage />
-          </MainContext.Provider>
-        ))
+          </MainContext.Provider>,
+        )),
     );
   };
 
@@ -68,7 +67,9 @@ describe("ListPage", () => {
 
   it("should render tasks within list", async () => {
     await setup({ ...CONTEXT_PROPS, tasks: MOCK_TASKS_LIST });
-    const { getByTestId, getByText, findAllByText, getAllByTestId } = wrapper;
+    const {
+      getByTestId, getByText, findAllByText, getAllByTestId,
+    } = wrapper;
 
     getByText(/To Do/);
     getByTestId(/to-do-tasks-header/);

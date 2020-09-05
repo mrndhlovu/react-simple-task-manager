@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import { useHistory } from "react-router";
 import UIHeader from "../shared/UIHeader";
 import TaskItem from "../shared/TaskItem";
 import { useMainContent } from "../../utils/hookUtils";
-import { useHistory } from "react-router";
 
 const TasksList = ({ header, tasks }) => {
   const { taskActionHandler } = useMainContent();

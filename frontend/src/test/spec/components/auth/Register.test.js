@@ -1,17 +1,17 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 
+import routeData from "react-router";
 import { MainContext } from "../../../../js/utils/contextUtils";
 import { MOCK_LOCATION_PROPS } from "../../../utils";
 import RegisterPage from "../../../../js/components/auth/Register";
-import routeData from "react-router";
 
 const CONTEXT_PROPS = {
   registrationHandler: jest.fn(),
   auth: { authenticated: false },
 };
 
-let USER = {
+const USER = {
   firstName: "Mock Name",
   lastName: "Mock LastName",
   email: "testemail@testing.com",
@@ -19,17 +19,17 @@ let USER = {
 };
 
 describe("RegisterPage", () => {
-  let wrapper, firstNameInput, emailInput, passwordInput, lastNameInput;
+  let wrapper; let firstNameInput; let emailInput; let passwordInput; let
+    lastNameInput;
 
   const init = () => {
     jest.spyOn(routeData, "useLocation").mockReturnValue(MOCK_LOCATION_PROPS);
 
-    wrapper = () =>
-      render(
-        <MainContext.Provider value={CONTEXT_PROPS}>
-          <RegisterPage />
-        </MainContext.Provider>
-      );
+    wrapper = () => render(
+      <MainContext.Provider value={CONTEXT_PROPS}>
+        <RegisterPage />
+      </MainContext.Provider>,
+    );
   };
 
   beforeEach(() => {

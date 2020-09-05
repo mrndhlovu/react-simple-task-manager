@@ -1,20 +1,21 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 
-const portalRoot = document.getElementById("root");
+const ROOT_ELEMENT = document.getElementById("root");
 
 const UIPortal = ({ children }) => {
-  const portal = document.createElement("div");
+  const portalElement = document.createElement("div");
+  portalElement.className = "ui__portal";
 
   useEffect(() => {
-    portalRoot.insertAdjacentElement("afterEnd", portal);
+    ROOT_ELEMENT.insertAdjacentElement("afterEnd", portalElement);
 
     return () => {
-      portalRoot.removeChild(portal);
+      ROOT_ELEMENT.nextElementSibling.remove(portalElement);
     };
   }, []);
 
-  return createPortal(children, portal);
+  return createPortal(children, portalElement);
 };
 
 export default UIPortal;

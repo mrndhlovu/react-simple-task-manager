@@ -12,12 +12,11 @@ describe("CreateListPage", () => {
   let wrapper;
 
   const init = () => {
-    wrapper = () =>
-      render(
-        <MainContext.Provider value={CONTEXT_PROPS}>
-          <CreateListPage />
-        </MainContext.Provider>
-      );
+    wrapper = () => render(
+      <MainContext.Provider value={CONTEXT_PROPS}>
+        <CreateListPage />
+      </MainContext.Provider>,
+    );
   };
 
   beforeEach(() => {

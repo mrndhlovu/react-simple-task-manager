@@ -11,19 +11,17 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 
-const Routes = () => {
-  return (
-    <Switch>
-      <ProtectedRoute path="/" exact component={HomeContainer} />
-      <ProtectedRoute path="/create-list" component={CreateList} />
-      <ProtectedRoute path="/lists/:listId" component={List} />
-      <ProtectedRoute path="/edit-task/:taskId" component={EditTask} />
-      <ProtectedRoute path="/settings" component={Settings} />
+const Routes = () => (
+  <Switch>
+    <ProtectedRoute path="/" exact component={HomeContainer} />
+    <ProtectedRoute path="/create-list" component={CreateList} />
+    <ProtectedRoute path="/lists/:listId" component={List} />
+    <ProtectedRoute path="/edit-task/:taskId" component={EditTask} />
+    <ProtectedRoute path="/settings" component={Settings} />
 
-      <Route path="/register" render={(props) => <Register {...props} />} />
-      <Route path="/login" render={(props) => <Login {...props} />} />
-    </Switch>
-  );
-};
+    <Route path="/register" render={(props) => <Register {...props} />} />
+    <Route path="/login" render={(props) => <Login {...props} />} />
+  </Switch>
+);
 
 export default Routes;

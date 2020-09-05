@@ -14,7 +14,9 @@ const INITIAL_STATE = {
   list: undefined,
 };
 
-const CreateTask = ({ task, buttonText, handleButtonClick, list }) => {
+const CreateTask = ({
+  task, buttonText, handleButtonClick, list
+}) => {
   const [newTask, setNewTask] = useState(task || INITIAL_STATE);
 
   const inputId = buttonText.toLowerCase().split(" ").join("-");
