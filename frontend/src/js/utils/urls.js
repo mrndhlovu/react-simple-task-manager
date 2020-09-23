@@ -1,5 +1,5 @@
 export const baseURL = process.env.NODE_ENV === "development"
-  ? "http://localhost:5000"
+  ? "http://localhost:6000"
   : "https://checklists.ndhlovu.com";
 
 export const TASKS_EP = "/api/tasks";
