@@ -2,7 +2,7 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 6000;
 
 const S_GRID_API_KEY = process.env.SEND_GRID_API_KEY;
 const CONNECTION_URI = process.env.MONGODB_URI;
