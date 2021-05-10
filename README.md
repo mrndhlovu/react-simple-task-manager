@@ -5,7 +5,7 @@
 
 ## Description
 
-A simple to-do task manager built with react, react hooks, scss. JWT web tokens is used for authentication and the production version is hosted on an Amazon EC2 instance. Used `Let's Encrypt` for an SSL certification while `Nginx` as the reverse proxy.
+A simple to-do task manager built with react, react hooks, scss. JWT web tokens is used for authentication and the production version is hosted on an Amazon EC2 instance. Used `Let's Encrypt` for an SSL certification with `Nginx` as the reverse proxy.
 
 ### Technologies
 
